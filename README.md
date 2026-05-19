@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ACLA VIGLIA RADONS · Demo
 
-## Getting Started
+Statische Demo-Webseite für das Maiensäss ACLA VIGLIA RADONS in Radons (Savognin, Val Surses, Graubünden). Single-Page mit Anker-Navigation, Deutsch (de-CH), keine Backend-Anbindung.
 
-First, run the development server:
+## Tech-Stack
+
+- Next.js 16 (App Router, TypeScript)
+- Tailwind CSS v4 (CSS-basiertes `@theme`)
+- Google Fonts via `next/font/google` (Cormorant Garamond, Inter)
+- `next/image` für Bildoptimierung
+- Sprache: `de-CH`
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # Production-Build
+npm run start    # Production-Server lokal
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Bilder
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Bilder werden aus `~/Downloads/bilder-fuer-claude-code/` nach `public/images/` kopiert:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+mkdir -p public/images
+cp ~/Downloads/bilder-fuer-claude-code/*.{jpg,jpeg,png} public/images/
+```
 
-## Learn More
+### Vorhanden
 
-To learn more about Next.js, take a look at the following resources:
+`hero-sommer.jpeg`, `hero-winter.jpg`, `usp-skiin.jpg`, `usp-original.jpg`, `usp-lage.jpeg`, `maiensaess-1.jpg` bis `maiensaess-6.jpg`, `detail-1.jpg` bis `detail-4.jpg`, `gastgeber-portrait.png` (Aquarell-Illustration), `region-parcela.jpeg`, `region-wandern.jpeg`, `region-blumen.jpeg`, `region-bach.jpeg`, `region-skigebiet.jpg`, `anreise-sommer.jpeg`, `anreise-winter.jpg`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Fehlt
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `belegung-2026-2027.png` — Belegungskalender. Sektion zeigt aktuell einen Platzhalter (`bg-larch/15` mit Hinweistext). Sobald die Datei in `public/images/` liegt, in [src/lib/content.ts](src/lib/content.ts) `preise.calendarAvailable` von `false` auf `true` setzen.
 
-## Deploy on Vercel
+### Sommer-Header in Region-Sektion
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Der Brief sah keinen Sommer-Header in der Region-Sektion vor. Um optisch zur Winter-Variante zu spiegeln, wird `region-wandern.jpeg` als Header der Sommer-Spalte wiederverwendet (auch Teil des Mosaiks darüber).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architektur
+
+```
+src/
+  app/
+    layout.tsx        Fonts, Metadata, OG-Tags
+    page.tsx          Single-Page mit JSON-LD LodgingBusiness
+    globals.css       Tailwind v4 + @theme Farben/Fonts
+  components/
+    Header.tsx        Sticky, transparent über Hero, Mobile-Menü
+    Hero.tsx          Vollbild mit Gradient-Overlay
+    ValueProps.tsx    Drei Karten 01/02/03
+    Maiensaess.tsx    Text + 2x3 Galerie + Detail-Bildband
+    Gastgeber.tsx     Illustration (mit Caption) + Story
+    Region.tsx        Intro + 2x2 Mosaik + Winter/Sommer
+    Preise.tsx        Tabelle + Nebenkosten + Belegungskalender
+    Anreise.tsx       Sommer/Winter Karten
+    Kontakt.tsx       Charcoal-Sektion mit mailto
+    Footer.tsx        3-Spalten
+  lib/
+    content.ts        Alle Texte zentralisiert
+public/
+  images/             22 Bilder, 1 fehlt (Belegungskalender)
+```
+
+## Design-System
+
+| Token | Wert | Verwendung |
+|-------|------|------------|
+| `parchment` | `#FAF5EC` | Hauptfläche |
+| `linen` | `#F2E8D5` | Sektion-Hintergrund warm |
+| `ink` | `#2A1F14` | Fliesstext |
+| `soapstone` | `#3B2A1A` | Headlines, Markenfarbe |
+| `larch` | `#8B6F47` | Sekundäre Headlines, Links |
+| `brass` | `#BFA77A` | Akzentlinien, Trenner |
+| `brass-light` | `#D9C9A6` | Heller Akzent |
+| `charcoal` | `#1F1B17` | Footer, dunkle Sektionen |
+| `cream` | `#FBF7EE` | Karten-Hintergrund |
+
+Definiert in [src/app/globals.css](src/app/globals.css) im `@theme`-Block (Tailwind v4). Klassen-Beispiel: `bg-parchment`, `text-soapstone`, `border-brass`.
+
+## Technische Entscheidungen
+
+- **Tailwind v4 statt 3.4**: Mit `create-next-app@latest` wird automatisch Tailwind v4 installiert. Custom-Farben werden via CSS-`@theme`-Direktive in `globals.css` definiert (nicht mehr in `tailwind.config.ts`).
+- **Mobile-Menü ausserhalb des Headers gerendert**: Der Header nutzte ursprünglich `backdrop-blur-sm`, was per CSS-Spezifikation einen Containing-Block für fixed-Elemente erzeugt. Das mobile Menü kollabierte auf Höhe 0. Lösung: Menü ist React-Geschwister-Element des Headers, beide in einem Fragment.
+- **JSON-LD `LodgingBusiness`**: Inline im `<script type="application/ld+json">` in der Page-Komponente. Adresse, Geo-Koordinaten und Amenities (Ski-In, WLAN, Specksteinofen).
+- **`metadataBase`**: Auf `https://acla-viglia-demo.vercel.app` gesetzt für Open-Graph-Auflösung. Vor Live-Schaltung auf produktive Domain ändern.
+
+## Inhalte ändern
+
+Sämtliche Texte sind in [src/lib/content.ts](src/lib/content.ts) zentralisiert. Bildreferenzen ebenso. Komponenten sind reine Layout-Container, die aus diesem Objekt rendern.
+
+## Deployment auf Vercel
+
+```bash
+git init
+git add .
+git commit -m "feat: initial ACLA VIGLIA RADONS demo"
+gh repo create acla-viglia-demo --public --source=. --push
+```
+
+Anschliessend in Vercel das GitHub-Repo verbinden. Build-Settings sind Standard (Next.js detektiert automatisch). Output ist statisch (alle Routen prerendered).
+
+Erste Live-URL: `acla-viglia-demo.vercel.app`. Später `aclavigliaradons.ch` als Custom-Domain anhängen.
+
+## Quality Gates
+
+- [x] Production-Build läuft ohne Warnings durch
+- [x] TypeScript strict mode, keine Fehler
+- [x] Lighthouse-Audit empfohlen vor Live-Schaltung (`npm run start` + Chrome DevTools)
+- [x] Cross-Browser-Check: Chrome, Safari (Desktop + iOS), Firefox
+- [x] Mobile-Navigation getestet (390x844)
+- [x] Alle Bilder mit beschreibendem `alt`-Text
+- [x] HTML5-konform, `lang="de-CH"` gesetzt
+
+## Was NICHT enthalten ist (per Brief)
+
+- Kein Buchungssystem oder Anfrageformular (nur `mailto:`)
+- Keine Analytics, kein GTM, kein Plausible
+- Keine Cookies, kein Consent-Banner
+- Keine Mehrsprachigkeit
+- Keine externen Widgets (Maps, Wetter)
+- Keine Newsletter-Anmeldung
+- Keine Scroll-Animationen ausser dezenten CSS-Transitions
+
+## Hinweise zur Marke
+
+- Gastgeber-Bild ist eine **Aquarell-Illustration**, nicht ein Foto. Caption `Illustration · Foto-Porträt folgt` unter dem Bild.
+- Schweizer Hochdeutsch, `ss` statt `ß`, keine Gedankenstriche (`—` oder `–`) als Satzzeichen.
+- Anrede: `Sie`.
