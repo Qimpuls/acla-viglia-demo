@@ -32,9 +32,9 @@ cp ~/Downloads/bilder-fuer-claude-code/*.{jpg,jpeg,png} public/images/
 
 `hero-sommer.jpeg`, `hero-winter.jpg`, `usp-skiin.jpg`, `usp-original.jpg`, `usp-lage.jpeg`, `maiensaess-1.jpg` bis `maiensaess-6.jpg`, `detail-1.jpg` bis `detail-4.jpg`, `gastgeber-portrait.png` (Aquarell-Illustration), `region-parcela.jpeg`, `region-wandern.jpeg`, `region-blumen.jpeg`, `region-bach.jpeg`, `region-skigebiet.jpg`, `anreise-sommer.jpeg`, `anreise-winter.jpg`.
 
-### Fehlt
+### Belegungskalender
 
-- `belegung-2026-2027.png` — Belegungskalender. Sektion zeigt aktuell einen Platzhalter (`bg-larch/15` mit Hinweistext). Sobald die Datei in `public/images/` liegt, in [src/lib/content.ts](src/lib/content.ts) `preise.calendarAvailable` von `false` auf `true` setzen.
+Statt eines Screenshots wird ein eigener React-Kalender gerendert. Buchungen liegen in [src/lib/bookings.ts](src/lib/bookings.ts) als Liste von `{ start, end, status? }`-Einträgen vor. Wochenmiete Samstag zu Samstag wird mit zwei diagonalen Dreiecken auf dem Übergangs-Samstag dargestellt (morgens Abreise, nachmittags Anreise). Navigation per `« zurück` / `weiter »` blättert in 9-Monats-Schritten.
 
 ### Sommer-Header in Region-Sektion
 
@@ -91,6 +91,34 @@ Definiert in [src/app/globals.css](src/app/globals.css) im `@theme`-Block (Tailw
 ## Inhalte ändern
 
 Sämtliche Texte sind in [src/lib/content.ts](src/lib/content.ts) zentralisiert. Bildreferenzen ebenso. Komponenten sind reine Layout-Container, die aus diesem Objekt rendern.
+
+## Belegungskalender pflegen
+
+Buchungen werden in [src/lib/bookings.ts](src/lib/bookings.ts) als Array gepflegt:
+
+```ts
+{ start: '2026-12-19', end: '2026-12-26' },               // Standard, belegt
+{ start: '2027-02-13', end: '2027-02-20', status: 'reserved' },
+{ start: '2027-04-01', end: '2027-04-08', status: 'closed', note: 'Renovation' },
+```
+
+- `start` = Anreise-Samstag (nachmittags)
+- `end`   = Abreise-Samstag (vormittags)
+- `status` optional: `'booked'` (Default, larch), `'reserved'` (gelb), `'closed'` (rot)
+- `note` rein intern, nicht öffentlich sichtbar
+
+**Workflow für Angela:**
+
+1. Datei [src/lib/bookings.ts](src/lib/bookings.ts) im Browser auf GitHub editieren (Bleistift-Symbol)
+2. Buchung als neue Zeile einfügen, sortiert nach Datum
+3. Commit-Nachricht z.B. `Buchung Familie Müller 12.-19.07.2026`
+4. Vercel deployt automatisch innerhalb von ~60 Sekunden
+
+**Empfehlung für Produktion** (später, optional):
+
+- iCal-Feed-Integration: Angela verwaltet Buchungen in Apple Calendar / Google Calendar, die Website liest den `.ics`-Feed serverseitig
+- Aufwand: 1-2 Tage, vermeidet Git-Workflow komplett
+- Headless CMS (Decap, Sanity) als Alternative wenn iCal nicht passt
 
 ## Deployment auf Vercel
 

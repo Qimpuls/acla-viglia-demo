@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { BookingCalendar } from '@/components/BookingCalendar'
 import { preise } from '@/lib/content'
 
 export function Preise() {
@@ -10,7 +10,7 @@ export function Preise() {
           <h2 className="font-serif text-3xl md:text-5xl">{preise.headline}</h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 mb-12 md:mb-16">
           <div className="lg:col-span-7">
             <div className="bg-cream rounded-2xl p-6 md:p-8 shadow-sm">
               <div className="hidden md:grid grid-cols-12 gap-4 pb-3 border-b border-brass/40 text-larch text-xs uppercase tracking-widest font-semibold">
@@ -41,29 +41,33 @@ export function Preise() {
                 ))}
               </div>
             </div>
+          </div>
 
-            <div className="mt-8">
-              <h3 className="font-serif text-xl mb-4 text-soapstone">
-                Nebenkosten
-              </h3>
-              <ul className="divide-y divide-brass/30 border-t border-brass/40">
-                {preise.costs.map((cost) => (
-                  <li
-                    key={cost.label}
-                    className="grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-4 py-3 text-sm"
-                  >
-                    <span className="md:col-span-8 text-ink/85">
-                      {cost.label}
-                    </span>
-                    <span className="md:col-span-4 md:text-right text-soapstone font-medium">
-                      {cost.value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="lg:col-span-5">
+            <h3 className="font-serif text-xl mb-4 text-soapstone">
+              Nebenkosten
+            </h3>
+            <ul className="divide-y divide-brass/30 border-t border-brass/40">
+              {preise.costs.map((cost) => (
+                <li
+                  key={cost.label}
+                  className="grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-4 py-3 text-sm"
+                >
+                  <span className="md:col-span-8 text-ink/85">
+                    {cost.label}
+                  </span>
+                  <span className="md:col-span-4 md:text-right text-soapstone font-medium">
+                    {cost.value}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
-            <div className="mt-10">
+            <p className="mt-8 text-sm text-ink/80 leading-relaxed">
+              {preise.availabilityNote}
+            </p>
+
+            <div className="mt-6">
               <a
                 href={preise.cta.href}
                 className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors"
@@ -72,33 +76,9 @@ export function Preise() {
               </a>
             </div>
           </div>
-
-          <div className="lg:col-span-5">
-            <h3 className="font-serif text-xl mb-4 text-soapstone">
-              Belegung 2026 bis 2027
-            </h3>
-            {preise.calendarAvailable ? (
-              <div className="overflow-x-auto scrollbar-thin rounded-xl border border-brass/40">
-                <Image
-                  src={preise.calendarImage}
-                  alt="Belegungskalender Mai 2026 bis Januar 2027"
-                  width={900}
-                  height={1200}
-                  className="w-full h-auto"
-                />
-              </div>
-            ) : (
-              <div className="aspect-[3/4] bg-larch/15 border border-brass/40 rounded-xl flex items-center justify-center p-8 text-center">
-                <p className="text-larch text-sm">
-                  Belegungskalender folgt. Aktuelle Verfügbarkeit auf Anfrage.
-                </p>
-              </div>
-            )}
-            <p className="mt-4 text-sm text-ink/80 leading-relaxed">
-              {preise.availabilityNote}
-            </p>
-          </div>
         </div>
+
+        <BookingCalendar />
       </div>
     </section>
   )
