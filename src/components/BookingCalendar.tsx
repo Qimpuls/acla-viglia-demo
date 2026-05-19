@@ -165,23 +165,22 @@ function shiftMonths(anchor: MonthRef, offset: number): MonthRef {
 
 export function BookingCalendar() {
   const [page, setPage] = useState(0)
-  const PAGE_SIZE = 9
+  const PAGE_SIZE = 12
 
   const months: MonthRef[] = []
   for (let i = 0; i < PAGE_SIZE; i++) {
     months.push(shiftMonths(calendarAnchor, page * PAGE_SIZE + i))
   }
 
-  const firstLabel = `${MONTH_NAMES[months[0].month]} ${months[0].year}`
-  const lastLabel = `${MONTH_NAMES[months[PAGE_SIZE - 1].month]} ${months[PAGE_SIZE - 1].year}`
+  const displayYear = months[0].year
 
   return (
     <div className="bg-linen/60 rounded-2xl p-6 md:p-10 border border-brass/30">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
         <div>
           <p className="eyebrow mb-2">Belegungskalender</p>
-          <p className="font-serif text-soapstone text-xl md:text-2xl">
-            {firstLabel} bis {lastLabel}
+          <p className="font-serif text-soapstone text-2xl md:text-3xl">
+            {displayYear}
           </p>
         </div>
         <div className="flex gap-2">
@@ -205,7 +204,7 @@ export function BookingCalendar() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
         {months.map((m) => (
           <MonthGrid key={`${m.year}-${m.month}`} year={m.year} month={m.month} />
         ))}
@@ -226,20 +225,6 @@ export function BookingCalendar() {
               style={{ backgroundColor: STATUS_COLOR.booked }}
             />
             belegt
-          </span>
-          <span className="flex items-center gap-2">
-            <span
-              className="w-3.5 h-3.5"
-              style={{ backgroundColor: STATUS_COLOR.reserved }}
-            />
-            reserviert
-          </span>
-          <span className="flex items-center gap-2">
-            <span
-              className="w-3.5 h-3.5"
-              style={{ backgroundColor: STATUS_COLOR.closed }}
-            />
-            geschlossen
           </span>
         </div>
         <p className="mt-4 text-xs text-larch italic">
