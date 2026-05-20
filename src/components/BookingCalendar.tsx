@@ -37,7 +37,9 @@ function pad(n: number) {
 }
 
 function ymd(year: number, month: number, day: number) {
-  return `${year}-${pad(month + 1)}-${pad(day)}`
+  // Normalisiert auch Tage ausserhalb des Monats (z.B. day=32 -> nächster Monat)
+  const d = new Date(year, month, day)
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
 }
 
 function getBookingForDay(
@@ -48,17 +50,41 @@ function getBookingForDay(
 ): Booking | null {
   const dateStr = ymd(year, month, day)
   for (const b of list) {
-    // Buchung deckt die Nächte ab: start (Anreise) inkl., end (Abreise) exkl.
     if (dateStr >= b.start && dateStr < b.end) return b
   }
   return null
 }
 
+function isWeekFree(
+  year: number,
+  month: number,
+  saturdayDay: number,
+  list: Booking[],
+): boolean {
+  for (let offset = 0; offset < 7; offset++) {
+    const d = new Date(year, month, saturdayDay + offset)
+    const dStr = ymd(d.getFullYear(), d.getMonth(), d.getDate())
+    for (const b of list) {
+      if (dStr >= b.start && dStr < b.end) return false
+    }
+  }
+  return true
+}
+
+function handleWeekClick(from: string, to: string) {
+  const target = document.getElementById('kontakt')
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+  const newHash = `#kontakt?from=${from}&to=${to}`
+  window.history.replaceState(null, '', newHash)
+  window.dispatchEvent(new HashChangeEvent('hashchange'))
+}
+
 function MonthGrid({ year, month }: { year: number; month: number }) {
   const first = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0).getDate()
-  // Wochenstart Samstag: SA=0, SO=1, MO=2 … FR=6
-  // JS getDay(): SO=0, MO=1, DI=2, MI=3, DO=4, FR=5, SA=6
+  // SA=0, SO=1 ... FR=6 — JS getDay: SO=0, MO=1, ..., SA=6
   const startWeekday = (first.getDay() + 1) % 7
 
   const cells: (number | null)[] = []
@@ -66,52 +92,97 @@ function MonthGrid({ year, month }: { year: number; month: number }) {
   for (let d = 1; d <= lastDay; d++) cells.push(d)
   while (cells.length % 7 !== 0) cells.push(null)
 
+  const rows: (number | null)[][] = []
+  for (let i = 0; i < cells.length; i += 7) {
+    rows.push(cells.slice(i, i + 7))
+  }
+
   return (
     <div className="bg-cream rounded-lg overflow-hidden border border-brass/40 shadow-sm">
       <div className="bg-brass/15 text-center py-2.5 font-serif text-soapstone text-base border-b border-brass/30">
         {MONTH_NAMES[month]} {year}
       </div>
-      <div className="grid grid-cols-7 text-[0.7rem] md:text-xs">
+      <div className="grid grid-cols-7 text-[0.7rem] md:text-xs border-b border-brass/30">
         {WEEKDAYS.map((w) => (
           <div
             key={w}
-            className="text-center py-1.5 font-semibold text-larch tracking-wider border-b border-brass/30 bg-cream"
+            className="text-center py-1.5 font-semibold text-larch tracking-wider bg-cream"
           >
             {w}
           </div>
         ))}
-        {cells.map((day, i) => {
-          if (day === null) {
-            return <div key={i} className="aspect-square bg-cream/60" />
-          }
-          const booking = getBookingForDay(year, month, day, bookings)
-          const isBooked = booking !== null
-
-          return (
-            <div
-              key={i}
-              className="relative aspect-square flex items-center justify-center bg-cream"
-            >
-              {booking && (
-                <span
-                  className="absolute inset-0"
-                  style={{
-                    backgroundColor:
-                      STATUS_COLOR[(booking.status ?? 'booked') as BookingStatus],
-                  }}
-                />
-              )}
-              <span
-                className={`relative z-10 text-[0.7rem] md:text-xs font-medium ${
-                  isBooked ? 'text-parchment' : 'text-soapstone'
-                }`}
-              >
-                {day}
-              </span>
-            </div>
-          )
-        })}
       </div>
+
+      {rows.map((row, rowIdx) => {
+        const saturdayDay = row[0]
+        let clickable = false
+        let from = ''
+        let to = ''
+
+        if (saturdayDay !== null && isWeekFree(year, month, saturdayDay, bookings)) {
+          const start = new Date(year, month, saturdayDay)
+          const end = new Date(year, month, saturdayDay + 7)
+          from = ymd(start.getFullYear(), start.getMonth(), start.getDate())
+          to = ymd(end.getFullYear(), end.getMonth(), end.getDate())
+          clickable = true
+        }
+
+        const rowClass = clickable
+          ? 'grid grid-cols-7 cursor-pointer hover:bg-brass-light/30 focus-visible:bg-brass-light/40 focus-visible:outline-none transition-colors'
+          : 'grid grid-cols-7'
+
+        const rowProps = clickable
+          ? {
+              role: 'button' as const,
+              tabIndex: 0,
+              'aria-label': `Woche vom ${from} bis ${to} anfragen`,
+              onClick: () => handleWeekClick(from, to),
+              onKeyDown: (e: React.KeyboardEvent) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  handleWeekClick(from, to)
+                }
+              },
+            }
+          : {}
+
+        return (
+          <div key={rowIdx} className={rowClass} {...rowProps}>
+            {row.map((day, colIdx) => {
+              if (day === null) {
+                return <div key={colIdx} className="aspect-square bg-cream/60" />
+              }
+              const booking = getBookingForDay(year, month, day, bookings)
+              const isBooked = booking !== null
+              return (
+                <div
+                  key={colIdx}
+                  className="relative aspect-square flex items-center justify-center bg-cream text-[0.7rem] md:text-xs"
+                >
+                  {booking && (
+                    <span
+                      className="absolute inset-0"
+                      style={{
+                        backgroundColor:
+                          STATUS_COLOR[
+                            (booking.status ?? 'booked') as BookingStatus
+                          ],
+                      }}
+                    />
+                  )}
+                  <span
+                    className={`relative z-10 font-medium ${
+                      isBooked ? 'text-parchment' : 'text-soapstone'
+                    }`}
+                  >
+                    {day}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -176,7 +247,11 @@ export function BookingCalendar() {
         ))}
       </div>
 
-      <div className="mt-8 pt-5 border-t border-brass/30">
+      <p className="mt-6 text-sm text-larch italic">
+        Klicken Sie auf eine freie Woche, um direkt anzufragen.
+      </p>
+
+      <div className="mt-6 pt-5 border-t border-brass/30">
         <div className="flex flex-wrap gap-x-6 gap-y-2 items-center text-xs text-ink/85">
           <span className="font-semibold uppercase tracking-wider text-larch text-[0.7rem]">
             Legende

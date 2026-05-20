@@ -37,21 +37,21 @@ export function Header() {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 h-14 md:h-20 flex items-center justify-between">
           <a
             href="#top"
             className="flex flex-col leading-tight"
             aria-label={brand.name}
           >
             <span
-              className={`font-serif text-lg md:text-xl tracking-[0.18em] ${
+              className={`font-serif text-base md:text-xl tracking-[0.18em] ${
                 showLight ? 'text-parchment' : 'text-soapstone'
               } transition-colors`}
             >
               {brand.name}
             </span>
             <span
-              className={`text-[0.65rem] tracking-[0.2em] uppercase mt-0.5 ${
+              className={`hidden md:block text-[0.65rem] tracking-[0.2em] uppercase mt-0.5 ${
                 showLight ? 'text-brass-light' : 'text-larch'
               } transition-colors`}
             >
@@ -107,7 +107,7 @@ export function Header() {
         className={`md:hidden fixed left-0 right-0 z-40 overflow-y-auto bg-parchment ${
           open ? 'block' : 'hidden'
         }`}
-        style={{ top: '5rem', bottom: 0 }}
+        style={{ top: '3.5rem', bottom: 0 }}
       >
         <nav className="flex flex-col px-6 py-12 gap-2">
           {navigation.map((item) => (
