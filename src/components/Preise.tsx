@@ -1,92 +1,128 @@
 import { BookingCalendar } from '@/components/BookingCalendar'
 import { preise } from '@/lib/content'
 
+function CheckIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      aria-hidden="true"
+      className="text-larch shrink-0 mt-0.5"
+    >
+      <path
+        d="M3 8.5l3.2 3.2L13 4.8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export function Preise() {
   return (
     <section id="preise" className="bg-parchment py-20 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-12 md:mb-16">
           <p className="eyebrow mb-5">{preise.eyebrow}</p>
-          <h2 className="font-serif text-3xl md:text-5xl">{preise.headline}</h2>
+          <h2 className="font-serif text-3xl md:text-5xl mb-5">
+            {preise.headline}
+          </h2>
+          <p className="text-ink/85 text-base md:text-lg leading-relaxed">
+            {preise.intro}
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 mb-12 md:mb-16">
+        <div className="bg-linen rounded-2xl p-8 md:p-12 mb-10 md:mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <p className="eyebrow mb-3">Preis-Indikation</p>
+            <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="font-serif text-larch text-2xl md:text-3xl">
+                {preise.spotlight.prefix}
+              </span>
+              <span className="font-serif text-soapstone text-5xl md:text-7xl tracking-tight">
+                {preise.spotlight.amount}
+              </span>
+              <span className="font-serif text-soapstone text-2xl md:text-3xl">
+                {preise.spotlight.suffix}
+              </span>
+            </p>
+            <p className="mt-3 text-sm md:text-base text-ink/75 max-w-xl leading-relaxed">
+              {preise.spotlight.detail}
+            </p>
+          </div>
+          <a
+            href={preise.cta.href}
+            className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors whitespace-nowrap"
+          >
+            {preise.cta.label}
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12 md:mb-16">
           <div className="lg:col-span-7">
-            <div className="bg-cream rounded-2xl p-6 md:p-8 shadow-sm">
-              <div className="hidden md:grid grid-cols-12 gap-4 pb-3 border-b border-brass/40 text-larch text-xs uppercase tracking-widest font-semibold">
-                <span className="col-span-8">Saison</span>
-                <span className="col-span-4 text-right">
-                  Pro Tag, bis 5 Personen
-                </span>
-              </div>
-              <ul className="divide-y divide-brass/30">
-                {preise.rows.map((row) => (
+            <p className="eyebrow mb-5">Saisonübersicht</p>
+            <div className="bg-cream rounded-2xl border border-brass/30 overflow-hidden">
+              <ul className="divide-y divide-brass/25">
+                {preise.seasons.map((season) => (
                   <li
-                    key={row.season}
-                    className="grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-4 py-4"
+                    key={season.label}
+                    className="grid grid-cols-12 gap-3 items-center px-6 py-4"
                   >
-                    <span className="md:col-span-8 text-soapstone font-medium">
-                      {row.season}
-                    </span>
-                    <span className="md:col-span-4 md:text-right font-serif text-xl text-soapstone">
-                      {row.price}
-                    </span>
+                    <div className="col-span-8 md:col-span-9">
+                      <p className="text-soapstone font-medium">
+                        {season.label}
+                      </p>
+                      <p className="text-xs text-larch tracking-wider uppercase mt-0.5">
+                        {season.tag}
+                      </p>
+                    </div>
+                    <div className="col-span-4 md:col-span-3 text-right font-serif text-xl md:text-2xl text-soapstone">
+                      {season.price}
+                    </div>
                   </li>
                 ))}
               </ul>
-
-              <div className="mt-6 pt-6 border-t border-brass/40 space-y-2 text-sm text-ink/85">
-                {preise.notes.map((note, i) => (
-                  <p key={i}>{note}</p>
-                ))}
-              </div>
             </div>
-
-            <div className="mt-6 bg-linen rounded-2xl p-6 md:p-8">
-              <p className="eyebrow mb-2">{preise.perPerson.label}</p>
-              <p className="font-serif text-soapstone text-lg md:text-xl leading-snug">
-                {preise.perPerson.range}
-              </p>
-              <p className="mt-3 text-sm text-ink/75">
-                {preise.perPerson.inclusion}
-              </p>
-            </div>
+            <p className="mt-3 text-xs text-larch">{preise.perDayNote}</p>
           </div>
 
           <div className="lg:col-span-5">
-            <h3 className="font-serif text-xl mb-4 text-soapstone">
-              Nebenkosten
-            </h3>
-            <ul className="divide-y divide-brass/30 border-t border-brass/40">
-              {preise.costs.map((cost) => (
+            <p className="eyebrow mb-5">{preise.inklusive.label}</p>
+            <div className="bg-cream rounded-2xl border border-brass/30 p-6 md:p-8">
+              <ul className="space-y-3">
+                {preise.inklusive.items.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm md:text-base text-ink/85">
+                    <CheckIcon />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="eyebrow mt-8 mb-4">{preise.zusatzkosten.label}</p>
+            <ul className="divide-y divide-brass/25 border-t border-brass/30">
+              {preise.zusatzkosten.items.map((item) => (
                 <li
-                  key={cost.label}
-                  className="grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-4 py-3 text-sm"
+                  key={item.label}
+                  className="grid grid-cols-12 gap-2 py-3 text-sm"
                 >
-                  <span className="md:col-span-8 text-ink/85">
-                    {cost.label}
-                  </span>
-                  <span className="md:col-span-4 md:text-right text-soapstone font-medium">
-                    {cost.value}
+                  <span className="col-span-7 text-ink/85">{item.label}</span>
+                  <span className="col-span-5 text-right text-soapstone font-medium">
+                    {item.value}
                   </span>
                 </li>
               ))}
             </ul>
-
-            <p className="mt-8 text-sm text-ink/80 leading-relaxed">
-              {preise.availabilityNote}
-            </p>
-
-            <div className="mt-6">
-              <a
-                href={preise.cta.href}
-                className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors"
-              >
-                {preise.cta.label}
-              </a>
-            </div>
           </div>
         </div>
+
+        <p className="text-sm text-ink/70 italic max-w-3xl mb-12 md:mb-16">
+          {preise.availabilityNote}
+        </p>
 
         <BookingCalendar />
       </div>

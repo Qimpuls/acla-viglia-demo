@@ -96,12 +96,18 @@ export const maiensaess = {
   ],
   details: [
     {
+      src: '/images/detail-4.jpg',
+      alt: 'Sessel mit Sicht aus dem Fenster',
+    },
+    {
+      src: '/images/detail-3.jpg',
+      alt: 'Wohnzimmer mit Specksteinofen',
+    },
+    { src: '/images/detail-2.jpg', alt: 'Küche mit Holzbalken' },
+    {
       src: '/images/detail-1.jpg',
       alt: 'Gewürzregal mit Becher-Reihe an der Decke',
     },
-    { src: '/images/detail-2.jpg', alt: 'Küchendetail mit Holzbalken' },
-    { src: '/images/detail-3.jpg', alt: 'Detailaufnahme der Wohnstube' },
-    { src: '/images/detail-4.jpg', alt: 'Schlafraum-Detail' },
   ],
 }
 
@@ -132,8 +138,8 @@ export const region = {
       alt: 'Lai Barnagn, Bergsee mit Bergpanorama',
     },
     {
-      src: '/images/region-wandern.jpeg',
-      alt: 'Wanderweg durch Wiese mit Wolkenhimmel',
+      src: '/images/usp-lage.jpeg',
+      alt: 'Maiensäss-Dorf Radons mit Bergpanorama',
     },
     { src: '/images/region-blumen.jpeg', alt: 'Wildblumen vor Tal und Bergen' },
     { src: '/images/region-bach.jpeg', alt: 'Bergbach zwischen Steinen' },
@@ -164,39 +170,52 @@ export const region = {
 
 export const preise = {
   eyebrow: 'PREISE',
-  headline: 'Wochenmiete von Samstag bis Samstag.',
-  rows: [
+  headline: 'Transparent. Inklusive.',
+  intro:
+    'Wochenmiete von Samstag bis Samstag, für 2 bis 8 Personen. Alle Nebenkosten sind im Tagespreis enthalten, ausser Endreinigung, Wäsche und Kurtaxen.',
+  spotlight: {
+    prefix: 'ab',
+    amount: 'CHF 44',
+    suffix: 'pro Person und Nacht',
+    detail:
+      'in der Sommer-Nebensaison bei 5 Personen. In der Hochsaison Winter bis CHF 70.',
+  },
+  seasons: [
     {
-      season: 'Weihnachten, Neujahr, Februar',
+      label: 'Weihnachten, Neujahr, Februar',
+      tag: 'Hochsaison',
       price: 'CHF 280',
     },
-    { season: 'Hochsaison Winter', price: 'CHF 280' },
-    { season: 'Nebensaison Winter', price: 'CHF 260' },
-    { season: 'Juli und August', price: 'CHF 260' },
-    { season: 'Nebensaison Sommer', price: 'CHF 220' },
+    { label: 'Hochsaison Winter', tag: 'Hochsaison', price: 'CHF 280' },
+    { label: 'Nebensaison Winter', tag: 'Winter', price: 'CHF 260' },
+    { label: 'Juli und August', tag: 'Sommer', price: 'CHF 260' },
+    { label: 'Nebensaison Sommer', tag: 'Sommer', price: 'CHF 220' },
   ],
-  notes: [
-    'Jede weitere erwachsene Person CHF 10 pro Tag und Person.',
-    'Im Preis enthalten: MWST, Strom, Wasser, WLAN, Holz für Heizung.',
-    'Willkommensgeschenk: eine Flasche Prosecco und eine Flasche Amarone.',
-  ],
-  costs: [
-    { label: 'Endreinigung pauschal', value: 'CHF 195' },
-    { label: 'Bett- und Frotteewäsche pro Woche und Person', value: 'CHF 25' },
-    {
-      label: 'Kurtaxen pro Tag und Person',
-      value: 'Erwachsene CHF 2.50, Kinder 6 bis 16 Jahre CHF 1.25',
-    },
-  ],
-  perPerson: {
-    label: 'Pro Person und Nacht',
-    range:
-      'Ab CHF 44 in der Nebensaison Sommer bei 5 Personen, bis CHF 70 in der Hochsaison Winter bei 4 Personen.',
-    inclusion:
-      'Inklusive MWST, Strom, Wasser, WLAN, Holz für Heizung.',
+  perDayNote:
+    'Pro Tag bis 5 Personen. Jede weitere erwachsene Person CHF 10 pro Tag.',
+  inklusive: {
+    label: 'Im Tagespreis enthalten',
+    items: [
+      'MWST',
+      'Strom und Wasser',
+      'WLAN',
+      'Holz für Cheminée und Kochherd',
+      'SodaStream am Bergquellwasser',
+      'Eine Flasche Prosecco und eine Flasche Amarone bei Anreise',
+    ],
   },
-  calendarImage: '/images/belegung-2026-2027.png',
-  calendarAvailable: false,
+  zusatzkosten: {
+    label: 'Zusatzkosten',
+    items: [
+      { label: 'Endreinigung', value: 'CHF 195 pauschal' },
+      { label: 'Bett- und Frotteewäsche', value: 'CHF 25 pro Woche und Person' },
+      { label: 'Kurtaxen Erwachsene', value: 'CHF 2.50 pro Tag' },
+      {
+        label: 'Kurtaxen Kinder (6–16 Jahre)',
+        value: 'CHF 1.25 pro Tag',
+      },
+    ],
+  },
   availabilityNote:
     'Aktuelle Verfügbarkeit auf Anfrage. Wir antworten persönlich, in der Regel innerhalb von 24 Stunden.',
   cta: { label: 'Verfügbarkeit anfragen', href: '#kontakt' },
