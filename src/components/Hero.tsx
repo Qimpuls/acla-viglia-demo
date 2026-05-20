@@ -1,16 +1,9 @@
 import Image from 'next/image'
 import { hero } from '@/lib/content'
 
-function isWinterSeason(date = new Date()) {
-  const month = date.getMonth() + 1
-  return month >= 11 || month <= 4
-}
-
 export function Hero() {
-  const heroImage = isWinterSeason() ? hero.imageWinter : hero.imageSummer
-  const heroAlt = isWinterSeason()
-    ? 'ACLA VIGLIA RADONS Maiensäss im Winter mit Schnee'
-    : 'ACLA VIGLIA RADONS Maiensäss im Sommer mit Bergpanorama'
+  const heroImage = hero.imageWinter
+  const heroAlt = 'ACLA VIGLIA RADONS Maiensäss im Winter mit Schnee'
 
   return (
     <section
