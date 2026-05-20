@@ -41,6 +41,16 @@ export function Preise() {
                 ))}
               </div>
             </div>
+
+            <div className="mt-6 bg-linen rounded-2xl p-6 md:p-8">
+              <p className="eyebrow mb-2">{preise.perPerson.label}</p>
+              <p className="font-serif text-soapstone text-lg md:text-xl leading-snug">
+                {preise.perPerson.range}
+              </p>
+              <p className="mt-3 text-sm text-ink/75">
+                {preise.perPerson.inclusion}
+              </p>
+            </div>
           </div>
 
           <div className="lg:col-span-5">

@@ -1,15 +1,25 @@
 import Image from 'next/image'
 import { hero } from '@/lib/content'
 
+function isWinterSeason(date = new Date()) {
+  const month = date.getMonth() + 1
+  return month >= 11 || month <= 4
+}
+
 export function Hero() {
+  const heroImage = isWinterSeason() ? hero.imageWinter : hero.imageSummer
+  const heroAlt = isWinterSeason()
+    ? 'ACLA VIGLIA RADONS Maiensäss im Winter mit Schnee'
+    : 'ACLA VIGLIA RADONS Maiensäss im Sommer mit Bergpanorama'
+
   return (
     <section
       id="top"
       className="relative min-h-[100svh] w-full overflow-hidden bg-charcoal"
     >
       <Image
-        src={hero.imageSummer}
-        alt="ACLA VIGLIA RADONS Maiensäss im Sommer mit Bergpanorama"
+        src={heroImage}
+        alt={heroAlt}
         fill
         sizes="100vw"
         priority
@@ -41,7 +51,10 @@ export function Hero() {
             {hero.secondaryCta.label}
           </a>
         </div>
-        <p className="mt-6 text-sm text-brass-light">{hero.note}</p>
+        <p className="mt-8 text-xs md:text-sm font-medium text-parchment/95 max-w-2xl">
+          {hero.trust}
+        </p>
+        <p className="mt-2 text-sm text-brass-light">{hero.note}</p>
       </div>
     </section>
   )

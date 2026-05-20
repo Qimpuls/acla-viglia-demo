@@ -1,4 +1,5 @@
 import { Anreise } from '@/components/Anreise'
+import { Empfehlungen } from '@/components/Empfehlungen'
 import { Footer } from '@/components/Footer'
 import { Gastgeber } from '@/components/Gastgeber'
 import { Header } from '@/components/Header'
@@ -56,6 +57,7 @@ export default function Home() {
         <Hero />
         <ValueProps />
         <Maiensaess />
+        <Empfehlungen />
         <Gastgeber />
         <Region />
         <Preise />

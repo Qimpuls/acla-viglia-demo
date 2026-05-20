@@ -21,11 +21,10 @@ export const hero = {
   headlineBottom: 'Geführt wie ein gutes Hotel.',
   subline:
     'Auf 1885 Metern im Maiensäss-Dorf Radons. Direkt an der Skipiste von Savognin. Mitten im Parc Ela, dem grössten Naturpark der Schweiz. Persönlich geführt von Angela und Gallus Liesch-Lombris.',
-  primaryCta: {
-    label: 'Verfügbarkeit anfragen',
-    href: 'mailto:info@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS',
-  },
+  primaryCta: { label: 'Verfügbarkeit anfragen', href: '#kontakt' },
   secondaryCta: { label: 'Das Maiensäss kennenlernen', href: '#maiensaess' },
+  trust:
+    'Persönlich geführt von Angela und Gallus Liesch-Lombris. 25 Jahre Hoteliers im Albulatal.',
   note: 'Wochenmiete Samstag zu Samstag. 2 bis 8 Personen.',
   imageSummer: '/images/hero-sommer.jpeg',
   imageWinter: '/images/hero-winter.jpg',
@@ -189,6 +188,13 @@ export const preise = {
       value: 'Erwachsene CHF 2.50, Kinder 6 bis 16 Jahre CHF 1.25',
     },
   ],
+  perPerson: {
+    label: 'Pro Person und Nacht',
+    range:
+      'Ab CHF 44 in der Nebensaison Sommer bei 5 Personen, bis CHF 70 in der Hochsaison Winter bei 4 Personen.',
+    inclusion:
+      'Inklusive MWST, Strom, Wasser, WLAN, Holz für Heizung.',
+  },
   calendarImage: '/images/belegung-2026-2027.png',
   calendarAvailable: false,
   availabilityNote:
@@ -219,6 +225,32 @@ export const anreise = {
     },
   ],
   note: 'Lebensmittel mitbringen oder in Savognin einkaufen (Coop, Volg). In Radons gibt es keinen Lebensmittelladen.',
+}
+
+export const empfehlungen = {
+  eyebrow: 'EMPFEHLUNGEN AUS DEM TAL',
+  headline: 'Was wir Ihnen ans Herz legen.',
+  intro:
+    'In dreissig Jahren als Gastgeber im Albulatal haben wir Lieblingsorte gesammelt. Eine Auswahl davon legen wir Ihnen ans Herz. Die ausführliche Liste finden Sie als handgeschriebenes Heft im Maiensäss.',
+  cards: [
+    {
+      eyebrow: 'WANDERUNG SOMMER',
+      title: 'Lai Barnagn ab Tigignas',
+      body: 'Sechs Kilometer, eineinhalb Stunden. Wer in Savognin startet, sollte vorher bei der Bäckerei Casparin Brot und ein Stück Bündner Nusstorte holen. Am See picknicken, dann zurück mit der Gondel. Geht auch mit Kinderwagen.',
+    },
+    {
+      eyebrow: 'MITTAGSTIPP',
+      title: 'Mungga-Stuba in Radons',
+      body: 'Zehn Gehminuten vom Maiensäss. Bekannt für hausgemachte Capuns und selbstgemachte Pommes. Die sonnige Terrasse mit Blick auf Piz Mez und Piz Forbesch. Bei schönem Wetter unbedingt früh reservieren, sonst keine Chance auf einen Platz draussen.',
+    },
+    {
+      eyebrow: 'IM SOMMER NICHT VERPASSEN',
+      title: 'Origen Festival in Riom',
+      body: 'Theaterfestival in romanischer Sprache, international beachtet. Findet Juli bis September statt, 15 Autominuten vom Maiensäss. Wir empfehlen vor allem die Aufführungen im Burgturm bei Sonnenuntergang. Tickets früh sichern, beliebte Vorstellungen sind schnell ausgebucht.',
+    },
+  ],
+  footnote:
+    'Diese Tipps sind kuratiert und werden saisonal aktualisiert. Die persönliche Empfehlung erhalten Sie bei Ihrer Anreise.',
 }
 
 export const kontakt = {

@@ -25,6 +25,19 @@ html {
   scroll-padding-top: 5rem;
 }
 
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 3.5rem;
+  }
+  section[id] {
+    scroll-margin-top: 3.5rem;
+  }
+}
+
 html, body {
   background-color: var(--color-parchment);
   color: var(--color-ink);
