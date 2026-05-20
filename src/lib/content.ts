@@ -35,10 +35,10 @@ export const valueProps = {
   cards: [
     {
       number: '01',
-      title: 'Skischuhe an, Tür auf, los.',
-      body: 'Die Piste der Savognin Bergbahnen verläuft direkt am Maiensäss vorbei. Kein Skibus, keine Wartezeit. Am Abend dieselbe Tür, dieselben Schuhe.',
-      image: '/images/usp-skiin.jpg',
-      alt: 'Maiensäss seitlich mit verschneitem Tal im Winter',
+      title: 'Mitten im Parc Ela.',
+      body: 'Radons liegt im grössten Naturpark der Schweiz. Im Winter erreichbar nur mit dem Winterbus oder auf Skiern. Das hält die Strasse ruhig und die Sterne hell.',
+      image: '/images/usp-lage.jpeg',
+      alt: 'Maiensäss-Dorf Radons mit Bergpanorama im Sommer',
     },
     {
       number: '02',
@@ -49,10 +49,10 @@ export const valueProps = {
     },
     {
       number: '03',
-      title: 'Mitten im Parc Ela.',
-      body: 'Radons liegt im grössten Naturpark der Schweiz. Im Winter erreichbar nur mit dem Winterbus oder auf Skiern. Das hält die Strasse ruhig und die Sterne hell.',
-      image: '/images/usp-lage.jpeg',
-      alt: 'Maiensäss-Dorf Radons mit Bergpanorama im Sommer',
+      title: 'Skischuhe an, Tür auf, los.',
+      body: 'Die Piste der Savognin Bergbahnen verläuft direkt am Maiensäss vorbei. Kein Skibus, keine Wartezeit. Am Abend dieselbe Tür, dieselben Schuhe.',
+      image: '/images/usp-skiin.jpg',
+      alt: 'Maiensäss seitlich mit verschneitem Tal im Winter',
     },
   ],
 }
