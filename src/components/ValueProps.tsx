@@ -3,7 +3,7 @@ import { valueProps } from '@/lib/content'
 
 export function ValueProps() {
   return (
-    <section className="bg-parchment py-20 md:py-32">
+    <section id="warum" className="bg-parchment py-20 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-16 md:mb-20">
           <p className="eyebrow mb-5">{valueProps.eyebrow}</p>

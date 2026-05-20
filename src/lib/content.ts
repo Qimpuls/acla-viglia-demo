@@ -20,12 +20,11 @@ export const hero = {
   headlineTop: 'Ein Maiensäss.',
   headlineBottom: 'Geführt wie ein gutes Hotel.',
   subline:
-    'Auf 1885 Metern im Maiensäss-Dorf Radons. Direkt an der Skipiste von Savognin. Mitten im Parc Ela, dem grössten Naturpark der Schweiz. Persönlich geführt von Angela und Gallus Liesch-Lombris.',
+    'Auf 1885 m, direkt an der Skipiste Savognin. Mitten im Parc Ela.',
   primaryCta: { label: 'Verfügbarkeit anfragen', href: '#kontakt' },
-  secondaryCta: { label: 'Das Maiensäss kennenlernen', href: '#maiensaess' },
+  secondaryCta: { label: 'Mehr über das Maiensäss', href: '#maiensaess' },
   trust:
-    'Persönlich geführt von Angela und Gallus Liesch-Lombris. 25 Jahre Hoteliers im Albulatal.',
-  note: 'Wochenmiete Samstag zu Samstag. 2 bis 8 Personen.',
+    'Persönlich geführt von Angela und Gallus · 25 Jahre Hoteliers · Samstag zu Samstag · 2 bis 8 Personen',
   imageSummer: '/images/hero-sommer.jpeg',
   imageWinter: '/images/hero-winter.jpg',
 }
