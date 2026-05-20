@@ -10,15 +10,12 @@ export function Gastgeber() {
             <div className="relative aspect-3/2 w-full overflow-hidden rounded-2xl bg-linen">
               <Image
                 src={gastgeber.image}
-                alt="Aquarell-Illustration von Angela und Gallus Liesch-Lombris vor dem Maiensäss"
+                alt="Angela und Gallus Liesch-Lombris vor dem Maiensäss"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <p className="mt-3 text-xs italic text-larch">
-              {gastgeber.imageCaption}
-            </p>
           </div>
 
           <div className="lg:col-span-7 order-1 lg:order-2">

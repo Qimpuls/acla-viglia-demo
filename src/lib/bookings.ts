@@ -84,8 +84,8 @@ export const bookings: Booking[] = [
 ]
 
 /**
- * Anker-Jahr für den Kalender. Default-Startansicht zeigt das ganze Jahr
- * (Januar bis Dezember). Wenn Angela die Default-Startansicht verschieben
- * will, hier ändern.
+ * Anker für den Kalender. Default-Startansicht zeigt 6 Monate ab diesem
+ * Monat. Wenn Angela die Default-Startansicht verschieben will, hier ändern.
+ * (Monate sind 0-indexiert: 0 = Januar, 6 = Juli.)
  */
-export const calendarAnchor = { year: 2026, month: 0 }
+export const calendarAnchor = { year: 2026, month: 6 }

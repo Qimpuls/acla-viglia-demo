@@ -2,6 +2,7 @@ export const navigation = [
   { label: 'Maiensäss', href: '#maiensaess' },
   { label: 'Gastgeber', href: '#gastgeber' },
   { label: 'Region', href: '#region' },
+  { label: 'Preise', href: '#preise' },
   { label: 'Anreise', href: '#anreise' },
   { label: 'Kontakt', href: '#kontakt' },
 ] as const
@@ -20,7 +21,10 @@ export const hero = {
   headlineBottom: 'Geführt wie ein gutes Hotel.',
   subline:
     'Auf 1885 Metern im Maiensäss-Dorf Radons. Direkt an der Skipiste von Savognin. Mitten im Parc Ela, dem grössten Naturpark der Schweiz. Persönlich geführt von Angela und Gallus Liesch-Lombris.',
-  primaryCta: { label: 'Verfügbarkeit anfragen', href: '#kontakt' },
+  primaryCta: {
+    label: 'Verfügbarkeit anfragen',
+    href: 'mailto:info@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS',
+  },
   secondaryCta: { label: 'Das Maiensäss kennenlernen', href: '#maiensaess' },
   note: 'Wochenmiete Samstag zu Samstag. 2 bis 8 Personen.',
   imageSummer: '/images/hero-sommer.jpeg',
@@ -42,8 +46,8 @@ export const valueProps = {
       number: '02',
       title: 'Specksteinofen statt Designerheizung.',
       body: 'Das Maiensäss ist gewachsen, nicht gebaut. Holzbalken, offener Cheminée, ein Holz-Kochherd als Alternative zum Elektroherd. Komfort, wo er nützt. Tradition, wo sie zählt.',
-      image: '/images/usp-original.jpg',
-      alt: 'Wohnstube mit Specksteinofen und Esstisch',
+      image: '/images/detail-4.jpg',
+      alt: 'Detail des Wohnraums mit Holzbalken',
     },
     {
       number: '03',
@@ -174,7 +178,7 @@ export const preise = {
   ],
   notes: [
     'Jede weitere erwachsene Person CHF 10 pro Tag und Person.',
-    'Im Preis enthalten: Marili, Strom, Wasser, Holz für Heizung.',
+    'Im Preis enthalten: MWST, Strom, Wasser, WLAN, Holz für Heizung.',
     'Willkommensgeschenk: eine Flasche Prosecco und eine Flasche Amarone.',
   ],
   costs: [

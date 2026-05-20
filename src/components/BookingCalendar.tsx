@@ -22,7 +22,9 @@ const MONTH_NAMES = [
   'November',
   'Dezember',
 ]
-const WEEKDAYS = ['MO', 'DI', 'MI', 'DO', 'FR', 'SA', 'SO']
+
+// Wochenstart Samstag: SA SO MO DI MI DO FR
+const WEEKDAYS = ['SA', 'SO', 'MO', 'DI', 'MI', 'DO', 'FR']
 
 const STATUS_COLOR: Record<BookingStatus, string> = {
   booked: 'var(--color-larch)',
@@ -38,43 +40,26 @@ function ymd(year: number, month: number, day: number) {
   return `${year}-${pad(month + 1)}-${pad(day)}`
 }
 
-interface DayState {
-  full: boolean
-  checkin: BookingStatus | null
-  checkout: BookingStatus | null
-}
-
-function getDayState(
+function getBookingForDay(
   year: number,
   month: number,
   day: number,
   list: Booking[],
-): DayState {
+): Booking | null {
   const dateStr = ymd(year, month, day)
-  let full = false
-  let checkin: BookingStatus | null = null
-  let checkout: BookingStatus | null = null
-
   for (const b of list) {
-    const status = b.status ?? 'booked'
-    if (dateStr > b.start && dateStr < b.end) {
-      full = true
-    }
-    if (dateStr === b.start) {
-      checkin = status
-    }
-    if (dateStr === b.end) {
-      checkout = status
-    }
+    // Buchung deckt die Nächte ab: start (Anreise) inkl., end (Abreise) exkl.
+    if (dateStr >= b.start && dateStr < b.end) return b
   }
-
-  return { full, checkin, checkout }
+  return null
 }
 
 function MonthGrid({ year, month }: { year: number; month: number }) {
   const first = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0).getDate()
-  const startWeekday = (first.getDay() + 6) % 7
+  // Wochenstart Samstag: SA=0, SO=1, MO=2 … FR=6
+  // JS getDay(): SO=0, MO=1, DI=2, MI=3, DO=4, FR=5, SA=6
+  const startWeekday = (first.getDay() + 1) % 7
 
   const cells: (number | null)[] = []
   for (let i = 0; i < startWeekday; i++) cells.push(null)
@@ -99,46 +84,26 @@ function MonthGrid({ year, month }: { year: number; month: number }) {
           if (day === null) {
             return <div key={i} className="aspect-square bg-cream/60" />
           }
-          const state = getDayState(year, month, day, bookings)
-          const fullColor = state.full
-            ? STATUS_COLOR[(bookings.find(
-                (b) =>
-                  ymd(year, month, day) > b.start &&
-                  ymd(year, month, day) < b.end,
-              )?.status ?? 'booked') as BookingStatus]
-            : null
-          const isLight = state.full || state.checkin || state.checkout
+          const booking = getBookingForDay(year, month, day, bookings)
+          const isBooked = booking !== null
 
           return (
             <div
               key={i}
               className="relative aspect-square flex items-center justify-center bg-cream"
             >
-              {fullColor && (
-                <span
-                  className="absolute inset-0"
-                  style={{ backgroundColor: fullColor }}
-                />
-              )}
-              {!state.full && state.checkout && (
+              {booking && (
                 <span
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, ${STATUS_COLOR[state.checkout]} 50%, transparent 50%)`,
-                  }}
-                />
-              )}
-              {!state.full && state.checkin && (
-                <span
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(135deg, transparent 50%, ${STATUS_COLOR[state.checkin]} 50%)`,
+                    backgroundColor:
+                      STATUS_COLOR[(booking.status ?? 'booked') as BookingStatus],
                   }}
                 />
               )}
               <span
                 className={`relative z-10 text-[0.7rem] md:text-xs font-medium ${
-                  isLight ? 'text-parchment' : 'text-soapstone'
+                  isBooked ? 'text-parchment' : 'text-soapstone'
                 }`}
               >
                 {day}
@@ -165,14 +130,15 @@ function shiftMonths(anchor: MonthRef, offset: number): MonthRef {
 
 export function BookingCalendar() {
   const [page, setPage] = useState(0)
-  const PAGE_SIZE = 12
+  const PAGE_SIZE = 6
 
   const months: MonthRef[] = []
   for (let i = 0; i < PAGE_SIZE; i++) {
     months.push(shiftMonths(calendarAnchor, page * PAGE_SIZE + i))
   }
 
-  const displayYear = months[0].year
+  const firstLabel = `${MONTH_NAMES[months[0].month]} ${months[0].year}`
+  const lastLabel = `${MONTH_NAMES[months[PAGE_SIZE - 1].month]} ${months[PAGE_SIZE - 1].year}`
 
   return (
     <div className="bg-linen/60 rounded-2xl p-6 md:p-10 border border-brass/30">
@@ -180,7 +146,7 @@ export function BookingCalendar() {
         <div>
           <p className="eyebrow mb-2">Belegungskalender</p>
           <p className="font-serif text-soapstone text-2xl md:text-3xl">
-            {displayYear}
+            {firstLabel} bis {lastLabel}
           </p>
         </div>
         <div className="flex gap-2">
@@ -204,7 +170,7 @@ export function BookingCalendar() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         {months.map((m) => (
           <MonthGrid key={`${m.year}-${m.month}`} year={m.year} month={m.month} />
         ))}
@@ -227,9 +193,9 @@ export function BookingCalendar() {
             belegt
           </span>
         </div>
-        <p className="mt-4 text-xs text-larch italic">
-          Ein halb gefüllter Samstag bedeutet: morgens Abreise, nachmittags
-          Anreise. Wochenmiete jeweils Samstag bis Samstag.
+        <p className="mt-3 text-xs text-larch italic">
+          Wochenmiete jeweils Samstag bis Samstag. Eine farbige Woche steht
+          für eine Buchung.
         </p>
       </div>
     </div>
