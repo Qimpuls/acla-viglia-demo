@@ -186,7 +186,7 @@ Inline-Validierung, accessible Labels, mobile-friendly.
 
 ## Bestehende Domain `aclavigliaradons.ch` (Migration)
 
-Die bisherige Webseite läuft bei **Hoststar** mit dem BaseKit-Website-Builder:
+Die bisherige Webseite läuft bei **Hoststar** mit dem BaseKit-Website-Builder, betreut von Thomas (Freundschaftsdienst, Kosten von ihm getragen):
 
 | Was | Wo |
 |-----|-----|
@@ -195,18 +195,38 @@ Die bisherige Webseite läuft bei **Hoststar** mit dem BaseKit-Website-Builder:
 | CMS | BaseKit (white-label, im Hoststar Designer) |
 | E-Mail | Hoststar, MX `mail.aclavigliaradons.ch` |
 
-**Empfohlener Migrations-Pfad (minimaler DNS-Switch, E-Mail bleibt):**
+Der Mail-Entwurf an Thomas liegt unter [../email-thomas-domain-hosting.md](../email-thomas-domain-hosting.md) (Stand 2026-05-21, noch nicht gesendet).
 
-1. Hoststar-Login besorgen (vom Kollegen, der die alte Site gebaut hat)
-2. Im Hoststar-DNS-Panel:
+### Variante 1: Thomas bleibt Verwalter von Domain und Mail
+
+DNS-Anpassung bei Hoststar, danach läuft alles unverändert weiter:
+
+1. Im Hoststar-DNS-Panel:
    - A-Record `aclavigliaradons.ch` → `76.76.21.21` (Vercel)
    - CNAME `www` → `cname.vercel-dns.com`
    - MX-Records **nicht ändern**
-3. In Vercel: Custom-Domain `aclavigliaradons.ch` + `www` hinterlegen, Let's-Encrypt-Zertifikat wird automatisch ausgestellt
-4. 24-48 h DNS-Propagation abwarten
-5. Erst nach 2-4 Wochen stabilem Betrieb das Hoststar-Webhosting kündigen. Domain + E-Mail bleiben dort.
+2. In Vercel: Custom-Domain `aclavigliaradons.ch` + `www` hinterlegen, Let's-Encrypt-Zertifikat wird automatisch ausgestellt
+3. 24-48 h DNS-Propagation abwarten
+4. Erst nach 2-4 Wochen stabilem Betrieb kann Thomas das Hoststar-Webhosting (BaseKit-Designer) runterstufen oder kündigen. Domain + E-Mail bleiben dort.
+5. Thomas teilt Gallus die jährlichen Kosten (Domain + Mail) mit, damit Gallus die Position selbst übernehmen kann.
 
-Was vom Kollegen zwingend gebraucht wird: Hoststar-Login oder schriftliche Bestätigung dass er den DNS-Switch selbst macht. Optional der AuthInfo-Code falls die Domain später zu einem anderen Registrar wandern soll.
+### Variante 2: Thomas gibt Domain und Mail ab
+
+Komplett-Übernahme zu **Hostpoint** (Marco hat dort bereits alle Domains, ein zusätzliches Konto wäre unnötig):
+
+- **Domain-Transfer zu Hostpoint.** Thomas entsperrt die Domain bei Hoststar und gibt den AuthInfo-Code raus, der Rest läuft automatisch über Hostpoint.
+- **Mail bei Hostpoint.** Postfächer im Webhosting-Paket inkludiert, oder Standalone via MyMail (ab CHF 28/Jahr für 1 Postfach). Bestehende Adressen 1:1 nachbauen, alte Postfächer per IMAP-Sync übernehmen, damit keine Mails verloren gehen.
+- **Hosting auf Vercel** wie in Variante 1.
+- **Halter (Whois):** Gallus. **Technischer Verwalter:** Marco (Hostpoint-Account-Zugriff).
+- **Rechnung:** läuft über Marco, Weiterverrechnung an Gallus.
+
+Stichtag für den Domain-Transfer mit Thomas abstimmen, damit Webseite und Mail nahtlos übergehen.
+
+### Was wir von Thomas brauchen
+
+- Antwort auf Variante 1 oder 2
+- Bei Variante 1: DNS-Einträge gesetzt (oder Hoststar-Login zur Selbst-Umstellung)
+- Bei Variante 2: AuthInfo-Code, Domain-Entsperrung, Mail-Postfächer-Inventar (Adressen, Aliase, Weiterleitungen)
 
 ## Deployment
 
