@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import { region } from '@/lib/content'
 
+function ImageCaption({ children }: { children: React.ReactNode }) {
+  return <p className="text-xs italic text-larch mt-2">{children}</p>
+}
+
 export function Region() {
   return (
     <section id="region" className="bg-linen py-20 md:py-32">
@@ -19,7 +23,7 @@ export function Region() {
           {region.mosaic.map((img) => (
             <div
               key={img.src}
-              className="relative aspect-[4/3] overflow-hidden rounded-xl"
+              className="relative aspect-4/3 overflow-hidden rounded-xl"
             >
               <Image
                 src={img.src}
@@ -33,8 +37,8 @@ export function Region() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-          <div>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-xl mb-6">
+          <div className="order-1">
+            <div className="relative aspect-video overflow-hidden rounded-xl mb-6">
               <Image
                 src={region.winter.image}
                 alt={region.winter.alt}
@@ -47,15 +51,27 @@ export function Region() {
             <ul className="space-y-2 text-ink/85 text-base leading-relaxed">
               {region.winter.items.map((item, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="text-brass mt-2 flex-shrink-0">·</span>
+                  <span className="text-brass mt-2 shrink-0">·</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
+            <figure className="mt-6">
+              <div className="relative h-72 md:h-80 overflow-hidden rounded-xl">
+                <Image
+                  src={region.winter.extraImage.src}
+                  alt={region.winter.extraImage.alt}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <ImageCaption>{region.winter.extraImage.caption}</ImageCaption>
+            </figure>
           </div>
 
-          <div>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-xl mb-6">
+          <div className="order-2">
+            <div className="relative aspect-video overflow-hidden rounded-xl mb-6">
               <Image
                 src="/images/region-wandern.jpeg"
                 alt="Sommerwanderung im Val Surses"
@@ -68,11 +84,27 @@ export function Region() {
             <ul className="space-y-2 text-ink/85 text-base leading-relaxed">
               {region.summer.items.map((item, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="text-brass mt-2 flex-shrink-0">·</span>
+                  <span className="text-brass mt-2 shrink-0">·</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              {region.summer.extraImages.map((img) => (
+                <figure key={img.src}>
+                  <div className="relative h-48 md:h-56 overflow-hidden rounded-xl">
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="(min-width: 768px) 25vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <ImageCaption>{img.caption}</ImageCaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
       </div>
