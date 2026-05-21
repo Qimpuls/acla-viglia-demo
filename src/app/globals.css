@@ -90,6 +90,22 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-soapstone);
 }
 
+.hero-sommer-pos {
+  object-position: center 35%;
+}
+.hero-winter-pos {
+  object-position: center center;
+}
+
+@media (max-width: 768px) {
+  .hero-sommer-pos {
+    object-position: center 40%;
+  }
+  .hero-winter-pos {
+    object-position: 70% center;
+  }
+}
+
 .scrollbar-thin::-webkit-scrollbar {
   height: 6px;
 }
