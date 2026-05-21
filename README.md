@@ -33,17 +33,31 @@ Alle auf der Website genutzten Bilder liegen in `public/images/`. Neue Bilder ko
 | `hero-sommer.png` | Echtes Maiensäss im Sommer, Steinbock-Skulpturen, Strasse als Diagonale | AKTIV | Mai bis Oktober |
 | `hero-winter.png` | Echtes Maiensäss im Tiefwinter, Holzwand-Rahmen links, Bergkette | bereit, archiviert | November bis April |
 
-Die Umschaltung erfolgt **automatisch** per Datumslogik in [src/components/Hero.tsx](src/components/Hero.tsx) (Funktion `isWinterSeason`). Im November schaltet das Winter-Hero von selbst auf, im Mai das Sommer-Hero. Wenn der Wechsel an einem Wochenende fällt und Vercel zwischenzeitlich nicht neu baut, reicht ein leerer Commit zum Trigger.
+Die Datumslogik in [src/components/Hero.tsx](src/components/Hero.tsx) (Funktion `isWinterSeason`) entscheidet beim **Build-Vorgang**, welches Bild gerendert wird. Die Seite ist statisch und wird auf Vercel-CDN gecached. Das heisst: der Wechsel passiert erst beim nächsten Deploy, nicht automatisch am Stichtag.
+
+**Aktueller Workflow (vereinbart):** Manuelle Aktivierung via Claude, getriggert durch Kalender-Erinnerung. Termine:
+
+- **15. Oktober** → Auftrag an Claude: *"Aktiviere das Winter-Hero-Bild jetzt"* (Vorlauf für Vorbuchungsphase Winter)
+- **15. April** → Auftrag an Claude: *"Aktiviere das Sommer-Hero-Bild jetzt"*
+
+Claude setzt dann `const winter = true` bzw. `false` in Hero.tsx, aktualisiert das OG-Image in layout.tsx, committet und deployt. Dauer: 60 Sekunden.
+
+**Alternative für später** (falls echter Auto-Switch gewünscht): ISR mit `export const revalidate = 86400` auf der Page kombiniert mit einem Vercel-Cron-Job (in `vercel.json`) der am 1.5. und 1.11. einen Revalidate-Endpoint pingt. Aufwand ~30 Minuten.
 
 ### Responsive Bildausschnitt
 
 Beide Hero-Bilder nutzen unterschiedliche `object-position`-Werte für Desktop und Mobile, definiert in `globals.css` als `.hero-sommer-pos` und `.hero-winter-pos`. Sommer: Desktop `center 35%`, Mobile `center 40%`. Winter: Desktop `center center`, Mobile `70% center` (verschiebt nach rechts, damit das verschneite Maiensäss zentraler sitzt und die dunkle Holzwand-Kante nicht dominiert).
 
-### Hinweis für den Herbst (Saisonwechsel auf Winter)
+### Manueller Saisonwechsel — Schritt für Schritt
 
-Die Umschaltung passiert **automatisch am 1. November** über die Datumslogik. Kein manueller Eingriff nötig.
+Wenn der Auftrag "Aktiviere das Winter-Hero-Bild jetzt" reinkommt, macht Claude:
 
-Falls das Winter-Hero früher aktiviert werden soll (z.B. ab Mitte Oktober für die Vorbuchungsphase Winter), genügt der Auftrag an Claude Code: *"Aktiviere das Winter-Hero-Bild jetzt."* Claude setzt `const winter = true` in [src/components/Hero.tsx](src/components/Hero.tsx) statt `const winter = isWinterSeason()` und deployt. Das Winter-Bild liegt bereit unter `public/images/hero-winter.png`.
+1. In [src/components/Hero.tsx](src/components/Hero.tsx): `const winter = isWinterSeason()` → `const winter = true`
+2. In [src/app/layout.tsx](src/app/layout.tsx): OG- und Twitter-Card-Image von `hero-sommer.png` auf `hero-winter.png`
+3. Commit `feat(hero): switch homepage to winter image`, push, Vercel-Deploy
+4. Curl gegen die Live-URL zur Verifikation
+
+Rückwärts genauso (`= false`, OG zurück auf Sommer). Das Winter-Bild liegt bereit unter `public/images/hero-winter.png`, das Sommer-Bild unter `public/images/hero-sommer.png`.
 
 ### Vollständiges Bild-Inventar
 
