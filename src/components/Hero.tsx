@@ -2,8 +2,8 @@ import Image from 'next/image'
 import { hero } from '@/lib/content'
 
 export function Hero() {
-  const heroImage = hero.imageWinter
-  const heroAlt = 'ACLA VIGLIA RADONS Maiensäss im Winter mit Schnee'
+  const heroImage = hero.imageSummer
+  const heroAlt = 'ACLA VIGLIA RADONS Maiensäss im Sommer mit Bergpanorama'
 
   return (
     <section
