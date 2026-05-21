@@ -154,6 +154,11 @@ export const region = {
       'Skitouren am Piz Martegnas',
       'Langlauf im Tal',
     ],
+    extraImage: {
+      src: '/images/region-tiefschnee.webp',
+      alt: 'Verschneiter Hang mit Skitourenspuren im Tiefschnee oberhalb der Maiensäss-Häuser von Radons',
+      caption: 'Unverspurter Tiefschnee direkt oberhalb der Hütten',
+    },
   },
   summer: {
     label: 'SOMMER',
@@ -163,6 +168,18 @@ export const region = {
       'Golf: Golfplatz Alvaneu, 30 Minuten',
       'Origen Festival Cultural in Riom, international beachtet',
       'Sternenhimmel: Radons liegt in einer Zone mit sehr geringer Lichtverschmutzung',
+    ],
+    extraImages: [
+      {
+        src: '/images/region-pferde.webp',
+        alt: 'Freilaufende Pferde mit Fohlen auf der Sommerweide von Radons vor Bergpanorama',
+        caption: 'Sömmerung auf den Weiden von Radons',
+      },
+      {
+        src: '/images/region-wegweiser.webp',
+        alt: 'Gelber Wanderwegweiser in Radons auf 1885 Metern mit Zielen Alp Schmorras, Piz Martegnas und Savognin',
+        caption: 'Wanderknotenpunkt Radons, 1885 m',
+      },
     ],
   },
 }
