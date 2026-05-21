@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: 'ACLA VIGLIA RADONS · Maiensäss in Savognin',
     description:
       'Maiensäss auf 1885 m, direkt an der Skipiste Savognin. Persönlich geführt von Angela und Gallus Liesch-Lombris.',
-    images: ['/images/hero-sommer.jpeg'],
+    images: ['/images/hero-sommer.png'],
     locale: 'de_CH',
     type: 'website',
   },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: 'ACLA VIGLIA RADONS · Maiensäss in Savognin',
     description:
       'Maiensäss auf 1885 m, direkt an der Skipiste Savognin. Persönlich geführt von Angela und Gallus Liesch-Lombris.',
-    images: ['/images/hero-sommer.jpeg'],
+    images: ['/images/hero-sommer.png'],
   },
 }
 

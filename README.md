@@ -22,22 +22,51 @@ npm run build    # Production-Build
 npm run start    # Production-Server lokal
 ```
 
-## Bilder
+## Bild-Archiv und Saison-Hero-Steuerung
 
-Bilder werden aus `~/Downloads/bilder-fuer-claude-code/` nach `public/images/` kopiert:
+Alle auf der Website genutzten Bilder liegen in `public/images/`. Neue Bilder kommen vom Auftraggeber via `~/Downloads/bilder-fuer-claude-code/` und werden in `public/images/` kopiert.
 
-```bash
-mkdir -p public/images
-cp ~/Downloads/bilder-fuer-claude-code/*.{jpg,jpeg,png} public/images/
-```
+### Hero-Bilder (saisonal gesteuert)
 
-### Vorhanden
+| Datei | Inhalt | Status | Aktiv in Saison |
+|-------|--------|--------|-----------------|
+| `hero-sommer.png` | Echtes Maiensäss im Sommer, Steinbock-Skulpturen, Strasse als Diagonale | AKTIV | Mai bis Oktober |
+| `hero-winter.png` | Echtes Maiensäss im Tiefwinter, Holzwand-Rahmen links, Bergkette | bereit, archiviert | November bis April |
 
-`hero-sommer.jpeg`, `hero-winter.jpg`, `usp-skiin.jpg`, `usp-original.jpg`, `usp-lage.jpeg`, `maiensaess-1.jpg` bis `maiensaess-6.jpg`, `detail-1.jpg` bis `detail-4.jpg`, `gastgeber-portrait.png` (Aquarell-Illustration), `region-parcela.jpeg`, `region-wandern.jpeg`, `region-blumen.jpeg`, `region-bach.jpeg`, `region-skigebiet.jpg`, `anreise-sommer.jpeg`, `anreise-winter.jpg`.
+Die Umschaltung erfolgt **automatisch** per Datumslogik in [src/components/Hero.tsx](src/components/Hero.tsx) (Funktion `isWinterSeason`). Im November schaltet das Winter-Hero von selbst auf, im Mai das Sommer-Hero. Wenn der Wechsel an einem Wochenende fällt und Vercel zwischenzeitlich nicht neu baut, reicht ein leerer Commit zum Trigger.
 
-### Hero-Saisonsteuerung
+### Responsive Bildausschnitt
 
-Das Hero-Bild wird beim Server-Render anhand des Build-Datums gewählt: November bis April → `hero-winter.jpg`, Mai bis Oktober → `hero-sommer.jpeg`. Logik in [src/components/Hero.tsx](src/components/Hero.tsx). Bei Vercel-Deploy wird die Entscheidung im Build neu gefällt — push-Trigger reichen, wenn der Saisonwechsel an einem Wochenende kommt einfach einen leeren Commit pushen.
+Beide Hero-Bilder nutzen unterschiedliche `object-position`-Werte für Desktop und Mobile, definiert in `globals.css` als `.hero-sommer-pos` und `.hero-winter-pos`. Sommer: Desktop `center 35%`, Mobile `center 40%`. Winter: Desktop `center center`, Mobile `70% center` (verschiebt nach rechts, damit das verschneite Maiensäss zentraler sitzt und die dunkle Holzwand-Kante nicht dominiert).
+
+### Hinweis für den Herbst (Saisonwechsel auf Winter)
+
+Die Umschaltung passiert **automatisch am 1. November** über die Datumslogik. Kein manueller Eingriff nötig.
+
+Falls das Winter-Hero früher aktiviert werden soll (z.B. ab Mitte Oktober für die Vorbuchungsphase Winter), genügt der Auftrag an Claude Code: *"Aktiviere das Winter-Hero-Bild jetzt."* Claude setzt `const winter = true` in [src/components/Hero.tsx](src/components/Hero.tsx) statt `const winter = isWinterSeason()` und deployt. Das Winter-Bild liegt bereit unter `public/images/hero-winter.png`.
+
+### Vollständiges Bild-Inventar
+
+| Datei | Einsatz auf der Website |
+|-------|-------------------------|
+| `hero-sommer.png` | Hero-Bild, aktiv Mai-Oktober |
+| `hero-winter.png` | Hero-Bild, aktiv November-April |
+| `usp-skiin.jpg` | ValueProps Karte 03 "Skischuhe an, Tür auf, los." |
+| `usp-original.jpg` | (archiviert, vorher Karte 02; nicht mehr aktiv im Code referenziert) |
+| `usp-lage.jpeg` | ValueProps Karte 01 "Mitten im Parc Ela" + Region-Mosaik oben rechts |
+| `maiensaess-1.jpg` … `maiensaess-6.jpg` | Maiensäss-Sektion 2×3 Galerie (Wohnstube, Küche, Eltern-Schlaf, Kinder-Schlaf, Dachgalerie, Bad) |
+| `detail-1.jpg` … `detail-4.jpg` | Maiensäss-Sektion horizontaler Detail-Bildband (Reihenfolge: detail-4, detail-3, detail-2, detail-1) |
+| `gastgeber-portrait.png` | Gastgeber-Sektion, Aquarell-Illustration von Angela und Gallus |
+| `region-parcela.jpeg` | Region-Sektion Mosaik oben links (Lai Barnagn) |
+| `region-blumen.jpeg` | Region-Sektion Mosaik unten links (Wildblumen vor Bergen) |
+| `region-bach.jpeg` | Region-Sektion Mosaik unten rechts (Bergbach zwischen Steinen) |
+| `region-wandern.jpeg` | Region-Sektion Sommer-Spalten-Header (Wanderweg) |
+| `region-skigebiet.jpg` | Region-Sektion Winter-Spalten-Header (Skigebiet) |
+| `region-tiefschnee.webp` | Region-Sektion Winter-Spalte unten, mit Caption "Unverspurter Tiefschnee" |
+| `region-pferde.webp` | Region-Sektion Sommer-Spalte, Caption "Sömmerung auf den Weiden von Radons" |
+| `region-wegweiser.webp` | Region-Sektion Sommer-Spalte, Caption "Wanderknotenpunkt Radons, 1885 m" |
+| `anreise-sommer.jpeg` | Anreise-Sektion Sommer-Karte |
+| `anreise-winter.jpg` | Anreise-Sektion Winter-Karte |
 
 ## Architektur
 

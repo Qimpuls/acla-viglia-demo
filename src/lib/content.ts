@@ -25,8 +25,8 @@ export const hero = {
   secondaryCta: { label: 'Mehr über das Maiensäss', href: '#maiensaess' },
   trust:
     'Persönlich geführt von Angela und Gallus · 25 Jahre Hoteliers · Samstag zu Samstag · 2 bis 8 Personen',
-  imageSummer: '/images/hero-sommer.jpeg',
-  imageWinter: '/images/hero-winter.jpg',
+  imageSummer: '/images/hero-sommer.png',
+  imageWinter: '/images/hero-winter.png',
 }
 
 export const valueProps = {
