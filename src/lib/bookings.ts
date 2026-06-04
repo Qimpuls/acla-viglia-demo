@@ -1,14 +1,14 @@
 /**
- * Buchungsdaten ACLA VIGLIA RADONS
+ * Buchungsdaten ACLA VIGLIA RADONS (Startbestand / Seed)
  *
- * Pflege: Angela trägt Buchungen hier ein und schiebt einen Commit zu GitHub.
- * Vercel deployt automatisch neu. Format ISO-Datum (YYYY-MM-DD).
+ * Pflege: Angela bearbeitet die Belegung im Admin-Bereich (/verwaltung).
+ * Die laufenden Daten liegen im Datenspeicher (Vercel Blob), nicht hier.
+ * Diese Liste ist nur der einmalige Startbestand, falls der Speicher leer ist.
+ * Format ISO-Datum (YYYY-MM-DD).
  *
  * Konvention: Wochenmiete Samstag zu Samstag.
  *   start = Anreisetag (Samstag Nachmittag)
  *   end   = Abreisetag (Samstag Vormittag)
- * Übergangs-Samstage werden in der Anzeige automatisch mit zwei Dreiecken
- * (Abreise vormittag + Anreise nachmittag) dargestellt.
  *
  * Status:
  *   'booked'     blau gefüllt
@@ -22,11 +22,11 @@ export interface Booking {
   start: string
   end: string
   status?: BookingStatus
-  /** Interne Notiz, nicht öffentlich angezeigt. */
+  /** Interne Notiz (Kundenname), nur im Admin sichtbar, nie öffentlich. */
   note?: string
 }
 
-export const bookings: Booking[] = [
+export const seedBookings: Booking[] = [
   // 2026
   { start: '2026-06-20', end: '2026-06-27' },
   { start: '2026-07-11', end: '2026-07-18' },
@@ -50,6 +50,7 @@ export const bookings: Booking[] = [
   { start: '2027-02-27', end: '2027-03-06' },
   { start: '2027-03-06', end: '2027-03-13' },
   { start: '2027-03-13', end: '2027-03-20' },
+  { start: '2027-03-20', end: '2027-03-27' },
 
   // 2027 Sommer
   { start: '2027-07-10', end: '2027-07-17' },
@@ -82,10 +83,3 @@ export const bookings: Booking[] = [
   { start: '2029-02-10', end: '2029-02-17' },
   { start: '2029-02-24', end: '2029-03-03' },
 ]
-
-/**
- * Anker für den Kalender. Default-Startansicht zeigt 6 Monate ab diesem
- * Monat. Wenn Angela die Default-Startansicht verschieben will, hier ändern.
- * (Monate sind 0-indexiert: 0 = Januar, 6 = Juli.)
- */
-export const calendarAnchor = { year: 2026, month: 6 }

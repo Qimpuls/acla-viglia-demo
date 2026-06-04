@@ -1,74 +1,23 @@
 'use client'
 
 import { useState } from 'react'
+import { type Booking, type BookingStatus } from '@/lib/bookings'
 import {
-  bookings,
-  calendarAnchor,
-  type Booking,
-  type BookingStatus,
-} from '@/lib/bookings'
-
-const MONTH_NAMES = [
-  'Januar',
-  'Februar',
-  'März',
-  'April',
-  'Mai',
-  'Juni',
-  'Juli',
-  'August',
-  'September',
-  'Oktober',
-  'November',
-  'Dezember',
-]
-
-// Wochenstart Samstag: SA SO MO DI MI DO FR
-const WEEKDAYS = ['SA', 'SO', 'MO', 'DI', 'MI', 'DO', 'FR']
+  MONTH_NAMES,
+  WEEKDAYS,
+  type MonthRef,
+  bookingForDay,
+  buildMonthWeeks,
+  isWeekFree,
+  shiftMonths,
+  weekRange,
+  ymdOf,
+} from '@/lib/calendar'
 
 const STATUS_COLOR: Record<BookingStatus, string> = {
   booked: 'var(--color-larch)',
   reserved: '#C9B66A',
   closed: '#B1564A',
-}
-
-function pad(n: number) {
-  return n < 10 ? `0${n}` : `${n}`
-}
-
-function ymd(year: number, month: number, day: number) {
-  // Normalisiert auch Tage ausserhalb des Monats (z.B. day=32 -> nächster Monat)
-  const d = new Date(year, month, day)
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
-}
-
-function getBookingForDay(
-  year: number,
-  month: number,
-  day: number,
-  list: Booking[],
-): Booking | null {
-  const dateStr = ymd(year, month, day)
-  for (const b of list) {
-    if (dateStr >= b.start && dateStr < b.end) return b
-  }
-  return null
-}
-
-function isWeekFree(
-  year: number,
-  month: number,
-  saturdayDay: number,
-  list: Booking[],
-): boolean {
-  for (let offset = 0; offset < 7; offset++) {
-    const d = new Date(year, month, saturdayDay + offset)
-    const dStr = ymd(d.getFullYear(), d.getMonth(), d.getDate())
-    for (const b of list) {
-      if (dStr >= b.start && dStr < b.end) return false
-    }
-  }
-  return true
 }
 
 function handleWeekClick(from: string, to: string) {
@@ -81,21 +30,16 @@ function handleWeekClick(from: string, to: string) {
   window.dispatchEvent(new HashChangeEvent('hashchange'))
 }
 
-function MonthGrid({ year, month }: { year: number; month: number }) {
-  const first = new Date(year, month, 1)
-  const lastDay = new Date(year, month + 1, 0).getDate()
-  // SA=0, SO=1 ... FR=6 — JS getDay: SO=0, MO=1, ..., SA=6
-  const startWeekday = (first.getDay() + 1) % 7
-
-  const cells: (number | null)[] = []
-  for (let i = 0; i < startWeekday; i++) cells.push(null)
-  for (let d = 1; d <= lastDay; d++) cells.push(d)
-  while (cells.length % 7 !== 0) cells.push(null)
-
-  const rows: (number | null)[][] = []
-  for (let i = 0; i < cells.length; i += 7) {
-    rows.push(cells.slice(i, i + 7))
-  }
+function MonthGrid({
+  year,
+  month,
+  bookings,
+}: {
+  year: number
+  month: number
+  bookings: Booking[]
+}) {
+  const weeks = buildMonthWeeks(year, month)
 
   return (
     <div className="bg-cream rounded-lg overflow-hidden border border-brass/40 shadow-sm">
@@ -113,19 +57,11 @@ function MonthGrid({ year, month }: { year: number; month: number }) {
         ))}
       </div>
 
-      {rows.map((row, rowIdx) => {
-        const saturdayDay = row[0]
-        let clickable = false
-        let from = ''
-        let to = ''
-
-        if (saturdayDay !== null && isWeekFree(year, month, saturdayDay, bookings)) {
-          const start = new Date(year, month, saturdayDay)
-          const end = new Date(year, month, saturdayDay + 7)
-          from = ymd(start.getFullYear(), start.getMonth(), start.getDate())
-          to = ymd(end.getFullYear(), end.getMonth(), end.getDate())
-          clickable = true
-        }
+      {weeks.map((row, rowIdx) => {
+        const saturday = row[0]
+        const saturdayInMonth = saturday.getMonth() === month
+        const clickable = saturdayInMonth && isWeekFree(saturday, bookings)
+        const { from, to } = weekRange(saturday)
 
         const rowClass = clickable
           ? 'grid grid-cols-7 cursor-pointer hover:bg-brass-light/30 focus-visible:bg-brass-light/40 focus-visible:outline-none transition-colors'
@@ -149,10 +85,10 @@ function MonthGrid({ year, month }: { year: number; month: number }) {
         return (
           <div key={rowIdx} className={rowClass} {...rowProps}>
             {row.map((day, colIdx) => {
-              if (day === null) {
+              if (day.getMonth() !== month) {
                 return <div key={colIdx} className="aspect-square bg-cream/60" />
               }
-              const booking = getBookingForDay(year, month, day, bookings)
+              const booking = bookingForDay(ymdOf(day), bookings)
               const isBooked = booking !== null
               return (
                 <div
@@ -175,7 +111,7 @@ function MonthGrid({ year, month }: { year: number; month: number }) {
                       isBooked ? 'text-parchment' : 'text-soapstone'
                     }`}
                   >
-                    {day}
+                    {day.getDate()}
                   </span>
                 </div>
               )
@@ -187,25 +123,18 @@ function MonthGrid({ year, month }: { year: number; month: number }) {
   )
 }
 
-interface MonthRef {
-  year: number
-  month: number
-}
-
-function shiftMonths(anchor: MonthRef, offset: number): MonthRef {
-  const total = anchor.year * 12 + anchor.month + offset
-  const year = Math.floor(total / 12)
-  const month = ((total % 12) + 12) % 12
-  return { year, month }
-}
-
-export function BookingCalendar() {
+export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
   const [page, setPage] = useState(0)
   const PAGE_SIZE = 6
 
+  // Startansicht beginnt automatisch beim aktuellen Monat, damit der
+  // Kalender ohne manuelle Pflege immer aktuell bleibt.
+  const now = new Date()
+  const anchor: MonthRef = { year: now.getFullYear(), month: now.getMonth() }
+
   const months: MonthRef[] = []
   for (let i = 0; i < PAGE_SIZE; i++) {
-    months.push(shiftMonths(calendarAnchor, page * PAGE_SIZE + i))
+    months.push(shiftMonths(anchor, page * PAGE_SIZE + i))
   }
 
   const firstLabel = `${MONTH_NAMES[months[0].month]} ${months[0].year}`
@@ -243,7 +172,12 @@ export function BookingCalendar() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         {months.map((m) => (
-          <MonthGrid key={`${m.year}-${m.month}`} year={m.year} month={m.month} />
+          <MonthGrid
+            key={`${m.year}-${m.month}`}
+            year={m.year}
+            month={m.month}
+            bookings={bookings}
+          />
         ))}
       </div>
 

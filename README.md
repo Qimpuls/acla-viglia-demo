@@ -100,13 +100,18 @@ src/
     Region.tsx        Intro + 2x2 Mosaik + Winter/Sommer-Bullets
     Preise.tsx        Value-Spotlight + Saisons + Inklusive-Checks + Kalender
     BookingCalendar.tsx  Sa-Sa-Wochenraster, klickbare freie Wochen
+    BookingCalendarSection.tsx  Server-Wrapper, lädt Belegung aus dem Speicher
+    admin/            Admin-UI: LoginForm + BookingAdmin (Route /verwaltung)
     Anreise.tsx       Sommer/Winter Karten
     Kontakt.tsx       Form-Embed + Adresse als Fallback
     ContactForm.tsx   Nativer Anfrage-Workflow mit mailto-Submit
     Footer.tsx        3-Spalten + Legal-Zeile
   lib/
     content.ts        Alle Texte zentralisiert
-    bookings.ts       Belegungs-Array, Status-Logik, Anker-Monat
+    bookings.ts       Startbestand (Seed) + Typen
+    store.ts          Belegungs-Speicher (Vercel Blob / lokale Datei)
+    auth.ts           Admin-Login: Passwort, signiertes Cookie, Drosselung
+    calendar.ts       Geteilte Kalender-Logik (Monatsraster, Wochen)
 public/
   images/             22 Bilder
 ```
@@ -133,32 +138,31 @@ Sämtliche Texte sind in [src/lib/content.ts](src/lib/content.ts) zentralisiert.
 
 ## Belegungskalender pflegen
 
-Buchungen werden in [src/lib/bookings.ts](src/lib/bookings.ts) als Array gepflegt:
-
-```ts
-{ start: '2026-12-19', end: '2026-12-26' },                 // Standard, belegt
-{ start: '2027-02-13', end: '2027-02-20', status: 'reserved' },
-{ start: '2027-04-01', end: '2027-04-08', status: 'closed', note: 'Renovation' },
-```
-
-- `start` = Anreise-Samstag (nachmittags)
-- `end`   = Abreise-Samstag (vormittags, exklusiv — Tag selbst wird nicht eingefärbt)
-- `status` optional: `'booked'` (Default, larch), `'reserved'` (gelb), `'closed'` (rot)
-- `note` rein intern, nicht öffentlich sichtbar
-
-**Anzeige-Logik:** Die Wochen sind im Kalender als Samstag-zu-Freitag-Zeilen gerendert (Wochenstart Sa). Eine ganze Buchungswoche füllt visuell genau eine Zeile, der Abreise-Samstag bleibt weiss. Klick auf eine freie Woche schreibt `#kontakt?from=...&to=...` in die URL, scrollt zur Anfrage-Sektion und füllt das Formular vor. Standard-Ansicht zeigt 6 Monate ab Juli 2026 (Anker in `calendarAnchor`), Navigation in 6-Monats-Schritten.
+Buchungen liegen im **privaten Vercel Blob Store** (`acla-viglia-bookings`) und werden über den passwortgeschützten Admin gepflegt. [src/lib/bookings.ts](src/lib/bookings.ts) ist nur noch der **Startbestand (Seed)**, falls der Speicher leer ist, nicht der laufende Datensatz.
 
 **Workflow für Angela:**
 
-1. Datei [src/lib/bookings.ts](src/lib/bookings.ts) im Browser auf GitHub editieren (Bleistift-Symbol)
-2. Buchung als neue Zeile einfügen, sortiert nach Datum
-3. Commit-Nachricht z.B. `Buchung Familie Müller 12.-19.07.2026`
-4. Vercel deployt automatisch innerhalb von ~60 Sekunden
+1. `/verwaltung` öffnen (z.B. `aclavigliaradons.ch/verwaltung`), Passwort eingeben, bleibt eingeloggt
+2. Woche im Kalender anklicken
+3. Status wählen: **Frei** oder **Belegt**
+4. Bei Belegt optional den Kundennamen eintragen (nur intern sichtbar, nie öffentlich)
+5. Speichern. Die öffentliche Seite zeigt die Änderung innert Sekunden
 
-**Empfehlung für später** (optional):
+Kein Code, kein Git, kein Deploy. Woche von Anreise- bis Abreise-Samstag (Sa zu Sa).
 
-- iCal-Feed-Integration: Angela verwaltet Buchungen in Apple Calendar / Google Calendar, die Website liest den `.ics`-Feed serverseitig (Aufwand 1-2 Tage, vermeidet Git-Workflow)
-- Headless CMS (Decap, Sanity) als Alternative
+**Datenmodell** (eine Buchung = eine Woche):
+
+```ts
+{ start: '2026-12-19', end: '2026-12-26', status: 'booked', note: 'Familie Müller' }
+```
+
+- `start` = Anreise-Samstag, `end` = Abreise-Samstag (exklusiv, Tag bleibt weiss)
+- `status`: `'booked'` (larch). Die Typen `'reserved'`/`'closed'` bleiben im Datenmodell, der Admin bietet aber nur Frei/Belegt
+- `note` = Kundenname, rein intern. Wird für alle öffentlichen Konsumenten serverseitig entfernt (`getPublicBookings`), erscheint nie im Seitenquelltext
+
+**Anzeige-Logik:** Wochen sind als Samstag-zu-Freitag-Zeilen gerendert. Eine Buchungswoche füllt visuell eine Zeile, der Abreise-Samstag bleibt frei. Klick auf eine freie Woche schreibt `#kontakt?from=...&to=...` in die URL und füllt das Anfrage-Formular vor. Standard-Ansicht startet automatisch beim **aktuellen Monat** (dynamisch), Navigation in 6-Monats-Schritten.
+
+**Technik:** Login via signiertes Cookie ([src/lib/auth.ts](src/lib/auth.ts)), Speicher-Abstraktion in [src/lib/store.ts](src/lib/store.ts) (Vercel Blob in Produktion, lokale Datei `.data/bookings.json` in der Entwicklung). Benötigte Umgebungsvariablen: `ADMIN_PASSWORD`, `AUTH_SECRET`, `BLOB_READ_WRITE_TOKEN` (siehe [.env.example](.env.example)).
 
 ## Anfrage-Formular
 
@@ -166,7 +170,7 @@ Buchungen werden in [src/lib/bookings.ts](src/lib/bookings.ts) als Array gepfleg
 
 - Anreise / Abreise (HTML5-Datepicker, Anreise ab heute, Abreise ab Anreise)
 - Erwachsene + Kinder mit Live-Summe und Hinweis bei >5 Personen
-- Verfügbarkeits-Check gegen `bookings.ts`, freundlicher Hinweis bei Überlappung
+- Verfügbarkeits-Check gegen die aktuelle Belegung, freundlicher Hinweis bei Überlappung
 - Name (Pflicht), E-Mail (Pflicht, validiert), Telefon, Herkunfts-Dropdown, Nachricht
 - Pre-Fill aus `#kontakt?from=...&to=...` (vom Kalender-Klick)
 - Submit baut einen strukturierten deutschen mailto-Link mit Subject und Body und öffnet den Mail-Client. Nach Klick wechselt die Form zu einem "Danke"-Bestätigungspanel mit Reset-Link.
@@ -195,7 +199,9 @@ Die bisherige Webseite läuft bei **Hoststar** mit dem BaseKit-Website-Builder, 
 | CMS | BaseKit (white-label, im Hoststar Designer) |
 | E-Mail | Hoststar, MX `mail.aclavigliaradons.ch` |
 
-Der Mail-Entwurf an Thomas liegt unter [../email-thomas-domain-hosting.md](../email-thomas-domain-hosting.md) (Stand 2026-05-21, noch nicht gesendet).
+Der Mail-Entwurf an Thomas liegt unter [../email-thomas-domain-hosting.md](../email-thomas-domain-hosting.md).
+
+**Status (2026-06-04):** Thomas hat **Variante 1** gewählt (er behält Domain + Mail, passt nur das Hosting via DNS an). `aclavigliaradons.ch` und `www` sind im Vercel-Projekt bereits hinterlegt und auf das aktuelle Production-Deployment aliased. Offen: Thomas setzt die zwei DNS-Einträge bei Hoststar (A `aclavigliaradons.ch` → `76.76.21.21`, CNAME `www` → `cname.vercel-dns.com`). Danach ist die Domain live, SSL automatisch. www leitet per 308 auf die Hauptdomain (in `next.config.ts`).
 
 ### Variante 1: Thomas bleibt Verwalter von Domain und Mail
 

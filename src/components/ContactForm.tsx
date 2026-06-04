@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { bookings } from '@/lib/bookings'
+import { type Booking } from '@/lib/bookings'
 
 interface FormState {
   anreise: string
@@ -52,9 +52,9 @@ function formatGerman(iso: string) {
   return `${d}.${m}.${y}`
 }
 
-function isRangeFree(from: string, to: string) {
+function isRangeFree(from: string, to: string, list: Booking[]) {
   if (!from || !to) return true
-  for (const b of bookings) {
+  for (const b of list) {
     // Overlap, wenn from < b.end && to > b.start
     if (from < b.end && to > b.start) return false
   }
@@ -66,7 +66,7 @@ const todayIso = () => {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
 }
 
-export function ContactForm() {
+export function ContactForm({ bookings }: { bookings: Booking[] }) {
   const [form, setForm] = useState<FormState>(INITIAL)
   const [touched, setTouched] = useState<Record<string, boolean>>({})
   const [submitting, setSubmitting] = useState(false)
@@ -93,8 +93,8 @@ export function ContactForm() {
   const personenTotal = erwachseneNum + kinderNum
 
   const rangeFree = useMemo(
-    () => isRangeFree(form.anreise, form.abreise),
-    [form.anreise, form.abreise],
+    () => isRangeFree(form.anreise, form.abreise, bookings),
+    [form.anreise, form.abreise, bookings],
   )
 
   const dateOrderValid =

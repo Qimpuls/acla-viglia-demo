@@ -1,4 +1,4 @@
-import { BookingCalendar } from '@/components/BookingCalendar'
+import { BookingCalendarSection } from '@/components/BookingCalendarSection'
 import { preise } from '@/lib/content'
 
 function CheckIcon() {
@@ -124,7 +124,7 @@ export function Preise() {
           {preise.availabilityNote}
         </p>
 
-        <BookingCalendar />
+        <BookingCalendarSection />
       </div>
     </section>
   )

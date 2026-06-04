@@ -1,7 +1,9 @@
 import { ContactForm } from '@/components/ContactForm'
 import { kontakt } from '@/lib/content'
+import { getPublicBookings } from '@/lib/store'
 
-export function Kontakt() {
+export async function Kontakt() {
+  const bookings = await getPublicBookings()
   return (
     <section id="kontakt" className="bg-charcoal py-20 md:py-32">
       <div className="max-w-3xl mx-auto px-6 md:px-12">
@@ -12,7 +14,7 @@ export function Kontakt() {
           </h2>
         </div>
 
-        <ContactForm />
+        <ContactForm bookings={bookings} />
 
         <div className="mt-12 pt-10 border-t border-charcoal-soft/60 text-center">
           <p className="eyebrow !text-brass-light/80 mb-4">
