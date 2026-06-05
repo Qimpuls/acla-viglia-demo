@@ -34,9 +34,9 @@ const HERKUNFT_OPTIONS = [
   'Sonstiges',
 ]
 
-// Online-Anfrage temporär deaktiviert, solange der Mailempfang gestört ist.
-// Sobald die Mail wieder läuft: auf true setzen, dann ist das Formular zurück.
-const MAIL_AKTIV = false
+// Schalter für die Online-Anfrage. Auf false leitet das Formular auf Telefon um
+// (z. B. bei gestörtem Mailempfang), auf true ist das Mail-Formular aktiv.
+const MAIL_AKTIV = true
 
 function parseHash(): { from?: string; to?: string } {
   if (typeof window === 'undefined') return {}

@@ -27,6 +27,14 @@ export async function Kontakt() {
             <p>{kontakt.region}</p>
             <p className="pt-3">
               <a
+                href={kontakt.mailto}
+                className="text-brass-light hover:text-parchment underline underline-offset-4 transition-colors"
+              >
+                {kontakt.email}
+              </a>
+            </p>
+            <p>
+              <a
                 href={`tel:${kontakt.tel}`}
                 className="text-brass-light hover:text-parchment underline underline-offset-4 transition-colors"
               >
