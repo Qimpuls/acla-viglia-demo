@@ -315,7 +315,6 @@ export const footer = {
       'Angela und Gallus Liesch-Lombris',
       'Radons 104, 7464 Surses',
       '+41 79 520 87 96',
-      'ferien@aclavigliaradons.ch',
     ],
   },
   navigation: [

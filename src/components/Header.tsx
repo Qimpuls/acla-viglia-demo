@@ -121,11 +121,11 @@ export function Header() {
             </a>
           ))}
           <a
-            href="mailto:ferien@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS"
+            href="tel:+41795208796"
             onClick={handleNavClick}
             className="mt-8 bg-soapstone text-parchment px-6 py-4 rounded-full text-center font-medium hover:bg-larch transition-colors"
           >
-            E-Mail schreiben
+            Anrufen
           </a>
         </nav>
       </div>

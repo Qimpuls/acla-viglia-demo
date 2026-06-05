@@ -33,14 +33,6 @@ export async function Kontakt() {
                 {kontakt.phone}
               </a>
             </p>
-            <p>
-              <a
-                href={`mailto:${kontakt.email}`}
-                className="text-brass-light hover:text-parchment underline underline-offset-4 transition-colors"
-              >
-                {kontakt.email}
-              </a>
-            </p>
           </div>
           <p className="mt-6 text-sm text-brass-light/70 max-w-xl mx-auto leading-relaxed">
             {kontakt.note}

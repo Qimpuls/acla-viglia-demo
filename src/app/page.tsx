@@ -24,7 +24,6 @@ const jsonLd = {
     `${SITE_URL}/images/hero-sommer.png`,
     `${SITE_URL}/images/hero-winter.png`,
   ],
-  email: 'ferien@aclavigliaradons.ch',
   telephone: '+41 79 520 87 96',
   address: {
     '@type': 'PostalAddress',
