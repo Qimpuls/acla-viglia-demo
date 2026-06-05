@@ -177,7 +177,7 @@ Kein Code, kein Git, kein Deploy. Woche von Anreise- bis Abreise-Samstag (Sa zu 
 
 Inline-Validierung, accessible Labels, mobile-friendly.
 
-**Temporärer Zustand (Mailempfang gestört):** Der Schalter `MAIL_AKTIV` in [ContactForm.tsx](src/components/ContactForm.tsx) steht aktuell auf `false`. Dann ersetzt das Formular den Absende-Button durch den Hinweis "Bitte rufen Sie uns an" plus Telefonnummer, und auch Enter löst keinen mailto aus. Die E-Mail-Adresse ist solange überall ausgeblendet (Kontakt, Footer, JSON-LD, llms.txt). Sobald der Mailempfang (`mail.aclavigliaradons.ch`, MX) bei Hoststar wieder läuft: `MAIL_AKTIV = true` setzen, E-Mail `ferien@aclavigliaradons.ch` wieder einblenden, deployen.
+**Mail-Schalter `MAIL_AKTIV`:** Der Schalter in [ContactForm.tsx](src/components/ContactForm.tsx) steht aktuell auf `true`, das Formular ist aktiv (mailto an `ferien@aclavigliaradons.ch`). Bei gestörtem Mailempfang auf `false` setzen: dann ersetzt das Formular den Absende-Button durch den Hinweis "Bitte rufen Sie uns an" plus Telefonnummer, Enter löst keinen mailto aus, und die E-Mail-Adresse wird überall ausgeblendet (Kontakt, Footer, JSON-LD, llms.txt). Zum Wieder-Einblenden umgekehrt vorgehen und `vercel --prod` deployen.
 
 **Upgrade-Pfad** wenn Backend gewünscht: Vercel Edge Function + Resend (oder ähnlicher Mail-Provider). Form-State bleibt unverändert, nur Submit-Handler tauschen. Tally-Embed weiterhin möglich als Drop-in (URL-Param-Logik ist vorbereitet).
 
