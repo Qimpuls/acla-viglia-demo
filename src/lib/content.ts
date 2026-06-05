@@ -10,8 +10,8 @@ export const navigation = [
 export const brand = {
   name: 'ACLA VIGLIA RADONS',
   location: 'Savognin · Val Surses · 1885 m',
-  email: 'info@aclavigliaradons.ch',
-  postal: '7456 Savognin',
+  email: 'ferien@aclavigliaradons.ch',
+  postal: 'Radons 104, 7464 Surses',
   region: 'Graubünden, Schweiz',
 }
 
@@ -293,11 +293,11 @@ export const kontakt = {
   headline: 'Schreiben Sie uns. Wir antworten persönlich.',
   hosts: 'Angela und Gallus Liesch-Lombris',
   brand: 'ACLA VIGLIA RADONS',
-  postal: '7456 Savognin',
+  postal: 'Radons 104, 7464 Surses',
   region: 'Graubünden, Schweiz',
-  email: 'info@aclavigliaradons.ch',
+  email: 'ferien@aclavigliaradons.ch',
   mailto:
-    'mailto:info@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS',
+    'mailto:ferien@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS',
   cta: 'E-Mail schreiben',
   note: 'Anfragen werden persönlich von Angela oder Gallus beantwortet, in der Regel innerhalb von 24 Stunden.',
 }
@@ -309,7 +309,11 @@ export const footer = {
   },
   contact: {
     title: 'Kontakt',
-    lines: ['Angela und Gallus Liesch-Lombris', 'info@aclavigliaradons.ch'],
+    lines: [
+      'Angela und Gallus Liesch-Lombris',
+      'Radons 104, 7464 Surses',
+      'ferien@aclavigliaradons.ch',
+    ],
   },
   navigation: [
     { label: 'Maiensäss', href: '#maiensaess' },

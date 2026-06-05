@@ -121,7 +121,7 @@ export function Header() {
             </a>
           ))}
           <a
-            href="mailto:info@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS"
+            href="mailto:ferien@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS"
             onClick={handleNavClick}
             className="mt-8 bg-soapstone text-parchment px-6 py-4 rounded-full text-center font-medium hover:bg-larch transition-colors"
           >

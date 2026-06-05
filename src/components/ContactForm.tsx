@@ -161,7 +161,7 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
       form.name,
     ].filter(Boolean)
     const body = lines.join('\n')
-    return `mailto:info@aclavigliaradons.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    return `mailto:ferien@aclavigliaradons.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   function handleSubmit(e: React.FormEvent) {
