@@ -10,13 +10,24 @@ import { Preise } from '@/components/Preise'
 import { Region } from '@/components/Region'
 import { ValueProps } from '@/components/ValueProps'
 
+const SITE_URL = 'https://aclavigliaradons.ch'
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LodgingBusiness',
+  '@id': `${SITE_URL}/#lodging`,
   name: 'ACLA VIGLIA RADONS',
-  description: 'Maiensäss in Radons, Savognin, Graubünden',
+  description:
+    'Persönlich geführtes Maiensäss auf 1885 m in Radons über Savognin, direkt an der Skipiste und mitten im Parc Ela. Wochenmiete Samstag zu Samstag für 2 bis 8 Personen.',
+  url: SITE_URL,
+  image: [
+    `${SITE_URL}/images/hero-sommer.png`,
+    `${SITE_URL}/images/hero-winter.png`,
+  ],
+  email: 'info@aclavigliaradons.ch',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Radons',
     addressLocality: 'Savognin',
     postalCode: '7456',
     addressRegion: 'GR',
@@ -27,9 +38,15 @@ const jsonLd = {
     latitude: 46.5598,
     longitude: 9.5546,
   },
-  email: 'info@aclavigliaradons.ch',
+  containedInPlace: {
+    '@type': 'Place',
+    name: 'Parc Ela, Val Surses',
+  },
   numberOfRooms: 3,
-  petsAllowed: 'true',
+  maximumAttendeeCapacity: 8,
+  petsAllowed: true,
+  knowsLanguage: ['de-CH'],
+  priceRange: 'CHF 220–280 pro Nacht',
   amenityFeature: [
     {
       '@type': 'LocationFeatureSpecification',
@@ -44,6 +61,16 @@ const jsonLd = {
     {
       '@type': 'LocationFeatureSpecification',
       name: 'Specksteinofen',
+      value: true,
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Cheminée',
+      value: true,
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Haustiere erlaubt',
       value: true,
     },
   ],
