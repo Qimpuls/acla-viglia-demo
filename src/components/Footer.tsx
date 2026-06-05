@@ -32,6 +32,13 @@ export function Footer() {
                     >
                       {line}
                     </a>
+                  ) : line.startsWith('+') ? (
+                    <a
+                      href={`tel:${line.replace(/\s/g, '')}`}
+                      className="hover:text-parchment transition-colors"
+                    >
+                      {line}
+                    </a>
                   ) : (
                     line
                   )}
