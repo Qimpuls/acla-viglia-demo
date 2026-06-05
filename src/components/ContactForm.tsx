@@ -34,6 +34,10 @@ const HERKUNFT_OPTIONS = [
   'Sonstiges',
 ]
 
+// Online-Anfrage temporär deaktiviert, solange der Mailempfang gestört ist.
+// Sobald die Mail wieder läuft: auf true setzen, dann ist das Formular zurück.
+const MAIL_AKTIV = false
+
 function parseHash(): { from?: string; to?: string } {
   if (typeof window === 'undefined') return {}
   const hash = window.location.hash.replace(/^#/, '')
@@ -166,6 +170,7 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!MAIL_AKTIV) return
     setTouched({
       anreise: true,
       abreise: true,
@@ -397,13 +402,27 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
           Regel innerhalb von 24 Stunden. Ihre Daten werden ausschliesslich für
           die Bearbeitung der Anfrage verwendet.
         </p>
-        <button
-          type="submit"
-          disabled={submitting}
-          className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch disabled:opacity-60 disabled:cursor-not-allowed px-8 py-4 rounded-full font-medium transition-colors whitespace-nowrap"
-        >
-          {submitting ? 'Wird gesendet…' : 'Anfrage senden'}
-        </button>
+        {MAIL_AKTIV ? (
+          <button
+            type="submit"
+            disabled={submitting}
+            className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch disabled:opacity-60 disabled:cursor-not-allowed px-8 py-4 rounded-full font-medium transition-colors whitespace-nowrap"
+          >
+            {submitting ? 'Wird gesendet…' : 'Anfrage senden'}
+          </button>
+        ) : (
+          <div className="text-center md:text-right">
+            <p className="text-sm font-medium text-soapstone mb-2">
+              Bitte rufen Sie uns an
+            </p>
+            <a
+              href="tel:+41795208796"
+              className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors whitespace-nowrap"
+            >
+              +41 79 520 87 96
+            </a>
+          </div>
+        )}
       </div>
     </form>
   )
