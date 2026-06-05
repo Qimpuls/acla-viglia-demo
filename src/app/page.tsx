@@ -43,6 +43,7 @@ const jsonLd = {
     name: 'Parc Ela, Val Surses',
   },
   numberOfRooms: 3,
+  numberOfBathroomsTotal: 2,
   maximumAttendeeCapacity: 8,
   petsAllowed: true,
   knowsLanguage: ['de-CH'],
@@ -66,6 +67,26 @@ const jsonLd = {
     {
       '@type': 'LocationFeatureSpecification',
       name: 'Cheminée',
+      value: true,
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Dusche',
+      value: true,
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Geschirrspüler',
+      value: true,
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Bodenheizung',
+      value: true,
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Holz-Kochherd',
       value: true,
     },
     {

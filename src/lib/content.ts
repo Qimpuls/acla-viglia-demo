@@ -69,12 +69,21 @@ export const maiensaess = {
     { label: 'Lage', value: 'Maiensäss-Dorf Radons, 1885 m' },
     { label: 'Kapazität', value: '2 bis 8 Personen' },
     {
-      label: 'Schlafzimmer',
-      value: '1 Elternzimmer, 1 Kinderzimmer, 2 Plätze Dachgalerie',
+      label: 'Schlafen',
+      value: '1 Doppelzimmer, 1 Dreierzimmer, 2 Doppelmatratzen in der Dachgalerie',
+    },
+    { label: 'Bad', value: '2 separate WCs, eines mit Dusche' },
+    {
+      label: 'Küche',
+      value: 'Geschirrspüler, 2 Kühlschränke, Holz- und Elektroherd',
+    },
+    {
+      label: 'Wärme',
+      value: '2 Specksteinöfen, offener Cheminée, Bodenheizung im Erdgeschoss',
     },
     { label: 'Skipiste', value: 'Direkt am Haus' },
     { label: 'WLAN', value: 'Vorhanden' },
-    { label: 'Haustiere', value: 'Nach Absprache' },
+    { label: 'Haustiere', value: 'Erlaubt, nach Absprache' },
   ],
   gallery: [
     {
@@ -253,7 +262,7 @@ export const anreise = {
       alt: 'Winter-Abendbild mit Steinbock-Skulptur',
       body: 'Im Winter ist die Zufahrtsstrasse gesperrt. Das ist Teil des Erlebnisses: Sie kommen in einem Tal an, das nicht durch Strassenverkehr gestört wird.',
       bullets: [
-        'Auf Skiern vom Piz Martegnas oder über den Panoramaweg.',
+        'Auf Skiern oder mit dem Schlitten vom Piz Martegnas oder über den Panoramaweg.',
         'Zu Fuss in rund 45 Minuten ab Savognin Bergstation.',
         'Mit dem Winterbus von der Bushaltestelle Hotel JUFA in Savognin. Empfohlen für Gäste mit Gepäck. Auto auf dem Parkplatz Grava (hinter Hotel JUFA): CHF 35 pro Woche.',
       ],
