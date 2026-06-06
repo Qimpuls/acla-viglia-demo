@@ -205,6 +205,30 @@ export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
         </button>
       )}
 
+      {/* Nach vollem Aufklappen: Vor/Zurück auch auf Mobile, damit jeder Monat
+          (z. B. März 2027) erreichbar ist. Desktop nutzt die Navigation oben. */}
+      {expand >= 2 && (
+        <div className="md:hidden mt-4 flex gap-2">
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={page === 0}
+            className="flex-1 px-4 py-3 text-sm font-medium border border-brass/50 rounded-full text-soapstone hover:bg-soapstone hover:text-parchment hover:border-soapstone transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-soapstone disabled:hover:border-brass/50"
+            aria-label="Vorherige Monate"
+          >
+            « zurück
+          </button>
+          <button
+            type="button"
+            onClick={() => setPage((p) => p + 1)}
+            className="flex-1 px-4 py-3 text-sm font-medium border border-brass/50 rounded-full text-soapstone hover:bg-soapstone hover:text-parchment hover:border-soapstone transition-colors"
+            aria-label="Nächste Monate"
+          >
+            weiter »
+          </button>
+        </div>
+      )}
+
       <p className="mt-6 text-sm text-larch italic">
         Klicken Sie auf eine freie Woche, um direkt anzufragen.
       </p>
