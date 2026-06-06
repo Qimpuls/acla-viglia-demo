@@ -1,10 +1,9 @@
 export const navigation = [
-  { label: 'Maiensäss', href: '#maiensaess' },
+  { label: 'Sommer', href: '#sommer' },
+  { label: 'Haus', href: '#haus' },
   { label: 'Gastgeber', href: '#gastgeber' },
-  { label: 'Region', href: '#region' },
   { label: 'Preise', href: '#preise' },
-  { label: 'Anreise', href: '#anreise' },
-  { label: 'Kontakt', href: '#kontakt' },
+  { label: 'Anfrage', href: '#kontakt' },
 ] as const
 
 export const brand = {
@@ -17,53 +16,98 @@ export const brand = {
 
 export const hero = {
   eyebrow: 'MAIENSÄSS IN RADONS · 1885 M',
-  headlineTop: 'Ein Maiensäss.',
-  headlineBottom: 'Geführt wie ein gutes Hotel.',
+  headlineTop: 'Eine Woche Bergsommer.',
+  headlineBottom: 'Ganz oben in Radons.',
   subline:
-    'Auf 1885 m, direkt an der Skipiste Savognin. Mitten im Parc Ela.',
-  primaryCta: { label: 'Verfügbarkeit anfragen', href: '#kontakt' },
-  secondaryCta: { label: 'Mehr über das Maiensäss', href: '#maiensaess' },
+    'Im Sommer fahren Sie bequem bis vor das Haus. Danach beginnt die Ruhe: Parc Ela, Wanderwege und klare Nächte.',
+  primaryCta: { label: 'Freie Sommerwochen prüfen', href: '#verfuegbarkeit' },
+  secondaryCta: { label: 'Mehr über den Sommer', href: '#sommer' },
   trust:
-    'Persönlich geführt von Angela und Gallus · 25 Jahre Hoteliers · Samstag zu Samstag · 2 bis 8 Personen',
+    'Persönlich geführt von Angela und Gallus · Samstag bis Samstag · 2 bis 8 Personen',
   imageSummer: '/images/hero-sommer.png',
   imageWinter: '/images/hero-winter.png',
 }
 
+// Drei Sommergründe (reine Text-Karten, bewusst ohne Bilder gegen Bildüberladung)
 export const valueProps = {
-  eyebrow: 'WARUM ACLA VIGLIA',
+  eyebrow: 'WARUM IM SOMMER',
   headline: 'Drei Gründe, hier oben zu bleiben.',
   cards: [
     {
       number: '01',
-      title: 'Mitten im Parc Ela.',
-      body: 'Radons liegt im grössten Naturpark der Schweiz. Im Winter erreichbar nur mit dem Winterbus oder auf Skiern. Das hält die Strasse ruhig und die Sterne hell.',
-      image: '/images/usp-lage.jpeg',
-      alt: 'Maiensäss-Dorf Radons mit Bergpanorama im Sommer',
+      title: 'Ankommen. Parkieren. Durchatmen.',
+      body: 'Von Ende Mai bis Ende Oktober fahren Sie bequem bis vor das Maiensäss. Danach wird es still: keine Hektik, kein Durchgangsverkehr, nur Radons und die Berge.',
     },
     {
       number: '02',
-      title: 'Specksteinofen statt Designerheizung.',
-      body: 'Das Maiensäss ist gewachsen, nicht gebaut. Holzbalken, offener Cheminée, ein Holz-Kochherd als Alternative zum Elektroherd. Komfort, wo er nützt. Tradition, wo sie zählt.',
-      image: '/images/detail-4.jpg',
-      alt: 'Detail des Wohnraums mit Holzbalken',
+      title: 'Eine Woche, die nicht lang wird.',
+      body: 'Wandern ab der Haustür, Bergseen, Bikewege, Origen in Riom, Ruhetage im Haus und Abende am Feuer. Der Sommer hier oben hat Raum für Familien, Freunde und stille Tage.',
     },
     {
       number: '03',
-      title: 'Skischuhe an, Tür auf, los.',
-      body: 'Die Piste der Savognin Bergbahnen verläuft direkt am Maiensäss vorbei. Kein Skibus, keine Wartezeit. Am Abend dieselbe Tür, dieselben Schuhe.',
-      image: '/images/usp-skiin.jpg',
-      alt: 'Maiensäss seitlich mit verschneitem Tal im Winter',
+      title: 'Nachts wird der Himmel dunkel.',
+      body: 'Radons liegt weit weg vom Licht der grossen Orte. An klaren Abenden sieht man Sterne, wie man sie im Mittelland kaum noch kennt.',
+    },
+  ],
+}
+
+export const sommerwoche = {
+  eyebrow: 'SOMMERWOCHE IN RADONS',
+  headline: 'So fühlt sich eine Woche hier oben an.',
+  banner: {
+    src: '/images/sommer-wanderfamilie.png',
+    alt: 'Wanderfamilie auf dem Weg zum Maiensäss Acla Viglia in Radons im Sommer',
+  },
+  timeline: [
+    {
+      time: 'Morgens',
+      text: 'Kaffee am Fenster. Die Sonne steht früh an den Hängen.',
+    },
+    {
+      time: 'Vormittags',
+      text: 'Loswandern ab der Haustür. Kurze Runde mit Kindern oder längere Tour Richtung Piz Martegnas, Alp Flix oder Lai Barnagn.',
+    },
+    {
+      time: 'Mittags',
+      text: 'Einfach bleiben: Brot, Käse und Früchte auf dem Holztisch. Oder zehn Minuten zu Fuss in eine Bergbeiz.',
+    },
+    {
+      time: 'Nachmittags',
+      text: 'Nichts müssen. Kinder draussen. Erwachsene lesen, schlafen oder schauen.',
+    },
+    {
+      time: 'Abends',
+      text: 'Feuer, Wein und Ruhe. Wenn es klar ist, kommt der Sternenhimmel dazu.',
+    },
+  ],
+  cta: { label: 'Sommerwoche anfragen', href: '#kontakt' },
+}
+
+export const sommerumgebung = {
+  eyebrow: 'SOMMERUMGEBUNG',
+  headline: 'Parc Ela beginnt vor der Tür.',
+  intro:
+    'Rund um Radons beginnt der Sommer direkt am Haus: Wege, Wiesen, Bergbäche und stille Plätze für Familien, Wanderer und Ruhesuchende.',
+  images: [
+    {
+      src: '/images/umgebung-sommer-2.png',
+      alt: 'Familie auf einem Sommerweg an einem Bergsee bei Radons mit Bergpanorama',
+      caption: 'Sommerwege für Familien und ruhige Tage.',
+    },
+    {
+      src: '/images/region-bach.jpeg',
+      alt: 'Kristallklarer Bergbach über Steinen mit Berggipfel im Parc Ela',
+      caption: 'Kristallklare Bergbäche und frische Höhenluft.',
     },
   ],
 }
 
 export const maiensaess = {
   eyebrow: 'DAS HAUS',
-  headline: 'Zwei Geschosse, eine Dachgalerie, kein Kompromiss.',
+  headline: 'Platz für Familie, Freunde und ruhige Tage.',
   paragraphs: [
-    'Das Maiensäss wurde behutsam restauriert. Die Substanz blieb erhalten: zwei Bündner Specksteinöfen, Holzbalken, der offene Cheminée, der Holz-Kochherd. Ergänzt wurde, was den Aufenthalt erleichtert: neue Küche mit Geschirrspüler und zwei Kühlschränken, Bodenheizung im Erdgeschoss, SodaStream am Bergquellwasser, WLAN.',
-    'Im Erdgeschoss empfängt Sie ein grosszügiger Eingangsbereich für Ski, Schlitten und Bikes, dahinter die Wohnküche mit Esstisch für sechs bis acht Personen und offenem Cheminée. Im Obergeschoss das Wohnzimmer mit Specksteinofen, das Elternschlafzimmer und das Kinderschlafzimmer mit Kajütenbett. In der Dachgalerie zwei weitere Schlafplätze.',
-    'Acht Schlafplätze. Drei Räume mit Holzfeuer. Eine Aussicht auf den Piz Mitgel.',
+    'Das Maiensäss bietet Raum für 2 bis 8 Personen auf zwei Geschossen und einer Dachgalerie. Der Mittelpunkt ist die Wohnküche mit langem Tisch, Feuerstelle und Blick nach draussen.',
+    'Ob Familienwoche, Wanderferien oder ein paar Tage mit Freunden: Das Haus ist einfach, warm und sorgfältig geführt.',
   ],
   facts: [
     { label: 'Lage', value: 'Maiensäss-Dorf Radons, 1885 m' },
@@ -85,6 +129,8 @@ export const maiensaess = {
     { label: 'WLAN', value: 'Vorhanden' },
     { label: 'Haustiere', value: 'Erlaubt, nach Absprache' },
   ],
+  // Galerie und Detailband bleiben als Daten erhalten (Desktop-Runde), werden in der
+  // Mobile-Sommerversion aber nicht gerendert. Das Familienleben trägt die Innenbilder.
   gallery: [
     {
       src: '/images/maiensaess-1.jpg',
@@ -119,19 +165,46 @@ export const maiensaess = {
   ],
 }
 
+export const familienleben = {
+  eyebrow: 'FAMILIENLEBEN IM HAUS',
+  headline: 'Wenn das Wetter wechselt, bleibt der Tag gut.',
+  text: 'Das Haus ist nicht nur Ausgangspunkt. Es ist auch Rückzugsort: spielen, lesen, kochen, Feuer machen, zusammensitzen.',
+  images: [
+    {
+      src: '/images/familie-wohnzimmer-sommer.png',
+      alt: 'Familie im Wohnzimmer des Maiensäss mit offenem Cheminée und Specksteinofen',
+      caption: 'Ruhe, Feuer und Platz für gemeinsame Abende.',
+    },
+    {
+      src: '/images/familie-kueche.png',
+      alt: 'Familie beim Frühstück am grossen Holztisch der Wohnküche mit offenem Cheminée',
+      caption: 'Der grosse Tisch ist der Mittelpunkt des Hauses.',
+    },
+    {
+      src: '/images/familie-kinderzimmer.png',
+      alt: 'Kinder im Dreierzimmer mit Kajütenbett aus Holz',
+      caption: 'Drei Betten, viel Holz und ein eigenes kleines Reich.',
+    },
+  ],
+}
+
+export const claim = {
+  text: 'Ein Maiensäss. Geführt wie ein gutes Hotel.',
+}
+
 export const gastgeber = {
   eyebrow: 'GASTGEBER',
   headline: 'Angela und Gallus Liesch-Lombris.',
   paragraphs: [
-    'Wir stammen aus dem Albulatal. Über 25 Jahre lang führten wir das Hotel Restaurant Rätia in Filisur, ein traditionsreiches Haus an der UNESCO-geschützten Albulalinie der Rhätischen Bahn. Wir lernten die Saisons dieses Tals nicht aus Reiseführern, sondern aus tausenden Anreisen, Wetterstürzen und Gästegesprächen.',
-    'Heute geben wir diese Erfahrung in einer persönlicheren Form weiter. In unserem eigenen Maiensäss in Radons, das wir mit der gleichen Sorgfalt führen, die uns im Hotel ausgemacht hat. Nur ohne Hotelbetrieb.',
-    'Anfragen beantworten wir selbst. Empfehlungen geben wir aus eigener Erfahrung. Und wenn Sie ankommen, finden Sie eine handgeschriebene Liste mit den Beizen, Wanderungen und Geheimtipps, die wir in dreissig Jahren im Tal gesammelt haben.',
+    'Wir stammen aus dem Albulatal. Über 25 Jahre lang führten wir das Hotel Restaurant Rätia in Filisur, ein traditionsreiches Haus an der UNESCO-geschützten Albulalinie der Rhätischen Bahn.',
+    'Heute geben wir diese Erfahrung persönlicher weiter: in unserem Maiensäss in Radons. Anfragen beantworten wir selbst. Empfehlungen geben wir aus eigener Erfahrung. Und bei Ihrer Ankunft finden Sie unsere handgeschriebene Sammlung mit Beizen, Wanderungen und Lieblingsorten im Tal.',
     'Allegra. Willkommen bei uns oben.',
   ],
   signature: 'Angela und Gallus Liesch-Lombris',
-  meta: 'Ehemals Hotel Restaurant Rätia, Filisur. Mitglied im Parc Ela.',
-  image: '/images/gastgeber-portrait.png',
-  imageCaption: 'Illustration · Foto-Porträt folgt',
+  meta: 'Ehemals Hotel Restaurant Rätia, Filisur · Persönlich geführt seit 2020',
+  // TODO: durch echtes Foto von Angela und Gallus ersetzen, sobald vorhanden.
+  // Aktuell temporärer KI-Platzhalter.
+  image: '/images/gastgeber-foto.png',
 }
 
 export const region = {
@@ -197,13 +270,14 @@ export const preise = {
   eyebrow: 'PREISE',
   headline: 'Transparent. Inklusive.',
   intro:
-    'Wochenmiete von Samstag bis Samstag, für 2 bis 8 Personen. Alle Nebenkosten sind im Tagespreis enthalten, ausser Endreinigung, Wäsche und Kurtaxen.',
-  spotlight: {
+    'Wochenmiete von Samstag bis Samstag. Alle Nebenkosten sind im Tagespreis enthalten, ausser Endreinigung, Wäsche und Kurtaxen.',
+  priceBox: {
+    label: 'Das ganze Maiensäss',
     prefix: 'ab',
-    amount: 'CHF 44',
-    suffix: 'pro Person und Nacht',
-    detail:
-      'in der Sommer-Nebensaison bei 5 Personen. In der Hochsaison Winter bis CHF 70.',
+    amount: 'CHF 220',
+    unit: 'pro Nacht',
+    subline: 'für bis zu 5 Personen',
+    hint: 'Jede weitere erwachsene Person CHF 10 pro Tag.',
   },
   seasons: [
     {
@@ -216,8 +290,7 @@ export const preise = {
     { label: 'Juli und August', tag: 'Sommer', price: 'CHF 260' },
     { label: 'Nebensaison Sommer', tag: 'Sommer', price: 'CHF 220' },
   ],
-  perDayNote:
-    'Pro Tag bis 5 Personen. Jede weitere erwachsene Person CHF 10 pro Tag.',
+  perDayNote: 'Preise pro Nacht für das ganze Haus, für bis zu 5 Personen.',
   inklusive: {
     label: 'Im Tagespreis enthalten',
     items: [
@@ -236,39 +309,31 @@ export const preise = {
       { label: 'Bett- und Frotteewäsche', value: 'CHF 25 pro Woche und Person' },
       { label: 'Kurtaxen Erwachsene', value: 'CHF 2.50 pro Tag' },
       {
-        label: 'Kurtaxen Kinder (6–16 Jahre)',
+        label: 'Kurtaxen Kinder (6 bis 16 Jahre)',
         value: 'CHF 1.25 pro Tag',
       },
     ],
   },
-  availabilityNote:
-    'Aktuelle Verfügbarkeit auf Anfrage. Wir antworten persönlich, in der Regel innerhalb von 24 Stunden.',
-  cta: { label: 'Verfügbarkeit anfragen', href: '#kontakt' },
+  cta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
+}
+
+export const verfuegbarkeit = {
+  eyebrow: 'VERFÜGBARKEIT',
+  headline: 'Freie Sommerwochen prüfen.',
+  text: 'Aktuell gibt es noch freie Sommerwochen 2026, besonders im August sowie in einzelnen Wochen im Juni, Juli und September. Klicken Sie im Kalender auf eine freie Woche oder senden Sie direkt eine Anfrage.',
+  cta: { label: 'Sommerwoche anfragen', href: '#kontakt' },
 }
 
 export const anreise = {
-  eyebrow: 'ANREISE',
-  headline: 'Im Sommer mit dem Auto. Im Winter mit Skiern oder Winterbus.',
-  cards: [
-    {
-      season: 'SOMMER',
-      image: '/images/anreise-sommer.jpeg',
-      alt: 'Wanderweg in Sommerstimmung',
-      body: 'Vom Frühjahr bis Spätherbst erreichen Sie das Maiensäss bequem mit dem Auto und parken direkt davor. Die Zufahrtsstrasse über Tigignas ist offen von Ende Mai bis Ende Oktober.',
-    },
-    {
-      season: 'WINTER',
-      image: '/images/anreise-winter.jpg',
-      alt: 'Winter-Abendbild mit Steinbock-Skulptur',
-      body: 'Im Winter ist die Zufahrtsstrasse gesperrt. Das ist Teil des Erlebnisses: Sie kommen in einem Tal an, das nicht durch Strassenverkehr gestört wird.',
-      bullets: [
-        'Auf Skiern oder mit dem Schlitten vom Piz Martegnas oder über den Panoramaweg.',
-        'Zu Fuss in rund 45 Minuten ab Savognin Bergstation.',
-        'Mit dem Winterbus von der Bushaltestelle Hotel JUFA in Savognin. Empfohlen für Gäste mit Gepäck. Auto auf dem Parkplatz Grava (hinter Hotel JUFA): CHF 35 pro Woche.',
-      ],
-    },
-  ],
-  note: 'Lebensmittel mitbringen oder in Savognin einkaufen (Coop, Volg). In Radons gibt es keinen Lebensmittelladen.',
+  eyebrow: 'ANREISE IM SOMMER',
+  headline: 'Im Sommer fahren Sie bis vor das Haus.',
+  text: 'Von Ende Mai bis Ende Oktober ist die Zufahrt über Tigignas offen. Sie parkieren direkt beim Maiensäss. Einkaufen können Sie vorher in Savognin. In Radons selbst gibt es keinen Lebensmittelladen.',
+}
+
+export const winterteaser = {
+  eyebrow: 'WINTER IN RADONS',
+  headline: 'Im Winter wird Radons stiller.',
+  text: 'Wenn die Strasse gesperrt ist, reisen Gäste mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus an. Das ist Teil des Wintererlebnisses und ab Oktober wieder prominent auf der Seite sichtbar.',
 }
 
 export const empfehlungen = {
@@ -300,6 +365,8 @@ export const empfehlungen = {
 export const kontakt = {
   eyebrow: 'ANFRAGE UND KONTAKT',
   headline: 'Schreiben Sie uns. Wir antworten persönlich.',
+  intro:
+    'Angela oder Gallus beantworten jede Anfrage persönlich. In der Regel erhalten Sie innerhalb von 24 Stunden eine Antwort.',
   hosts: 'Angela und Gallus Liesch-Lombris',
   brand: 'ACLA VIGLIA RADONS',
   postal: 'Radons 104, 7464 Surses',
@@ -328,11 +395,11 @@ export const footer = {
     ],
   },
   navigation: [
-    { label: 'Maiensäss', href: '#maiensaess' },
+    { label: 'Sommer', href: '#sommer' },
+    { label: 'Haus', href: '#haus' },
     { label: 'Gastgeber', href: '#gastgeber' },
-    { label: 'Region', href: '#region' },
-    { label: 'Anreise', href: '#anreise' },
     { label: 'Preise', href: '#preise' },
+    { label: 'Anreise', href: '#anreise' },
     { label: 'Kontakt', href: '#kontakt' },
   ],
   legal:

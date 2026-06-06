@@ -1,5 +1,6 @@
 import { Anreise } from '@/components/Anreise'
-import { Empfehlungen } from '@/components/Empfehlungen'
+import { Claim } from '@/components/Claim'
+import { Familienleben } from '@/components/Familienleben'
 import { Footer } from '@/components/Footer'
 import { Gastgeber } from '@/components/Gastgeber'
 import { Header } from '@/components/Header'
@@ -7,8 +8,12 @@ import { Hero } from '@/components/Hero'
 import { Kontakt } from '@/components/Kontakt'
 import { Maiensaess } from '@/components/Maiensaess'
 import { Preise } from '@/components/Preise'
-import { Region } from '@/components/Region'
+import { Sommerumgebung } from '@/components/Sommerumgebung'
+import { Sommerwoche } from '@/components/Sommerwoche'
+import { StickyCta } from '@/components/StickyCta'
 import { ValueProps } from '@/components/ValueProps'
+import { Verfuegbarkeit } from '@/components/Verfuegbarkeit'
+import { Winterteaser } from '@/components/Winterteaser'
 
 const SITE_URL = 'https://aclavigliaradons.ch'
 
@@ -18,7 +23,7 @@ const jsonLd = {
   '@id': `${SITE_URL}/#lodging`,
   name: 'ACLA VIGLIA RADONS',
   description:
-    'Persönlich geführtes Maiensäss auf 1885 m in Radons über Savognin, direkt an der Skipiste und mitten im Parc Ela. Wochenmiete Samstag zu Samstag für 2 bis 8 Personen.',
+    'Persönlich geführtes Maiensäss auf 1885 m in Radons über Savognin, mitten im Parc Ela. Wochenmiete Samstag zu Samstag für 2 bis 8 Personen. Im Sommer bequeme Zufahrt bis vor das Haus.',
   url: SITE_URL,
   image: [
     `${SITE_URL}/images/hero-sommer.png`,
@@ -105,15 +110,20 @@ export default function Home() {
       <main>
         <Hero />
         <ValueProps />
+        <Sommerwoche />
+        <Sommerumgebung />
         <Maiensaess />
-        <Empfehlungen />
+        <Familienleben />
+        <Claim />
         <Gastgeber />
-        <Region />
         <Preise />
+        <Verfuegbarkeit />
         <Anreise />
+        <Winterteaser />
         <Kontakt />
       </main>
       <Footer />
+      <StickyCta />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

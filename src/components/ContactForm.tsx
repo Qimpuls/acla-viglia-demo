@@ -6,33 +6,22 @@ import { type Booking } from '@/lib/bookings'
 interface FormState {
   anreise: string
   abreise: string
-  erwachsene: string
-  kinder: string
+  personen: string
   name: string
   email: string
   telefon: string
-  herkunft: string
-  nachricht: string
+  bemerkungen: string
 }
 
 const INITIAL: FormState = {
   anreise: '',
   abreise: '',
-  erwachsene: '2',
-  kinder: '0',
+  personen: '2',
   name: '',
   email: '',
   telefon: '',
-  herkunft: '',
-  nachricht: '',
+  bemerkungen: '',
 }
-
-const HERKUNFT_OPTIONS = [
-  'Google',
-  'Empfehlung',
-  'Graubünden Ferien',
-  'Sonstiges',
-]
 
 // Schalter für die Online-Anfrage. Auf false leitet das Formular auf Telefon um
 // (z. B. bei gestörtem Mailempfang), auf true ist das Mail-Formular aktiv.
@@ -92,10 +81,6 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
     return () => window.removeEventListener('hashchange', apply)
   }, [])
 
-  const erwachseneNum = Number(form.erwachsene) || 0
-  const kinderNum = Number(form.kinder) || 0
-  const personenTotal = erwachseneNum + kinderNum
-
   const rangeFree = useMemo(
     () => isRangeFree(form.anreise, form.abreise, bookings),
     [form.anreise, form.abreise, bookings],
@@ -103,8 +88,6 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
 
   const dateOrderValid =
     !form.anreise || !form.abreise || form.abreise > form.anreise
-
-  const totalValid = personenTotal >= 1 && personenTotal <= 8
 
   const errors = {
     anreise: touched.anreise && !form.anreise ? 'Bitte Anreisedatum wählen.' : '',
@@ -118,10 +101,6 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
       form.anreise && form.abreise && dateOrderValid && !rangeFree
         ? 'Diese Woche ist bereits belegt. Schreiben Sie uns trotzdem, wir suchen Alternativen.'
         : '',
-    personen:
-      touched.erwachsene && !totalValid
-        ? 'Mindestens 1, maximal 8 Personen.'
-        : '',
     name: touched.name && !form.name.trim() ? 'Bitte Ihren Namen.' : '',
     email:
       touched.email &&
@@ -134,7 +113,6 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
     !!form.anreise &&
     !!form.abreise &&
     dateOrderValid &&
-    totalValid &&
     !!form.name.trim() &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
 
@@ -151,15 +129,13 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
       '',
       `Anreise: ${formatGerman(form.anreise)}`,
       `Abreise: ${formatGerman(form.abreise)}`,
-      `Erwachsene: ${form.erwachsene}`,
-      `Kinder: ${form.kinder}`,
+      `Anzahl Personen: ${form.personen}`,
       '',
       `Name: ${form.name}`,
       `E-Mail: ${form.email}`,
       form.telefon ? `Telefon: ${form.telefon}` : '',
-      form.herkunft ? `Aufmerksam geworden über: ${form.herkunft}` : '',
       '',
-      form.nachricht ? `Nachricht:\n${form.nachricht}` : '',
+      form.bemerkungen ? `Bemerkungen:\n${form.bemerkungen}` : '',
       '',
       'Beste Grüsse',
       form.name,
@@ -174,7 +150,6 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
     setTouched({
       anreise: true,
       abreise: true,
-      erwachsene: true,
       name: true,
       email: true,
     })
@@ -224,13 +199,14 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
       noValidate
       className="bg-cream rounded-2xl p-6 md:p-10 border border-brass/30"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {/* 1 + 2: Anreise / Abreise */}
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
         <div>
-          <label htmlFor="anreise" className={labelBase}>
+          <label htmlFor="anfrage-anreise" className={labelBase}>
             Anreise <span className="text-[#B1564A]">*</span>
           </label>
           <input
-            id="anreise"
+            id="anfrage-anreise"
             type="date"
             required
             min={todayIso()}
@@ -242,11 +218,11 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
           {errors.anreise && <p className={errorBase}>{errors.anreise}</p>}
         </div>
         <div>
-          <label htmlFor="abreise" className={labelBase}>
+          <label htmlFor="anfrage-abreise" className={labelBase}>
             Abreise <span className="text-[#B1564A]">*</span>
           </label>
           <input
-            id="abreise"
+            id="anfrage-abreise"
             type="date"
             required
             min={form.anreise || todayIso()}
@@ -265,72 +241,58 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
         </p>
       )}
 
-      <div className="grid grid-cols-2 gap-5 mt-5">
-        <div>
-          <label htmlFor="erwachsene" className={labelBase}>
-            Erwachsene <span className="text-[#B1564A]">*</span>
-          </label>
-          <input
-            id="erwachsene"
-            type="number"
-            min="1"
-            max="8"
-            required
-            value={form.erwachsene}
-            onChange={(e) => update('erwachsene', e.target.value)}
-            onBlur={() => setTouched((t) => ({ ...t, erwachsene: true }))}
-            className={inputBase}
-          />
-        </div>
-        <div>
-          <label htmlFor="kinder" className={labelBase}>
-            Kinder
-          </label>
-          <input
-            id="kinder"
-            type="number"
-            min="0"
-            max="6"
-            value={form.kinder}
-            onChange={(e) => update('kinder', e.target.value)}
-            className={inputBase}
-          />
-        </div>
+      {/* 3: Anzahl Personen */}
+      <div className="mt-5">
+        <label htmlFor="anfrage-personen" className={labelBase}>
+          Anzahl Personen <span className="text-[#B1564A]">*</span>
+        </label>
+        <select
+          id="anfrage-personen"
+          required
+          value={form.personen}
+          onChange={(e) => update('personen', e.target.value)}
+          className={`${inputBase} appearance-none bg-size-[1rem] bg-position-[right_1rem_center] bg-no-repeat pr-10`}
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B6F47' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
+          }}
+        >
+          {[2, 3, 4, 5, 6, 7, 8].map((n) => (
+            <option key={n} value={String(n)}>
+              {n}
+            </option>
+          ))}
+        </select>
+        <p className="text-xs text-larch mt-2">2 bis 8 Personen</p>
       </div>
-      {errors.personen && (
-        <p className={errorBase}>{errors.personen}</p>
-      )}
-      {personenTotal > 0 && totalValid && (
-        <p className="text-xs text-larch mt-2">
-          {personenTotal} {personenTotal === 1 ? 'Person' : 'Personen'} insgesamt.
-          {personenTotal > 5 && ' Jede Person über 5 wird mit CHF 10 pro Tag berechnet.'}
-        </p>
-      )}
 
-      <div className="mt-8 pt-6 border-t border-brass/25 grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="md:col-span-2">
-          <label htmlFor="name" className={labelBase}>
-            Name <span className="text-[#B1564A]">*</span>
-          </label>
-          <input
-            id="name"
-            type="text"
-            required
-            autoComplete="name"
-            value={form.name}
-            onChange={(e) => update('name', e.target.value)}
-            onBlur={() => setTouched((t) => ({ ...t, name: true }))}
-            placeholder="Vor- und Nachname"
-            className={inputBase}
-          />
-          {errors.name && <p className={errorBase}>{errors.name}</p>}
-        </div>
+      {/* 4: Name */}
+      <div className="mt-5">
+        <label htmlFor="anfrage-name" className={labelBase}>
+          Name <span className="text-[#B1564A]">*</span>
+        </label>
+        <input
+          id="anfrage-name"
+          type="text"
+          required
+          autoComplete="name"
+          value={form.name}
+          onChange={(e) => update('name', e.target.value)}
+          onBlur={() => setTouched((t) => ({ ...t, name: true }))}
+          placeholder="Vor- und Nachname"
+          className={inputBase}
+        />
+        {errors.name && <p className={errorBase}>{errors.name}</p>}
+      </div>
+
+      {/* 5 + 6: E-Mail / Telefon */}
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="email" className={labelBase}>
+          <label htmlFor="anfrage-email" className={labelBase}>
             E-Mail <span className="text-[#B1564A]">*</span>
           </label>
           <input
-            id="email"
+            id="anfrage-email"
             type="email"
             required
             autoComplete="email"
@@ -343,81 +305,64 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
           {errors.email && <p className={errorBase}>{errors.email}</p>}
         </div>
         <div>
-          <label htmlFor="telefon" className={labelBase}>
+          <label htmlFor="anfrage-telefon" className={labelBase}>
             Telefon
           </label>
           <input
-            id="telefon"
+            id="anfrage-telefon"
             type="tel"
             autoComplete="tel"
             value={form.telefon}
             onChange={(e) => update('telefon', e.target.value)}
-            placeholder="079 123 45 67"
+            placeholder="+41 ..."
             className={inputBase}
           />
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-1 gap-5">
-        <div>
-          <label htmlFor="herkunft" className={labelBase}>
-            Wie sind Sie auf uns aufmerksam geworden?
-          </label>
-          <select
-            id="herkunft"
-            value={form.herkunft}
-            onChange={(e) => update('herkunft', e.target.value)}
-            className={`${inputBase} appearance-none bg-[length:1rem] bg-[right_1rem_center] bg-no-repeat pr-10`}
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B6F47' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
-            }}
-          >
-            <option value="">Keine Angabe</option>
-            {HERKUNFT_OPTIONS.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="nachricht" className={labelBase}>
-            Nachricht
-          </label>
-          <textarea
-            id="nachricht"
-            rows={4}
-            value={form.nachricht}
-            onChange={(e) => update('nachricht', e.target.value)}
-            placeholder="Wünsche, Fragen, Hund mit dabei …"
-            className={`${inputBase} resize-y`}
-          />
-        </div>
+      {/* 7: Bemerkungen */}
+      <div className="mt-5">
+        <label htmlFor="anfrage-bemerkungen" className={labelBase}>
+          Bemerkungen
+        </label>
+        <textarea
+          id="anfrage-bemerkungen"
+          rows={5}
+          value={form.bemerkungen}
+          onChange={(e) => update('bemerkungen', e.target.value)}
+          placeholder="Hund dabei, Fragen zur Anreise, Kinderbett gewünscht oder weitere Hinweise ..."
+          className={`${inputBase} resize-y`}
+        />
       </div>
 
-      <div className="mt-8 pt-6 border-t border-brass/25 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <p className="text-xs text-larch leading-relaxed max-w-md">
-          Anfragen werden persönlich von Angela oder Gallus beantwortet, in der
-          Regel innerhalb von 24 Stunden. Ihre Daten werden ausschliesslich für
-          die Bearbeitung der Anfrage verwendet.
-        </p>
+      {/* 8: CTA */}
+      <div className="mt-8 pt-6 border-t border-brass/25">
         {MAIL_AKTIV ? (
-          <button
-            type="submit"
-            disabled={submitting}
-            className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch disabled:opacity-60 disabled:cursor-not-allowed px-8 py-4 rounded-full font-medium transition-colors whitespace-nowrap"
-          >
-            {submitting ? 'Wird gesendet…' : 'Anfrage senden'}
-          </button>
+          <>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch disabled:opacity-60 disabled:cursor-not-allowed px-8 py-4 rounded-full font-medium transition-colors w-full"
+            >
+              {submitting ? 'Wird gesendet…' : 'Unverbindlich anfragen'}
+            </button>
+            <p className="mt-4 text-sm text-ink/75 text-center leading-relaxed max-w-md mx-auto">
+              Keine Online-Buchung. Sie erhalten zuerst eine persönliche
+              Rückmeldung von Angela oder Gallus.
+            </p>
+            <p className="mt-2 text-xs text-larch/70 text-center max-w-md mx-auto">
+              Ihre Daten werden ausschliesslich für die Bearbeitung der Anfrage
+              verwendet.
+            </p>
+          </>
         ) : (
-          <div className="text-center md:text-right">
+          <div className="text-center">
             <p className="text-sm font-medium text-soapstone mb-2">
               Bitte rufen Sie uns an
             </p>
             <a
               href="tel:+41795208796"
-              className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors whitespace-nowrap"
+              className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors w-full"
             >
               +41 79 520 87 96
             </a>

@@ -3,11 +3,13 @@ import { gastgeber } from '@/lib/content'
 
 export function Gastgeber() {
   return (
-    <section id="gastgeber" className="bg-parchment py-20 md:py-32">
+    <section id="gastgeber" className="bg-parchment py-16 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="relative aspect-3/2 w-full overflow-hidden rounded-2xl bg-linen">
+              {/* TODO: durch echtes Foto von Angela und Gallus ersetzen, sobald vorhanden.
+                  Aktuell temporärer KI-Platzhalter (gastgeber-foto.png). */}
               <Image
                 src={gastgeber.image}
                 alt="Angela und Gallus Liesch-Lombris vor dem Maiensäss"

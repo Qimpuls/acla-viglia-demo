@@ -5,13 +5,16 @@ import { getPublicBookings } from '@/lib/store'
 export async function Kontakt() {
   const bookings = await getPublicBookings()
   return (
-    <section id="kontakt" className="bg-charcoal py-20 md:py-32">
+    <section id="kontakt" className="bg-charcoal py-16 md:py-32">
       <div className="max-w-3xl mx-auto px-6 md:px-12">
         <div className="text-center mb-12">
           <p className="eyebrow !text-brass-light mb-5">{kontakt.eyebrow}</p>
           <h2 className="font-serif text-3xl md:text-5xl !text-parchment">
             {kontakt.headline}
           </h2>
+          <p className="mt-5 text-parchment/80 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
+            {kontakt.intro}
+          </p>
         </div>
 
         <ContactForm bookings={bookings} />

@@ -62,7 +62,7 @@ export function Hero() {
       </div>
 
       <a
-        href="#warum"
+        href="#sommer"
         aria-label="Nach unten scrollen"
         className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10 items-center justify-center w-10 h-10 rounded-full border border-parchment/40 text-parchment/70 hover:text-parchment hover:border-parchment/70 transition-colors animate-bounce"
       >
