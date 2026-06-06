@@ -285,16 +285,21 @@ Erste Live-URL: `acla-viglia-demo.vercel.app`. Custom-Domain `aclavigliaradons.c
 - [x] HTML5-konform, `lang="de-CH"` gesetzt
 - [ ] Lighthouse-Audit auf 95+ vor Custom-Domain-Live (siehe SEO-Roadmap)
 
-## Geplante SEO/KI-Sichtbarkeit (offen)
+## SEO/KI-Sichtbarkeit
 
-Vor Custom-Domain-Live umsetzen:
+Umgesetzt (Stand 2026-06-06, live):
 
-- JSON-LD erweitern (Preise als Offers, Aufenthaltsdauer, ContactPoint, sameAs)
-- JSON-LD `FAQPage` für häufige Gast-Fragen (Saison, WLAN, Hunde, Winter-Anreise)
-- Eigenes OG-Image (1200×630) mit Headline gerendert
-- `sitemap.xml` + `robots.txt` + `llms.txt`
-- Favicon-Set komplett (16/32/180/192/512 + manifest)
-- Google Search Console + Bing Webmaster nach DNS-Switch
+- JSON-LD `LodgingBusiness` erweitert: `makesOffer` (ab CHF 220), `slogan`, `currenciesAccepted`, `ReserveAction`, Amenities, Geo, Adresse
+- JSON-LD `FAQPage` (7 Q&A: Personenzahl, Sommer-/Winteranreise, Preis, Haustiere, WLAN, Buchung)
+- OG-Bild `public/images/og-image.jpg` (1200×553, ~278 KB) mit deklarierten Massen; `og`/`twitter` gesetzt
+- `sitemap.xml` (`sitemap.ts`), `robots.txt` (`robots.ts`, erlaubt explizit KI-Bots, sperrt `/verwaltung`), `public/llms.txt` (ausführlich)
+- Geschärfte `description` + erweiterte Keywords, `canonical`, `metadataBase`
+
+Offen:
+
+- Favicon-Set komplett (16/32/180/192/512 + manifest), aktuell nur `favicon.ico`
+- Eigenes gerendertes OG-Image mit Headline (optional, statt Foto-Crop)
+- Google Search Console + Bing Webmaster
 - Listings: Graubünden Ferien, MySwitzerland, Parc Ela
 - Lighthouse 95+ in allen vier Kategorien
 
