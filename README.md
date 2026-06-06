@@ -61,26 +61,21 @@ Rückwärts genauso (`= false`, OG zurück auf Sommer). Das Winter-Bild liegt be
 
 ### Vollständiges Bild-Inventar
 
+Aktiv in der Mobile-Sommerversion:
+
 | Datei | Einsatz auf der Website |
 |-------|-------------------------|
-| `hero-sommer.png` | Hero-Bild, aktiv Mai-Oktober |
+| `hero-sommer.png` | Hero-Bild, aktiv Mai-Oktober (echtes Foto, kein KI-Bild) |
 | `hero-winter.png` | Hero-Bild, aktiv November-April |
-| `usp-skiin.jpg` | ValueProps Karte 03 "Skischuhe an, Tür auf, los." |
-| `usp-original.jpg` | (archiviert, vorher Karte 02; nicht mehr aktiv im Code referenziert) |
-| `usp-lage.jpeg` | ValueProps Karte 01 "Mitten im Parc Ela" + Region-Mosaik oben rechts |
-| `maiensaess-1.jpg` … `maiensaess-6.jpg` | Maiensäss-Sektion 2×3 Galerie (Wohnstube, Küche, Eltern-Schlaf, Kinder-Schlaf, Dachgalerie, Bad) |
-| `detail-1.jpg` … `detail-4.jpg` | Maiensäss-Sektion horizontaler Detail-Bildband (Reihenfolge: detail-4, detail-3, detail-2, detail-1) |
-| `gastgeber-portrait.png` | Gastgeber-Sektion, Aquarell-Illustration von Angela und Gallus |
-| `region-parcela.jpeg` | Region-Sektion Mosaik oben links (Lai Barnagn) |
-| `region-blumen.jpeg` | Region-Sektion Mosaik unten links (Wildblumen vor Bergen) |
-| `region-bach.jpeg` | Region-Sektion Mosaik unten rechts (Bergbach zwischen Steinen) |
-| `region-wandern.jpeg` | Region-Sektion Sommer-Spalten-Header (Wanderweg) |
-| `region-skigebiet.jpg` | Region-Sektion Winter-Spalten-Header (Skigebiet) |
-| `region-tiefschnee.webp` | Region-Sektion Winter-Spalte unten, mit Caption "Unverspurter Tiefschnee" |
-| `region-pferde.webp` | Region-Sektion Sommer-Spalte, Caption "Sömmerung auf den Weiden von Radons" |
-| `region-wegweiser.webp` | Region-Sektion Sommer-Spalte, Caption "Wanderknotenpunkt Radons, 1885 m" |
-| `anreise-sommer.jpeg` | Anreise-Sektion Sommer-Karte |
-| `anreise-winter.jpg` | Anreise-Sektion Winter-Karte |
+| `sommer-wanderfamilie.png` | Sommerwoche-Banner (KI, Wanderfamilie am Maiensäss) |
+| `umgebung-sommer-2.png` | Sommerumgebung Bild 1 (KI, Familie am Bergsee) |
+| `region-bach.jpeg` | Sommerumgebung Bild 2 (Bergbach) |
+| `familie-wohnzimmer-sommer.png` | Familienleben Bild 1 (KI) |
+| `familie-kueche.png` | Familienleben Bild 2 (Familie am Tisch) |
+| `familie-kinderzimmer.png` | Familienleben Bild 3 (3er-Zimmer mit Kindern, KI) |
+| `gastgeber-foto.png` | Gastgeber-Sektion. **KI-Platzhalter**, TODO im Code: durch echtes Foto ersetzen |
+
+Im Code vorhanden, in der Mobile-Sommerversion aktuell NICHT gerendert (Archiv für die Desktop-Runde): `maiensaess-1.jpg`…`maiensaess-6.jpg` und `detail-1.jpg`…`detail-4.jpg` (Haus-Galerie/Detailband), `usp-*`, die übrigen `region-*` (Region-Sektion), `anreise-sommer/-winter`, `gastgeber-portrait.png` (alte Aquarell-Illustration).
 
 ## Architektur
 
@@ -91,21 +86,27 @@ src/
     page.tsx          Single-Page mit JSON-LD LodgingBusiness
     globals.css       Tailwind v4 + @theme Farben/Fonts, scroll-margin-top
   components/
-    Header.tsx        Sticky, transparent über Hero, kompakter Mobile-Header
+    Header.tsx        Sticky, transparent über Hero, Sommer-Menü (Sommer/Haus/Gastgeber/Preise/Anfrage)
     Hero.tsx          Vollbild, saisonales Bild, Trust-Mikrozeile, Scroll-Chevron
-    ValueProps.tsx    Drei Karten: Parc Ela > Specksteinofen > Ski-In
-    Maiensaess.tsx    Text + 2x3 Galerie + horizontaler Detail-Bildband
-    Empfehlungen.tsx  Drei Tipp-Karten (Wanderung, Mittagstipp, Origen)
-    Gastgeber.tsx     Aquarell-Portrait + Story
-    Region.tsx        Intro + 2x2 Mosaik + Winter/Sommer-Bullets
-    Preise.tsx        Value-Spotlight + Saisons + Inklusive-Checks + Kalender
+    ValueProps.tsx    Drei Sommergründe (reine Text-Karten, #sommer)
+    Sommerwoche.tsx   Banner + Tages-Timeline (Morgens..Abends) + CTA
+    Sommerumgebung.tsx  Bildsektion (2 Bilder: Familie am Wasser + Bach)
+    Maiensaess.tsx    Haus: gekürzter Text + kompakte Fakten-Tabelle (#haus)
+    Familienleben.tsx  Drei Familienbilder mit Captions
+    Claim.tsx         Ruhiges dunkles Zwischenband (Markenclaim)
+    Gastgeber.tsx     Foto (KI-Platzhalter, TODO) + Story
+    Preise.tsx        Hauspreis-Box (ab CHF 220/Nacht) + Saisons + Inklusive
+    Verfuegbarkeit.tsx  Intro + CTA + Kalender (#verfuegbarkeit)
     BookingCalendar.tsx  Sa-Sa-Wochenraster, klickbare freie Wochen
     BookingCalendarSection.tsx  Server-Wrapper, lädt Belegung aus dem Speicher
     admin/            Admin-UI: LoginForm + BookingAdmin (Route /verwaltung)
-    Anreise.tsx       Sommer/Winter Karten
-    Kontakt.tsx       Form-Embed + Adresse als Fallback
-    ContactForm.tsx   Nativer Anfrage-Workflow mit mailto-Submit
+    Anreise.tsx       Sommeranreise (Text)
+    Winterteaser.tsx  Kompakter Winter-Teaser (#winter)
+    Kontakt.tsx       Anfrage-Formular + Adresse/Mail als Fallback
+    ContactForm.tsx   Konversionsoptimiertes Anfrage-Formular, mailto-Submit
+    StickyCta.tsx     Dezenter mobiler Sticky-CTA "Sommerwoche anfragen"
     Footer.tsx        3-Spalten + Legal-Zeile
+    Region.tsx, Empfehlungen.tsx  NICHT mehr gerendert (Daten in content.ts, für Desktop-Runde)
   lib/
     content.ts        Alle Texte zentralisiert
     bookings.ts       Startbestand (Seed) + Typen
@@ -113,8 +114,12 @@ src/
     auth.ts           Admin-Login: Passwort, signiertes Cookie, Drosselung
     calendar.ts       Geteilte Kalender-Logik (Monatsraster, Wochen)
 public/
-  images/             22 Bilder
+  images/             Bilder (Hero saisonal, Sommer-Familien-/Umgebungsbilder, Galerie-Archiv)
 ```
+
+### Mobile-First-Sommerversion (Stand 2026-06-06)
+
+Die Seite ist eine Mobile-First-Sommerversion mit Conversion-Fokus auf Sommerbuchungen (Juni bis September). Sektionsreihenfolge: Hero · Sommergründe · Sommerwoche · Sommerumgebung · Haus · Familienleben · Claim · Gastgeber · Preise · Verfügbarkeit · Sommeranreise · Winterteaser · Kontakt. Keine öffentliche Rabatt-/Aktionskommunikation (Stammgäste-Aktionen laufen separat per E-Mail). Mobile-Abstände `py-16`, Desktop (`md:`) bewusst grosszügig belassen für eine spätere dedizierte Desktop-Runde. Region/Empfehlungen sind ausgeblendet, die Haus-Raumgalerie und der Detail-Bildband sind in der Mobile-Version nicht gerendert (Daten bleiben erhalten).
 
 ## Design-System
 
@@ -168,12 +173,18 @@ Kein Code, kein Git, kein Deploy. Woche von Anreise- bis Abreise-Samstag (Sa zu 
 
 [src/components/ContactForm.tsx](src/components/ContactForm.tsx) ist eine native React-Form mit:
 
-- Anreise / Abreise (HTML5-Datepicker, Anreise ab heute, Abreise ab Anreise)
-- Erwachsene + Kinder mit Live-Summe und Hinweis bei >5 Personen
+Konversionsoptimiert auf eine erste Anfrage reduziert (kein Buchungsformular). Felder:
+
+- Anreise / Abreise (Pflicht, HTML5-Datepicker, Anreise ab heute, Abreise ab Anreise)
+- Anzahl Personen (Pflicht, Dropdown 2 bis 8)
+- Name (Pflicht), E-Mail (Pflicht, validiert)
+- Telefon (optional), Bemerkungen (optional)
 - Verfügbarkeits-Check gegen die aktuelle Belegung, freundlicher Hinweis bei Überlappung
-- Name (Pflicht), E-Mail (Pflicht, validiert), Telefon, Herkunfts-Dropdown, Nachricht
-- Pre-Fill aus `#kontakt?from=...&to=...` (vom Kalender-Klick)
+- Pre-Fill aus `#kontakt?from=...&to=...` (vom Kalender-Klick). Feld-IDs mit Prefix `anfrage-` (vermeidet ID-Kollision mit Sektion `#anreise`)
+- CTA "Unverbindlich anfragen", darunter Hinweis "Keine Online-Buchung. Sie erhalten zuerst eine persönliche Rückmeldung von Angela oder Gallus."
 - Submit baut einen strukturierten deutschen mailto-Link mit Subject und Body und öffnet den Mail-Client. Nach Klick wechselt die Form zu einem "Danke"-Bestätigungspanel mit Reset-Link.
+
+Entfernt gegenüber der Vorversion: getrennte Felder Erwachsene/Kinder inkl. Personen-Total-Logik, Herkunfts-Dropdown.
 
 Inline-Validierung, accessible Labels, mobile-friendly.
 
