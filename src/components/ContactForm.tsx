@@ -189,7 +189,7 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
   }
 
   const inputBase =
-    'w-full bg-cream border border-brass/40 rounded-xl px-4 py-3 text-soapstone placeholder:text-larch/60 focus:outline-none focus:border-soapstone focus:ring-2 focus:ring-soapstone/15 transition-colors'
+    'w-full min-w-0 bg-cream border border-brass/40 rounded-xl px-4 py-3 text-soapstone placeholder:text-larch/60 focus:outline-none focus:border-soapstone focus:ring-2 focus:ring-soapstone/15 transition-colors'
   const labelBase = 'block text-xs font-semibold uppercase tracking-widest text-larch mb-2'
   const errorBase = 'text-xs text-[#B1564A] mt-1.5'
 

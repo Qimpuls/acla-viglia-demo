@@ -19,9 +19,11 @@ const inter = Inter({
 const SITE_URL = 'https://aclavigliaradons.ch'
 const SITE_TITLE = 'ACLA VIGLIA RADONS · Maiensäss in Savognin mieten'
 const SITE_DESCRIPTION =
-  'Maiensäss auf 1885 m an der Skipiste Savognin, mitten im Parc Ela. Persönlich geführt von zwei erfahrenen Hoteliers, Wochenmiete für 2 bis 8 Personen.'
+  'Maiensäss in Radons über Savognin mieten: das ganze Haus auf 1885 m im Parc Ela, für 2 bis 8 Personen, Wochenmiete Samstag zu Samstag. Persönlich geführt von Angela und Gallus Liesch-Lombris. Im Sommer Zufahrt bis vor das Haus.'
 const OG_IMAGE = {
-  url: '/images/hero-sommer.png',
+  url: '/images/og-image.jpg',
+  width: 1200,
+  height: 553,
   alt: 'Maiensäss Acla Viglia in Radons über Savognin im Sommer',
 }
 
@@ -39,13 +41,18 @@ export const metadata: Metadata = {
     'Maiensäss Radons',
     'Maiensäss mieten',
     'Ferienhaus Savognin',
-    'Ferienwohnung Savognin',
+    'Ferienhaus Graubünden',
+    'Ferienhaus für Gruppen',
+    'Ferienhaus mit Hund',
+    'Sommerferien Savognin',
+    'Wandern Parc Ela',
     'Skiferien Savognin',
     'Ski-In Ski-Out Savognin',
     'Parc Ela',
     'Val Surses',
     'Ferien Graubünden',
     'Maiensäss Graubünden',
+    'Surses',
   ],
   alternates: { canonical: '/' },
   robots: {

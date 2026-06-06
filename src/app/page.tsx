@@ -101,6 +101,95 @@ const jsonLd = {
       value: true,
     },
   ],
+  slogan: 'Ein Maiensäss. Geführt wie ein gutes Hotel.',
+  currenciesAccepted: 'CHF',
+  makesOffer: {
+    '@type': 'Offer',
+    name: 'Das ganze Maiensäss, Wochenmiete Samstag bis Samstag',
+    priceCurrency: 'CHF',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: 220,
+      minPrice: 220,
+      maxPrice: 280,
+      priceCurrency: 'CHF',
+      unitText: 'pro Nacht für das ganze Haus, bis 5 Personen',
+    },
+    eligibleQuantity: {
+      '@type': 'QuantitativeValue',
+      minValue: 2,
+      maxValue: 8,
+      unitText: 'Personen',
+    },
+  },
+  potentialAction: {
+    '@type': 'ReserveAction',
+    name: 'Sommerwoche anfragen',
+    target: `${SITE_URL}/#kontakt`,
+  },
+}
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Für wie viele Personen ist das Maiensäss Acla Viglia?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Das ganze Maiensäss bietet Platz für 2 bis 8 Personen: ein Doppelzimmer, ein Dreierzimmer und zwei Doppelmatratzen auf der Dachgalerie.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wie komme ich im Sommer nach Radons?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Von Ende Mai bis Ende Oktober ist die Zufahrt über Tigignas offen. Sie fahren mit dem Auto bis vor das Maiensäss und parkieren direkt davor. Einkaufen können Sie vorher in Savognin.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wie ist die Anreise im Winter?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Im Winter ist die Zufahrtsstrasse gesperrt. Gäste reisen mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus ab Savognin an.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Was kostet das Maiensäss?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Das ganze Haus kostet ab CHF 220 pro Nacht für bis zu 5 Personen, je nach Saison bis CHF 280. Jede weitere erwachsene Person CHF 10 pro Tag. Nicht enthalten sind Endreinigung, Wäsche und Kurtaxen.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Sind Haustiere erlaubt?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ja, Haustiere sind nach Absprache erlaubt.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Gibt es WLAN im Maiensäss?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ja, im Maiensäss ist WLAN vorhanden.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wie läuft die Buchung ab?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sie senden eine unverbindliche Anfrage über das Formular oder per E-Mail. Angela oder Gallus antworten persönlich, in der Regel innerhalb von 24 Stunden.',
+      },
+    },
+  ],
 }
 
 export default function Home() {
@@ -127,6 +216,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
     </>
   )
