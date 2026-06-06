@@ -22,22 +22,21 @@ export function Sommerwoche() {
           />
         </div>
 
-        <ol className="relative border-l border-brass/40 ml-1.5 max-w-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {sommerwoche.timeline.map((item) => (
-            <li key={item.time} className="relative pl-7 md:pl-8 pb-9 last:pb-0">
-              <span
-                aria-hidden="true"
-                className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-larch"
-              />
-              <p className="eyebrow mb-1.5">{item.time}</p>
-              <p className="text-ink/85 text-base md:text-lg leading-relaxed">
+            <div
+              key={item.time}
+              className="bg-cream rounded-2xl border border-brass/30 p-6"
+            >
+              <p className="eyebrow mb-2">{item.time}</p>
+              <p className="text-ink/85 text-base leading-relaxed">
                 {item.text}
               </p>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
 
-        <div className="mt-12 md:mt-16">
+        <div className="mt-10 md:mt-14">
           <a
             href={sommerwoche.cta.href}
             className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors w-full sm:w-auto"

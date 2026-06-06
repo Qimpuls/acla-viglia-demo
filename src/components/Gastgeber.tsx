@@ -1,10 +1,21 @@
 import Image from 'next/image'
-import { gastgeber } from '@/lib/content'
+import { claim, gastgeber } from '@/lib/content'
 
 export function Gastgeber() {
   return (
     <section id="gastgeber" className="bg-parchment py-16 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
+        {/* Schmale, elegante Claim-Zeile statt grossem dunklem Block */}
+        <div className="text-center mb-14 md:mb-20">
+          <span
+            aria-hidden="true"
+            className="block w-10 h-px bg-brass mx-auto mb-5"
+          />
+          <p className="font-serif text-soapstone text-xl md:text-2xl">
+            {claim.text}
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="relative aspect-3/2 w-full overflow-hidden rounded-2xl bg-linen">

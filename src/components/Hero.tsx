@@ -32,10 +32,12 @@ export function Hero() {
 
       <div className="relative z-10 flex flex-col justify-end min-h-[70vh] md:min-h-[85vh] max-w-6xl mx-auto px-6 md:px-12 pt-24 pb-12 md:pb-20">
         <p className="eyebrow text-brass-light! mb-5">{hero.eyebrow}</p>
-        <h1 className="font-serif text-5xl md:text-7xl text-parchment! max-w-4xl">
-          <span className="block">{hero.headlineTop}</span>
-          <span className="block">{hero.headlineBottom}</span>
+        <h1 className="font-serif text-4xl md:text-6xl text-parchment! max-w-3xl leading-[1.1]">
+          {hero.headline}
         </h1>
+        <p className="mt-4 font-serif text-brass-light! text-xl md:text-3xl max-w-2xl">
+          {hero.claim}
+        </p>
         <p className="mt-5 md:mt-6 max-w-2xl text-base md:text-lg text-parchment/95 leading-relaxed">
           {hero.subline}
         </p>

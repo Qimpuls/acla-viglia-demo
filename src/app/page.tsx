@@ -1,5 +1,4 @@
 import { Anreise } from '@/components/Anreise'
-import { Claim } from '@/components/Claim'
 import { Familienleben } from '@/components/Familienleben'
 import { Footer } from '@/components/Footer'
 import { Gastgeber } from '@/components/Gastgeber'
@@ -14,6 +13,7 @@ import { StickyCta } from '@/components/StickyCta'
 import { ValueProps } from '@/components/ValueProps'
 import { Verfuegbarkeit } from '@/components/Verfuegbarkeit'
 import { Winterteaser } from '@/components/Winterteaser'
+import { Wohnen } from '@/components/Wohnen'
 
 const SITE_URL = 'https://aclavigliaradons.ch'
 
@@ -110,12 +110,12 @@ export default function Home() {
       <main>
         <Hero />
         <ValueProps />
+        <Gastgeber />
         <Sommerwoche />
         <Sommerumgebung />
         <Maiensaess />
+        <Wohnen />
         <Familienleben />
-        <Claim />
-        <Gastgeber />
         <Preise />
         <Verfuegbarkeit />
         <Anreise />

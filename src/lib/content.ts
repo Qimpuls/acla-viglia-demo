@@ -16,10 +16,10 @@ export const brand = {
 
 export const hero = {
   eyebrow: 'MAIENSÄSS IN RADONS · 1885 M',
-  headlineTop: 'Eine Woche Bergsommer.',
-  headlineBottom: 'Ganz oben in Radons.',
+  headline: 'Eine Woche für Familie, Freunde und ruhige Tage.',
+  claim: 'Ein Maiensäss. Geführt wie ein gutes Hotel.',
   subline:
-    'Im Sommer fahren Sie bequem bis vor das Haus. Danach beginnt die Ruhe: Parc Ela, Wanderwege und klare Nächte.',
+    'Im Sommer fahren Sie bequem bis vor das Haus. Danach beginnt die Ruhe: Parc Ela, Wanderwege, klare Nächte und ein Maiensäss für 2 bis 8 Personen.',
   primaryCta: { label: 'Freie Sommerwochen prüfen', href: '#verfuegbarkeit' },
   secondaryCta: { label: 'Mehr über den Sommer', href: '#sommer' },
   trust:
@@ -31,7 +31,7 @@ export const hero = {
 // Drei Sommergründe (reine Text-Karten, bewusst ohne Bilder gegen Bildüberladung)
 export const valueProps = {
   eyebrow: 'WARUM IM SOMMER',
-  headline: 'Drei Gründe, hier oben zu bleiben.',
+  headline: 'Warum Gäste im Sommer bleiben.',
   cards: [
     {
       number: '01',
@@ -64,20 +64,12 @@ export const sommerwoche = {
       text: 'Kaffee am Fenster. Die Sonne steht früh an den Hängen.',
     },
     {
-      time: 'Vormittags',
-      text: 'Loswandern ab der Haustür. Kurze Runde mit Kindern oder längere Tour Richtung Piz Martegnas, Alp Flix oder Lai Barnagn.',
-    },
-    {
-      time: 'Mittags',
-      text: 'Einfach bleiben: Brot, Käse und Früchte auf dem Holztisch. Oder zehn Minuten zu Fuss in eine Bergbeiz.',
-    },
-    {
-      time: 'Nachmittags',
-      text: 'Nichts müssen. Kinder draussen. Erwachsene lesen, schlafen oder schauen.',
+      time: 'Tagsüber',
+      text: 'Wandern, Bergseen, Alp Flix oder einfach vor dem Haus bleiben.',
     },
     {
       time: 'Abends',
-      text: 'Feuer, Wein und Ruhe. Wenn es klar ist, kommt der Sternenhimmel dazu.',
+      text: 'Feuer, Wein und Sterne über Radons.',
     },
   ],
   cta: { label: 'Sommerwoche anfragen', href: '#kontakt' },
@@ -85,9 +77,9 @@ export const sommerwoche = {
 
 export const sommerumgebung = {
   eyebrow: 'SOMMERUMGEBUNG',
-  headline: 'Parc Ela beginnt vor der Tür.',
+  headline: 'Wiesen, Wege und Wasser direkt vor dem Haus.',
   intro:
-    'Rund um Radons beginnt der Sommer direkt am Haus: Wege, Wiesen, Bergbäche und stille Plätze für Familien, Wanderer und Ruhesuchende.',
+    'Vom Haus aus sind Sie sofort draussen: auf dem Weg, am Bach, auf der Wiese oder einfach auf der Bank vor der Tür.',
   images: [
     {
       src: '/images/umgebung-sommer-2.png',
@@ -165,10 +157,52 @@ export const maiensaess = {
   ],
 }
 
+export const wohnen = {
+  eyebrow: 'SO WOHNEN SIE HIER OBEN',
+  headline: 'Gemeinsam essen, schlafen, ankommen.',
+  intro:
+    'Das Maiensäss ist für gemeinsame Tage gemacht: ein langer Holztisch, warme Räume, Schlafplätze für Familien und Freunde und genug Rückzug, wenn das Wetter einmal wechselt.',
+  hero: {
+    src: '/images/abendessen-raclette.png',
+    alt: 'Freundesgruppe beim Raclette am langen Holztisch im Maiensäss bei Kerzenlicht und Cheminée-Feuer',
+    caption: 'Der lange Holztisch ist das Herz des Hauses.',
+  },
+  rooms: [
+    {
+      src: '/images/maiensaess-3.jpg',
+      alt: 'Doppelzimmer mit Edelweiss-Bettwäsche und Fenster mit Bergblick',
+      caption: 'Das grosse Doppelzimmer mit Blick auf die Berge.',
+    },
+    {
+      // Sauberes Raumfoto des Dreierzimmers ohne Personen. Bewusst nicht
+      // familie-kinderzimmer.png (Personen), das steht in [[Familienleben]] direkt
+      // darunter; so kein Bild-Duplikat in benachbarten Sektionen.
+      src: '/images/maiensaess-4.jpg',
+      alt: 'Dreierzimmer mit Einzelbett und Kajütenbett aus Holz',
+      caption: 'Drei Betten für Kinder, Jugendliche oder Freunde.',
+    },
+    {
+      src: '/images/maiensaess-5.jpg',
+      alt: 'Dachgalerie mit zusätzlichen Schlafplätzen unter Holzbalken',
+      caption: 'Zusätzliche Schlafplätze auf der Dachgalerie.',
+    },
+    {
+      src: '/images/maiensaess-2.jpg',
+      alt: 'Gut ausgestattete Küche mit Holz- und Elektroherd',
+      caption: 'Gut ausgestattete Küche für eine ganze Woche.',
+    },
+  ],
+  detail: {
+    src: '/images/maiensaess-6.jpg',
+    alt: 'Badezimmer mit Dusche',
+    caption: 'Bad mit Dusche und separaten WCs.',
+  },
+}
+
 export const familienleben = {
   eyebrow: 'FAMILIENLEBEN IM HAUS',
-  headline: 'Wenn das Wetter wechselt, bleibt der Tag gut.',
-  text: 'Das Haus ist nicht nur Ausgangspunkt. Es ist auch Rückzugsort: spielen, lesen, kochen, Feuer machen, zusammensitzen.',
+  headline: 'Auch Regentage haben hier ihren Platz.',
+  text: 'Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Genau dafür ist das Haus gemacht.',
   images: [
     {
       src: '/images/familie-wohnzimmer-sommer.png',
@@ -178,7 +212,7 @@ export const familienleben = {
     {
       src: '/images/familie-kueche.png',
       alt: 'Familie beim Frühstück am grossen Holztisch der Wohnküche mit offenem Cheminée',
-      caption: 'Der grosse Tisch ist der Mittelpunkt des Hauses.',
+      caption: 'Gemeinsame Morgen, bevor es nach draussen geht.',
     },
     {
       src: '/images/familie-kinderzimmer.png',
@@ -332,8 +366,8 @@ export const anreise = {
 
 export const winterteaser = {
   eyebrow: 'WINTER IN RADONS',
-  headline: 'Im Winter wird Radons stiller.',
-  text: 'Wenn die Strasse gesperrt ist, reisen Gäste mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus an. Das ist Teil des Wintererlebnisses und ab Oktober wieder prominent auf der Seite sichtbar.',
+  headline: 'Im Winter gehört Radons den Skiern, Schlitten und stillen Wegen.',
+  text: 'Wenn die Strasse gesperrt ist, kommen Gäste mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus. Der Winter hat seinen eigenen Rhythmus. Ab Oktober steht er wieder stärker im Vordergrund.',
 }
 
 export const empfehlungen = {
@@ -365,8 +399,11 @@ export const empfehlungen = {
 export const kontakt = {
   eyebrow: 'ANFRAGE UND KONTAKT',
   headline: 'Schreiben Sie uns. Wir antworten persönlich.',
-  intro:
-    'Angela oder Gallus beantworten jede Anfrage persönlich. In der Regel erhalten Sie innerhalb von 24 Stunden eine Antwort.',
+  trust: [
+    'Persönliche Antwort durch Angela oder Gallus.',
+    'Antwort innerhalb von 24 Stunden.',
+    'Direkter Kontakt mit den Gastgebern.',
+  ],
   hosts: 'Angela und Gallus Liesch-Lombris',
   brand: 'ACLA VIGLIA RADONS',
   postal: 'Radons 104, 7464 Surses',

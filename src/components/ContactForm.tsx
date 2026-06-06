@@ -347,8 +347,8 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
               {submitting ? 'Wird gesendet…' : 'Unverbindlich anfragen'}
             </button>
             <p className="mt-4 text-sm text-ink/75 text-center leading-relaxed max-w-md mx-auto">
-              Keine Online-Buchung. Sie erhalten zuerst eine persönliche
-              Rückmeldung von Angela oder Gallus.
+              Sie erhalten zuerst eine persönliche Rückmeldung von Angela oder
+              Gallus.
             </p>
             <p className="mt-2 text-xs text-larch/70 text-center max-w-md mx-auto">
               Ihre Daten werden ausschliesslich für die Bearbeitung der Anfrage

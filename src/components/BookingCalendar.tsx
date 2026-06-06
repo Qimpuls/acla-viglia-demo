@@ -125,6 +125,9 @@ function MonthGrid({
 
 export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
   const [page, setPage] = useState(0)
+  // Mobile-Akkordeon: 0 = nur erste 2 Monate, 1 = +2, 2 = alle 6. Desktop zeigt
+  // immer alle 6 (via md:block), die Stufen wirken nur auf Mobile.
+  const [expand, setExpand] = useState(0)
   const PAGE_SIZE = 6
 
   // Startansicht beginnt automatisch beim aktuellen Monat, damit der
@@ -149,7 +152,7 @@ export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
             {firstLabel} bis {lastLabel}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="hidden md:flex gap-2">
           <button
             type="button"
             onClick={() => setPage((p) => Math.max(0, p - 1))}
@@ -171,15 +174,36 @@ export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-        {months.map((m) => (
-          <MonthGrid
-            key={`${m.year}-${m.month}`}
-            year={m.year}
-            month={m.month}
-            bookings={bookings}
-          />
-        ))}
+        {months.map((m, i) => {
+          const mobileVis =
+            i < 2
+              ? 'block'
+              : i < 4
+                ? expand >= 1
+                  ? 'block'
+                  : 'hidden'
+                : expand >= 2
+                  ? 'block'
+                  : 'hidden'
+          return (
+            <div key={`${m.year}-${m.month}`} className={`${mobileVis} md:block`}>
+              <MonthGrid year={m.year} month={m.month} bookings={bookings} />
+            </div>
+          )
+        })}
       </div>
+
+      {expand < 2 && (
+        <button
+          type="button"
+          onClick={() => setExpand((e) => e + 1)}
+          className="md:hidden w-full mt-4 px-5 py-3 text-sm font-medium border border-brass/50 rounded-full text-soapstone hover:bg-soapstone hover:text-parchment hover:border-soapstone transition-colors"
+        >
+          {expand === 0
+            ? 'Weitere Monate anzeigen'
+            : `${MONTH_NAMES[months[4].month]} und ${MONTH_NAMES[months[5].month]} anzeigen`}
+        </button>
+      )}
 
       <p className="mt-6 text-sm text-larch italic">
         Klicken Sie auf eine freie Woche, um direkt anzufragen.

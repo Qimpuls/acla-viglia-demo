@@ -12,9 +12,29 @@ export async function Kontakt() {
           <h2 className="font-serif text-3xl md:text-5xl !text-parchment">
             {kontakt.headline}
           </h2>
-          <p className="mt-5 text-parchment/80 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            {kontakt.intro}
-          </p>
+          <ul className="mt-6 flex flex-col sm:flex-row sm:flex-wrap justify-center gap-x-7 gap-y-2.5 text-parchment/85 text-sm md:text-base">
+            {kontakt.trust.map((t) => (
+              <li key={t} className="flex items-center justify-center gap-2">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  className="text-brass-light shrink-0"
+                >
+                  <path
+                    d="M3 8.5l3.2 3.2L13 4.8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <ContactForm bookings={bookings} />
