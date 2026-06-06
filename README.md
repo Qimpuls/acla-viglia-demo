@@ -87,24 +87,24 @@ src/
     globals.css       Tailwind v4 + @theme Farben/Fonts, scroll-margin-top
   components/
     Header.tsx        Sticky, transparent über Hero, Sommer-Menü (Sommer/Haus/Gastgeber/Preise/Anfrage)
-    Hero.tsx          Vollbild, saisonales Bild, Trust-Mikrozeile, Scroll-Chevron
+    Hero.tsx          Vollbild, saisonales Bild, Headline + Claim, ein CTA, links-gewichtetes Overlay
     ValueProps.tsx    Drei Sommergründe (reine Text-Karten, #sommer)
-    Sommerwoche.tsx   Banner + Tages-Timeline (Morgens..Abends) + CTA
+    Gastgeber.tsx     Schmale Claim-Zeile + Foto (KI-Platzhalter, TODO) + Story (#gastgeber, früh platziert)
+    Sommerwoche.tsx   Banner + 3 kompakte Momente (Morgens/Tagsüber/Abends) + CTA
     Sommerumgebung.tsx  Bildsektion (2 Bilder: Familie am Wasser + Bach)
     Maiensaess.tsx    Haus: gekürzter Text + kompakte Fakten-Tabelle (#haus)
+    Wohnen.tsx        So wohnen Sie hier oben: Raclette-Leitbild + 4 Raumkarten + Bad-Detail (#wohnen)
     Familienleben.tsx  Drei Familienbilder mit Captions
-    Claim.tsx         Ruhiges dunkles Zwischenband (Markenclaim)
-    Gastgeber.tsx     Foto (KI-Platzhalter, TODO) + Story
     Preise.tsx        Hauspreis-Box (ab CHF 220/Nacht) + Saisons + Inklusive
     Verfuegbarkeit.tsx  Intro + CTA + Kalender (#verfuegbarkeit)
-    BookingCalendar.tsx  Sa-Sa-Wochenraster, klickbare freie Wochen
+    BookingCalendar.tsx  Sa-Sa-Wochenraster; Mobile-Akkordeon (2 → 4 → 6 Monate) + Vor/Zurück, Desktop 6 Monate + Pagination
     BookingCalendarSection.tsx  Server-Wrapper, lädt Belegung aus dem Speicher
     admin/            Admin-UI: LoginForm + BookingAdmin (Route /verwaltung)
     Anreise.tsx       Sommeranreise (Text)
     Winterteaser.tsx  Kompakter Winter-Teaser (#winter)
-    Kontakt.tsx       Anfrage-Formular + Adresse/Mail als Fallback
+    Kontakt.tsx       Anfrage-Formular + 3 Vertrauenspunkte + Adresse/Mail als Fallback
     ContactForm.tsx   Konversionsoptimiertes Anfrage-Formular, mailto-Submit
-    StickyCta.tsx     Dezenter mobiler Sticky-CTA "Sommerwoche anfragen"
+    StickyCta.tsx     Mobiler Sticky-CTA, nur beim Scrollen nach oben sichtbar
     Footer.tsx        3-Spalten + Legal-Zeile
     Region.tsx, Empfehlungen.tsx  NICHT mehr gerendert (Daten in content.ts, für Desktop-Runde)
   lib/
@@ -117,9 +117,23 @@ public/
   images/             Bilder (Hero saisonal, Sommer-Familien-/Umgebungsbilder, Galerie-Archiv)
 ```
 
-### Mobile-First-Sommerversion (Stand 2026-06-06)
+### Mobile-First-Sommerversion (Stand 2026-06-06, live)
 
-Die Seite ist eine Mobile-First-Sommerversion mit Conversion-Fokus auf Sommerbuchungen (Juni bis September). Sektionsreihenfolge: Hero · Sommergründe · Sommerwoche · Sommerumgebung · Haus · Familienleben · Claim · Gastgeber · Preise · Verfügbarkeit · Sommeranreise · Winterteaser · Kontakt. Keine öffentliche Rabatt-/Aktionskommunikation (Stammgäste-Aktionen laufen separat per E-Mail). Mobile-Abstände `py-16`, Desktop (`md:`) bewusst grosszügig belassen für eine spätere dedizierte Desktop-Runde. Region/Empfehlungen sind ausgeblendet, die Haus-Raumgalerie und der Detail-Bildband sind in der Mobile-Version nicht gerendert (Daten bleiben erhalten).
+Mobile-First-Sommerversion mit Conversion-Fokus auf Sommerbuchungen (Juni bis September). Live auf `aclavigliaradons.ch` (Deploy `f5bf5a6`).
+
+**Sektionsreihenfolge:** Hero · Sommergründe (`#sommer`) · Gastgeber (`#gastgeber`) · Sommerwoche (`#sommerwoche`) · Sommerumgebung (`#sommerumgebung`) · Haus (`#haus`) · So wohnen Sie hier oben (`#wohnen`) · Familienleben · Preise (`#preise`) · Verfügbarkeit (`#verfuegbarkeit`) · Sommeranreise (`#anreise`) · Winterteaser (`#winter`) · Kontakt (`#kontakt`) · Footer.
+
+**Kernentscheide:**
+
+- **Gastgeber bewusst früh** (Position 3) als Vertrauensanker vor Preis/Verfügbarkeit.
+- **Claim** „Ein Maiensäss. Geführt wie ein gutes Hotel." im Hero (unter der Headline) und als schmale Zeile über dem Gastgeber. Der frühere dunkle Claim-Block (`Claim.tsx`) wurde entfernt.
+- **Hero:** ein CTA, kein Scroll-Pfeil; links-gewichtetes Overlay (links dunkel für Lesbarkeit, rechts hell, damit das Maiensäss sichtbar bleibt) plus Mobile-only Boden-Verlauf.
+- **Preise:** ganzes Haus „ab CHF 220 pro Nacht für bis zu 5 Personen". Kein Pro-Person-/Bettpreis. Keine öffentliche Rabatt-/Aktionskommunikation (Stammgäste-Aktionen laufen separat per E-Mail).
+- **Kalender mobil:** Akkordeon (Default 2 Monate → +2 → alle 6) plus Vor/Zurück nach vollem Aufklappen, damit jeder Monat erreichbar ist. Desktop: 6 Monate + Pagination.
+- **Sticky-CTA (mobil):** erscheint nur beim Scrollen nach oben, nicht im Hero, blendet im Kontaktbereich aus. Desktop: kein Sticky.
+- **Mobile-Abstände** `py-16`; Desktop (`md:`) bewusst grosszügig für eine spätere dedizierte Desktop-Runde. Region/Empfehlungen ausgeblendet, Haus-Raumgalerie und Detail-Bildband in der Mobile-Version nicht gerendert (Daten in `content.ts` erhalten).
+
+**QA (2026-06-06):** Build + Lint sauber, alle referenzierten Bilder vorhanden (live 200), iPhone 390 px und Desktop 1280 px geprüft (Sektionsreihenfolge, Texte, Formular, Kalender, Sticky-CTA, kein horizontaler Overflow, alt-Texte, eine `h1`). Offen für die Desktop-Runde: echtes Gastgeberfoto statt KI-Platzhalter, Desktop-Feinschliff, Wiedereinbindung Haus-Galerie/Region/Empfehlungen nach Bedarf.
 
 ## Design-System
 
