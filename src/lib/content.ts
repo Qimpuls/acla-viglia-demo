@@ -19,11 +19,9 @@ export const hero = {
   headline: 'Eine Woche für Familie, Freunde und ruhige Tage.',
   claim: 'Ein Maiensäss. Geführt wie ein gutes Hotel.',
   subline:
-    'Im Sommer fahren Sie bequem bis vor das Haus. Danach beginnt die Ruhe: Parc Ela, Wanderwege, klare Nächte und ein Maiensäss für 2 bis 8 Personen.',
+    'Im Sommer fahren Sie bis vor das Haus. Danach beginnt Radons: Parc Ela, Wanderwege, klare Nächte und ein Maiensäss für 2 bis 8 Personen.',
   primaryCta: { label: 'Freie Sommerwochen prüfen', href: '#verfuegbarkeit' },
-  secondaryCta: { label: 'Mehr über den Sommer', href: '#sommer' },
-  trust:
-    'Persönlich geführt von Angela und Gallus · Samstag bis Samstag · 2 bis 8 Personen',
+  trust: 'Persönlich geführt von Angela und Gallus · Samstag bis Samstag',
   imageSummer: '/images/hero-sommer.png',
   imageWinter: '/images/hero-winter.png',
 }
