@@ -57,14 +57,21 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 - **Sommer:** Label `Sommer` (href `#sommer`)
 - **Winter:** Label `Winter` (href `#sommer` bleibt, nur Label)
 
-### Hero (`hero`) — bereits saisonneutral, nur Bild wechseln
-- eyebrow, headline, claim, subline, trust bleiben in **beiden** Editionen gleich:
-  - eyebrow: `MAIENSÄSS IN RADONS · 1885 M`
-  - headline: `Eine Woche, die länger nachwirkt.`
-  - claim: `Ein Maiensäss. Geführt wie ein gutes Hotel.`
-  - subline: `Berge, Ruhe und ein Haus, das für gemeinsame Zeit gebaut wurde.`
-  - trust: `Persönlich geführt von Angela und Gallus · Samstag bis Samstag`
-- **Nur** `imageSummer`/`imageWinter` greift über den Hero-Schalter (siehe unten).
+### Hero (`hero`)
+**Sommer (Archiv, aktuell live):**
+- eyebrow: `MAIENSÄSS IN RADONS · 1885 M`
+- headline: `Eine Woche, die länger nachwirkt.`
+- claim: `Ein Maiensäss. Geführt wie ein gutes Hotel.`
+- subline: `Berge, Ruhe und ein Haus, das für gemeinsame Zeit gebaut wurde.`
+- trust: `Persönlich geführt von Angela und Gallus · Samstag bis Samstag`
+
+**Winter (bereit, schärfer nach Challenge):**
+- eyebrow: `MAIENSÄSS IN RADONS · 1885 M` (bleibt)
+- headline: `Ski an der Tür. Feuer im Haus. Ruhe im Tal.` · Alternative (ruhiger, parallel zum Sommer): `Eine Winterwoche ganz oben in Radons.`
+- claim: `Ein Maiensäss. Geführt wie ein gutes Hotel.` (bleibt)
+- subline: `Direkt an der Piste, ohne Autoverkehr, mit Feuer im Haus und Zeit für Familie und Freunde.`
+- trust: `Persönlich geführt von Angela und Gallus · Samstag bis Samstag` (bleibt)
+- Bild: `hero-winter.png` (+ OG-Bild, siehe Hero-Schalter)
 
 ### ValueProps (`valueProps`)
 **Sommer (Archiv):**
@@ -74,12 +81,12 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 - Karte 02: `Eine Woche, die nicht lang wird.` / `Wandern ab der Haustür, Bergseen, Bikewege, Origen in Riom, Ruhetage im Haus und Abende am Feuer. Der Sommer hier oben hat Raum für Familien, Freunde und stille Tage.`
 - Karte 03: `Nachts wird der Himmel dunkel.` / `Radons liegt weit weg vom Licht der grossen Orte. An klaren Abenden sieht man Sterne, wie man sie im Mittelland kaum noch kennt.`
 
-**Winter (bereit):**
+**Winter (bereit, nach Challenge):**
 - eyebrow: `WARUM IM WINTER`
 - headline: `Warum Gäste im Winter kommen.`
-- Karte 01: `Ski-In, Ski-Out.` / `Die Piste der Savognin Bergbahnen liegt direkt am Haus. Morgens anschnallen, abends mit Schlitten oder Fellen zurück zur Tür.`
-- Karte 02: `Die Strasse ist zu. Die Ruhe bleibt.` / `Im Winter ist die Zufahrt gesperrt. Gäste kommen mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus. Dafür ist es oben still.`
-- Karte 03: `Drinnen Feuer, draussen Sterne.` / `Zwei Specksteinöfen und ein offenes Cheminée halten das Haus warm. An klaren Winterabenden steht der Himmel voller Sterne über Radons.`
+- Karte 01: `Ski anziehen. Losfahren. Zurück bis vors Haus.` / `Die Piste der Savognin Bergbahnen liegt direkt am Maiensäss. Morgens starten Sie vor der Tür. Abends kommen Sie mit Skiern oder Schlitten zurück.`
+- Karte 02: `Kein Autoverkehr. Mehr Winter.` / `Im Winter bleibt die Strasse nach Radons geschlossen. Gäste kommen mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus. Oben bleibt es still: nur der Wind, der Schnee und das Feuer im Ofen.`
+- Karte 03: `Feuer drinnen. Dunkelheit draussen.` / `Zwei Specksteinöfen und ein offenes Cheminée wärmen das Haus. Wenn der Himmel klar ist, sieht man über Radons Sterne, die im Tal unten verschwunden sind.`
 
 ### Sommerwoche / Winterwoche (`sommerwoche`)
 **Sommer (Archiv):**
@@ -93,11 +100,11 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 
 **Winter (bereit):**
 - eyebrow: `WINTERWOCHE IN RADONS`
-- headline: `So fühlt sich eine Woche hier oben an.` (bleibt)
+- headline: `Ein Wintertag in Radons.`
 - banner: `winter-familie.png` (alt: `Familie mit Schlitten vor dem verschneiten Maiensäss Acla Viglia in Radons bei Dämmerung`). Alternative für Stimmung/Anreise: `anreise-winter.jpg` (Haus im Schnee bei Dämmerung, ohne Personen).
 - Morgens: `Frische Spur im Schnee, bevor die Piste voll ist.`
 - Tagsüber: `Skifahren, Schlitteln, Schneeschuhe oder ein Tag am Feuer.`
-- Abends: `Fondue, Wein und Stille über dem verschneiten Tal.`
+- Abends: `Käse auf dem Tisch, Holz im Ofen, draussen wird es früh dunkel.`
 - cta: `Verfügbarkeit prüfen` (href `#verfuegbarkeit`)
 
 ### Umgebung (`sommerumgebung`)
@@ -110,7 +117,7 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 
 **Winter (bereit):**
 - eyebrow: `WINTERUMGEBUNG`
-- headline: `Schnee, Stille und Spuren direkt vor dem Haus.`
+- headline: `Piste, Schnee und stille Wege vor der Tür.`
 - intro: `Vom Haus aus sind Sie sofort im Schnee: auf der Piste, auf der Schlittenbahn, auf Schneeschuhen oder auf der Bank in der Wintersonne.`
 - Bild 1: `region-tiefschnee.webp` (alt: `Tiefverschneiter Hang über Radons mit Skitouren- und Schlittenspuren`) · `Tiefschnee und stille Wege über Radons.`
 - Bild 2: `region-skigebiet.jpg` (alt: `Verschneite Maiensässe vor der Bergkette von Savognin im Winter`) · `Die Bergkulisse von Savognin im Winter.`
@@ -118,7 +125,8 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 ### Haus-Sektion / Regentage Headline (`familienleben`)
 - Headline Sommer: `Auch Regentage haben hier ihren Platz.`
 - Headline Winter (bereit): `Auch graue Tage haben hier ihren Platz.`
-- Text bleibt beide: `Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Viele Gäste nutzen das Haus genau so.`
+- Text Sommer (live): `Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Viele Gäste nutzen das Haus genau so.`
+- Text Winter (bereit, ohne erklärenden Schlusssatz): `Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest.` (Schlusssatz gestrichen; im Frühjahr ggf. auch im Sommer übernehmen)
 - Leitbild Sommer: `detail-4-sommer.png` · Winter: `detail-4-winter.jpg` · Caption beide: `Ein Buch. Ein Feuer. Ein Blick nach draussen.`
 - Bild 2 + 3 bleiben (`familie-kueche.png` / `familie-wohnzimmer-sommer.png`) mit Captions `Morgens Kaffee, Brot und Zeit am grossen Tisch.` und `Drinnen spielen, lesen, Feuer machen.`
 
@@ -130,7 +138,7 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 
 **Winter (bereit):**
 - headline: `Freie Winterwochen prüfen.`
-- text: `Für die Wintersaison gibt es noch einzelne freie Wochen. Hochsaison sind Weihnachten, Neujahr und Februar. Wählen Sie eine freie Woche im Kalender oder senden Sie direkt eine Anfrage.` (Monate je nach Stand anpassen)
+- text: `Einzelne Winterwochen sind noch frei. Besonders ausserhalb von Weihnachten, Neujahr und Februar lohnt sich eine Anfrage. Wählen Sie eine freie Woche im Kalender oder schreiben Sie uns direkt.`
 - cta: `Verfügbarkeit prüfen`
 
 ### Anreise (`anreise`)
@@ -154,6 +162,22 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 - eyebrow: `SOMMER IN RADONS`
 - headline: `Im Sommer fahren Sie bis vor das Haus.`
 - text: `Von Ende Mai bis Ende Oktober ist die Zufahrt offen. Wanderwege ab der Haustür, Bergseen und lange, helle Abende. Ab dem Frühjahr rückt der Sommer wieder in den Vordergrund.`
+
+---
+
+## Winter-Infos noch zu klären (für Anreise und FAQ)
+
+Aus dem Challenge: konkrete Winter-Logistik fehlt. Diese Punkte gehören in die
+Anreise-Sektion oder eine kurze Winter-FAQ. Wo die Antwort bekannt ist, steht sie.
+Der Rest ist von Angela und Gallus zu bestätigen, bevor Winter live geht (nicht raten).
+
+- Lage zur Piste: direkt am Haus (Ski-In, Ski-Out). [bekannt]
+- Holz vor Ort: ja, Holz für Cheminée und Kochherd ist inklusive. [bekannt]
+- Eignung für Nicht-Skifahrer: Schlitteln, Schneeschuhe, Winterwandern, Tag am Feuer. [Text vorhanden, ggf. konkretisieren]
+- Winterbus ab Savognin: Fahrplan und Frequenz (täglich?). [zu bestätigen]
+- Fussweg ab Bergstation oder Parkplatz: Dauer und Strecke bis zum Haus. [zu bestätigen]
+- Gepäcktransport: wie kommt Gepäck hoch (Schlitten, Transportdienst)? [zu bestätigen]
+- Schlitten vor Ort vorhanden oder zu mieten? [zu bestätigen]
 
 ---
 
