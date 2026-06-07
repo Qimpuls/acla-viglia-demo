@@ -102,7 +102,7 @@ src/
     Sommerumgebung.tsx  Bildsektion (2 Bilder: Familie am Wasser + Bach)
     Maiensaess.tsx    Haus: gekürzter Text + kompakte Fakten-Tabelle (#haus)
     Wohnen.tsx        So wohnen Sie hier oben: Raclette-Leitbild + 4 Raumkarten + Bad-Detail (#wohnen)
-    Familienleben.tsx  Drei Familienbilder mit Captions
+    Familienleben.tsx  Regentage-Sektion: detail-4 als grosses Leitbild + 2 kleinere Bilder
     Preise.tsx        Hauspreis-Box (ab CHF 220/Nacht) + Saisons + Inklusive
     Verfuegbarkeit.tsx  Intro + CTA + Kalender (#verfuegbarkeit)
     BookingCalendar.tsx  Sa-Sa-Wochenraster; Mobile-Akkordeon (2 → 4 → 6 Monate) + Vor/Zurück, Desktop 6 Monate + Pagination
@@ -110,7 +110,7 @@ src/
     admin/            Admin-UI: LoginForm + BookingAdmin (Route /verwaltung)
     Anreise.tsx       Sommeranreise (Text)
     Winterteaser.tsx  Kompakter Winter-Teaser (#winter)
-    Kontakt.tsx       Anfrage-Formular + 3 Vertrauenspunkte + Adresse/Mail als Fallback
+    Kontakt.tsx       Anfrage-Formular (reduziert: nur Headline, keine Trust-Bullets) + Adresse/Mail als Fallback
     ContactForm.tsx   Konversionsoptimiertes Anfrage-Formular, mailto-Submit
     StickyCta.tsx     Mobiler Sticky-CTA, nur beim Scrollen nach oben sichtbar
     Footer.tsx        3-Spalten + Legal-Zeile
@@ -205,7 +205,7 @@ Konversionsoptimiert auf eine erste Anfrage reduziert (kein Buchungsformular). F
 - Telefon (optional), Bemerkungen (optional)
 - Verfügbarkeits-Check gegen die aktuelle Belegung, freundlicher Hinweis bei Überlappung
 - Pre-Fill aus `#kontakt?from=...&to=...` (vom Kalender-Klick). Feld-IDs mit Prefix `anfrage-` (vermeidet ID-Kollision mit Sektion `#anreise`)
-- CTA "Unverbindlich anfragen", darunter Hinweis "Keine Online-Buchung. Sie erhalten zuerst eine persönliche Rückmeldung von Angela oder Gallus."
+- CTA "Unverbindlich anfragen", darunter Hinweis "Sie erhalten eine persönliche Rückmeldung von Angela oder Gallus."
 - Submit baut einen strukturierten deutschen mailto-Link mit Subject und Body und öffnet den Mail-Client. Nach Klick wechselt die Form zu einem "Danke"-Bestätigungspanel mit Reset-Link.
 
 Entfernt gegenüber der Vorversion: getrennte Felder Erwachsene/Kinder inkl. Personen-Total-Logik, Herkunfts-Dropdown.
