@@ -199,7 +199,7 @@ export const wohnen = {
 export const familienleben = {
   eyebrow: 'FAMILIENLEBEN IM HAUS',
   headline: 'Auch Regentage haben hier ihren Platz.',
-  text: 'Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Dafür nutzen viele unserer Gäste das Haus.',
+  text: 'Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Viele Gäste nutzen das Haus genau so.',
   // Rückzug/Atmosphäre. detail-4-sommer (Lese-Ecke am Fenster) zuerst und prominent.
   // Kein Dreierzimmer mehr (steht jetzt in [[wohnen]]), keine Bilddoppelung.
   images: [
@@ -218,8 +218,8 @@ export const familienleben = {
     },
     {
       src: '/images/familie-wohnzimmer-sommer.png',
-      alt: 'Familie im Wohnzimmer des Maiensäss mit offenem Cheminée und Specksteinofen',
-      caption: 'Der lange Holztisch bleibt oft bis spät besetzt.',
+      alt: 'Familie im Wohnzimmer des Maiensäss, Kinder spielen auf dem Boden vor dem Specksteinofen',
+      caption: 'Drinnen spielen, lesen, Feuer machen.',
     },
   ],
 }
@@ -356,7 +356,7 @@ export const preise = {
 export const verfuegbarkeit = {
   eyebrow: 'VERFÜGBARKEIT',
   headline: 'Freie Sommerwochen prüfen.',
-  text: 'Aktuell gibt es noch freie Sommerwochen 2026, besonders im August sowie in einzelnen Wochen im Juni, Juli und September. Klicken Sie im Kalender auf eine freie Woche oder senden Sie direkt eine Anfrage.',
+  text: 'Für 2026 gibt es noch einzelne freie Wochen im Sommer. Besonders August sowie einzelne Wochen im Juni, Juli und September sind noch möglich. Wählen Sie eine freie Woche im Kalender oder senden Sie direkt eine Anfrage.',
   cta: { label: 'Verfügbarkeit prüfen', href: '#kontakt' },
 }
 
@@ -401,11 +401,6 @@ export const empfehlungen = {
 export const kontakt = {
   eyebrow: 'ANFRAGE UND KONTAKT',
   headline: 'Schreiben Sie uns. Wir antworten persönlich.',
-  trust: [
-    'Persönliche Antwort durch Angela oder Gallus.',
-    'Antwort innerhalb von 24 Stunden.',
-    'Direkter Kontakt mit den Gastgebern.',
-  ],
   hosts: 'Angela und Gallus Liesch-Lombris',
   brand: 'ACLA VIGLIA RADONS',
   postal: 'Radons 104, 7464 Surses',
@@ -416,7 +411,7 @@ export const kontakt = {
   mailto:
     'mailto:ferien@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS',
   cta: 'E-Mail schreiben',
-  note: 'Anfragen werden persönlich von Angela oder Gallus beantwortet, in der Regel innerhalb von 24 Stunden.',
+  note: 'Anfragen werden persönlich von Angela oder Gallus beantwortet.',
 }
 
 export const footer = {

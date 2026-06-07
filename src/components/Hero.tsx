@@ -32,19 +32,19 @@ export function Hero() {
       <div className="absolute inset-0 bg-linear-to-r from-soapstone/85 via-soapstone/30 to-transparent" />
       <div className="absolute inset-0 md:hidden bg-linear-to-t from-soapstone/75 via-soapstone/15 to-transparent" />
 
-      <div className="relative z-10 flex flex-col justify-end min-h-[70vh] md:min-h-[85vh] max-w-6xl mx-auto px-6 md:px-12 pt-24 pb-14 md:pb-24">
+      <div className="relative z-10 flex flex-col justify-end min-h-[70vh] md:min-h-[85vh] max-w-6xl mx-auto px-6 md:px-12 pt-24 pb-14 md:pb-40">
         <p className="eyebrow text-brass-light! mb-5">{hero.eyebrow}</p>
-        <h1 className="font-serif text-4xl md:text-6xl text-parchment! max-w-2xl leading-[1.1]">
+        <h1 className="font-serif text-4xl md:text-7xl text-parchment! max-w-4xl leading-[1.05] text-balance">
           {hero.headline}
         </h1>
-        <p className="mt-2 md:mt-3 font-serif text-brass-light! text-lg md:text-2xl max-w-2xl">
+        <p className="mt-3 md:mt-4 font-serif text-brass-light! text-lg md:text-3xl max-w-3xl">
           {hero.claim}
         </p>
-        <p className="mt-5 max-w-2xl text-base md:text-lg text-parchment/95 leading-relaxed">
+        <p className="mt-4 md:mt-5 max-w-2xl text-base md:text-xl text-parchment/95 leading-relaxed">
           {hero.subline}
         </p>
 
-        <div className="mt-6 md:mt-7">
+        <div className="mt-5 md:mt-6">
           <a
             href={hero.primaryCta.href}
             className="inline-flex items-center justify-center bg-parchment text-soapstone hover:bg-brass-light px-8 py-4 rounded-full font-medium transition-colors w-full sm:w-auto"
@@ -53,7 +53,7 @@ export function Hero() {
           </a>
         </div>
 
-        <p className="mt-6 md:mt-8 text-[0.7rem] md:text-xs text-brass-light/95 tracking-wide leading-relaxed max-w-2xl">
+        <p className="mt-7 md:mt-9 text-xs md:text-sm text-brass-light tracking-wide leading-relaxed max-w-2xl">
           {hero.trust}
         </p>
       </div>

@@ -170,8 +170,7 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
         </p>
         <p className="text-ink/80 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
           Wir haben gerade Ihr Mail-Programm geöffnet. Sobald die Nachricht
-          versendet ist, melden wir uns persönlich, in der Regel innerhalb
-          von 24 Stunden.
+          versendet ist, melden wir uns persönlich.
         </p>
         <button
           type="button"

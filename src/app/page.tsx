@@ -186,7 +186,7 @@ const faqLd = {
       name: 'Wie läuft die Buchung ab?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Sie senden eine unverbindliche Anfrage über das Formular oder per E-Mail. Angela oder Gallus antworten persönlich, in der Regel innerhalb von 24 Stunden.',
+        text: 'Sie senden eine unverbindliche Anfrage über das Formular oder per E-Mail. Angela oder Gallus antworten persönlich.',
       },
     },
   ],
