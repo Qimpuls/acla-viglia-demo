@@ -96,7 +96,7 @@ export const maiensaess = {
   eyebrow: 'DAS HAUS',
   headline: 'Platz für Familie, Freunde und ruhige Tage.',
   paragraphs: [
-    'Das Maiensäss bietet Raum für 2 bis 8 Personen auf zwei Geschossen und einer Dachgalerie. Der Mittelpunkt ist die Wohnküche mit langem Tisch, Feuerstelle und Blick nach draussen.',
+    'Das Maiensäss bietet Raum für 2 bis 8 Personen auf zwei Geschossen und einer Dachgalerie. Der Mittelpunkt ist die Wohnküche mit rustikalem Tisch, Feuerstelle und Blick nach draussen.',
     'Ob Familienwoche, Wanderferien oder ein paar Tage mit Freunden: Das Haus ist einfach, warm und sorgfältig geführt.',
   ],
   facts: [
@@ -159,11 +159,11 @@ export const wohnen = {
   eyebrow: 'SO WOHNEN SIE HIER OBEN',
   headline: 'Gemeinsam essen, schlafen, ankommen.',
   intro:
-    'Das Maiensäss ist für gemeinsame Tage gemacht: ein langer Holztisch, warme Räume, Schlafplätze für Familien und Freunde und genug Rückzug, wenn das Wetter einmal wechselt.',
+    'Das Maiensäss ist für gemeinsame Tage gemacht: ein rustikaler Holztisch, warme Räume, Schlafplätze für Familien und Freunde und genug Rückzug, wenn das Wetter einmal wechselt.',
   hero: {
     src: '/images/abendessen-raclette.png',
-    alt: 'Freundesgruppe beim Raclette am langen Holztisch im Maiensäss bei Kerzenlicht und Cheminée-Feuer',
-    caption: 'Der lange Holztisch ist das Herz des Hauses.',
+    alt: 'Freundesgruppe beim Raclette am rustikalen Holztisch im Maiensäss bei Kerzenlicht und Cheminée-Feuer',
+    caption: 'Der rustikale Holztisch ist das Herz des Hauses.',
   },
   rooms: [
     {
