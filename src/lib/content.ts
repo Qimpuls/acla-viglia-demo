@@ -16,11 +16,11 @@ export const brand = {
 
 export const hero = {
   eyebrow: 'MAIENSÄSS IN RADONS · 1885 M',
-  headline: 'Eine Woche für Familie, Freunde und ruhige Tage.',
+  headline: 'Eine Woche, die länger nachwirkt.',
   claim: 'Ein Maiensäss. Geführt wie ein gutes Hotel.',
   subline:
-    'Im Sommer fahren Sie bis vor das Haus. Danach beginnt Radons: Parc Ela, Wanderwege, klare Nächte und ein Maiensäss für 2 bis 8 Personen.',
-  primaryCta: { label: 'Freie Sommerwochen prüfen', href: '#verfuegbarkeit' },
+    'Berge, Ruhe und ein Haus, das für gemeinsame Zeit gebaut wurde.',
+  primaryCta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
   trust: 'Persönlich geführt von Angela und Gallus · Samstag bis Samstag',
   imageSummer: '/images/hero-sommer.png',
   imageWinter: '/images/hero-winter.png',
@@ -70,7 +70,7 @@ export const sommerwoche = {
       text: 'Feuer, Wein und Sterne über Radons.',
     },
   ],
-  cta: { label: 'Sommerwoche anfragen', href: '#kontakt' },
+  cta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
 }
 
 export const sommerumgebung = {
@@ -199,7 +199,7 @@ export const wohnen = {
 export const familienleben = {
   eyebrow: 'FAMILIENLEBEN IM HAUS',
   headline: 'Auch Regentage haben hier ihren Platz.',
-  text: 'Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Genau dafür ist das Haus gemacht.',
+  text: 'Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Dafür nutzen viele unserer Gäste das Haus.',
   // Rückzug/Atmosphäre. detail-4-sommer (Lese-Ecke am Fenster) zuerst und prominent.
   // Kein Dreierzimmer mehr (steht jetzt in [[wohnen]]), keine Bilddoppelung.
   images: [
@@ -214,12 +214,12 @@ export const familienleben = {
     {
       src: '/images/familie-kueche.png',
       alt: 'Familie beim Frühstück am grossen Holztisch der Wohnküche mit offenem Cheminée',
-      caption: 'Gemeinsame Morgen, bevor es nach draussen geht.',
+      caption: 'Morgens Kaffee, Brot und Zeit am grossen Tisch.',
     },
     {
       src: '/images/familie-wohnzimmer-sommer.png',
       alt: 'Familie im Wohnzimmer des Maiensäss mit offenem Cheminée und Specksteinofen',
-      caption: 'Platz für lange, gemeinsame Abende.',
+      caption: 'Der lange Holztisch bleibt oft bis spät besetzt.',
     },
   ],
 }
@@ -357,7 +357,7 @@ export const verfuegbarkeit = {
   eyebrow: 'VERFÜGBARKEIT',
   headline: 'Freie Sommerwochen prüfen.',
   text: 'Aktuell gibt es noch freie Sommerwochen 2026, besonders im August sowie in einzelnen Wochen im Juni, Juli und September. Klicken Sie im Kalender auf eine freie Woche oder senden Sie direkt eine Anfrage.',
-  cta: { label: 'Sommerwoche anfragen', href: '#kontakt' },
+  cta: { label: 'Verfügbarkeit prüfen', href: '#kontakt' },
 }
 
 export const anreise = {

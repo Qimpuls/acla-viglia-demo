@@ -51,10 +51,10 @@ export function StickyCta() {
       }`}
     >
       <a
-        href="#kontakt"
+        href="#verfuegbarkeit"
         className="flex items-center justify-center h-14 bg-soapstone/95 backdrop-blur-sm text-parchment text-sm font-medium rounded-full shadow-md shadow-soapstone/15 transition-colors hover:bg-soapstone"
       >
-        Sommerwoche anfragen
+        Verfügbarkeit prüfen
       </a>
     </div>
   )
