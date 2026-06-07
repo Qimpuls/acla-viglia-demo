@@ -307,7 +307,7 @@ Umgesetzt (Stand 2026-06-06, live):
 
 Offen:
 
-- Favicon-Set komplett (16/32/180/192/512 + manifest), aktuell nur `favicon.ico`
+- Favicon: Schweizerkreuz als `icon.svg` (skalierbar) + `favicon.ico` (16/32/48, RGBA) + `apple-icon.png` (180). Offen: PWA-Manifest-Icons 192/512 + `manifest.webmanifest`
 - Eigenes gerendertes OG-Image mit Headline (optional, statt Foto-Crop)
 - Google Search Console + Bing Webmaster
 - Listings: Graubünden Ferien, MySwitzerland, Parc Ela
