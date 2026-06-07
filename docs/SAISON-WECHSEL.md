@@ -37,6 +37,7 @@ Alle Winter-Bilder liegen bereits in `public/images/`, nichts zu beschaffen.
 | Hero | `hero-sommer.png` | `hero-winter.png` |
 | OG-/Twitter-Bild (layout.tsx) | `og-image.jpg` (aus hero-sommer) | für Winter ideal aus `hero-winter.png` neu schneiden, sonst `hero-winter.png` direkt |
 | Sommerwoche/Winterwoche Banner | `sommer-wanderfamilie.png` | `winter-familie.png` (Familie mit Schlitten vor dem Haus, Dämmerung) |
+| Umgebung Leitbild (breit) | (Sommer ohne Leitbild) | `dorf-radons-winter.png` (neu, idyllisches Dorf im Schnee) |
 | Umgebung Bild 1 | `umgebung-sommer-2.png` | `region-tiefschnee.webp` |
 | Umgebung Bild 2 | `region-bach.jpeg` | `region-skigebiet.jpg` |
 | Regentage Leitbild | `detail-4-sommer.png` | `detail-4-winter.jpg` |
@@ -67,7 +68,7 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 
 **Winter (bereit, schärfer nach Challenge):**
 - eyebrow: `MAIENSÄSS IN RADONS · 1885 M` (bleibt)
-- headline: `Ski an der Tür. Feuer im Haus. Ruhe im Tal.` · Alternative (ruhiger, parallel zum Sommer): `Eine Winterwoche ganz oben in Radons.`
+- headline: `Ski an der Tür. Feuer im Haus. Ruhe im Tal.` (von Marco gewählt; verworfene Alternative: „Eine Winterwoche ganz oben in Radons.")
 - claim: `Ein Maiensäss. Geführt wie ein gutes Hotel.` (bleibt)
 - subline: `Direkt an der Piste, ohne Autoverkehr, mit Feuer im Haus und Zeit für Familie und Freunde.`
 - trust: `Persönlich geführt von Angela und Gallus · Samstag bis Samstag` (bleibt)
@@ -119,8 +120,10 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 - eyebrow: `WINTERUMGEBUNG`
 - headline: `Piste, Schnee und stille Wege vor der Tür.`
 - intro: `Vom Haus aus sind Sie sofort im Schnee: auf der Piste, auf der Schlittenbahn, auf Schneeschuhen oder auf der Bank in der Wintersonne.`
+- Leitbild (breit, volle Sektionsbreite): `dorf-radons-winter.png` (alt: `Das verschneite Maiensäss-Dorf Radons in der Wintersonne mit Bergkette`) · `Das verschneite Dörfchen Radons in der Wintersonne.`
 - Bild 1: `region-tiefschnee.webp` (alt: `Tiefverschneiter Hang über Radons mit Skitouren- und Schlittenspuren`) · `Tiefschnee und stille Wege über Radons.`
 - Bild 2: `region-skigebiet.jpg` (alt: `Verschneite Maiensässe vor der Bergkette von Savognin im Winter`) · `Die Bergkulisse von Savognin im Winter.`
+- Layout: `dorf-radons-winter.png` ist breit (2:1). Für „perfekt" als volle Sektionsbreite oben, darunter die zwei Bilder im 2er-Grid. Kleine Ergänzung in `Sommerumgebung.tsx` nötig (ein `figure` in voller Breite über dem Grid). Ohne Tweak sitzt es im Grid und wird beschnitten.
 
 ### Haus-Sektion / Regentage Headline (`familienleben`)
 - Headline Sommer: `Auch Regentage haben hier ihren Platz.`
@@ -165,19 +168,25 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 
 ---
 
-## Winter-Infos noch zu klären (für Anreise und FAQ)
-
-Aus dem Challenge: konkrete Winter-Logistik fehlt. Diese Punkte gehören in die
-Anreise-Sektion oder eine kurze Winter-FAQ. Wo die Antwort bekannt ist, steht sie.
-Der Rest ist von Angela und Gallus zu bestätigen, bevor Winter live geht (nicht raten).
+## Winter-Infos (für Anreise und FAQ)
 
 - Lage zur Piste: direkt am Haus (Ski-In, Ski-Out). [bekannt]
 - Holz vor Ort: ja, Holz für Cheminée und Kochherd ist inklusive. [bekannt]
-- Eignung für Nicht-Skifahrer: Schlitteln, Schneeschuhe, Winterwandern, Tag am Feuer. [Text vorhanden, ggf. konkretisieren]
-- Winterbus ab Savognin: Fahrplan und Frequenz (täglich?). [zu bestätigen]
-- Fussweg ab Bergstation oder Parkplatz: Dauer und Strecke bis zum Haus. [zu bestätigen]
-- Gepäcktransport: wie kommt Gepäck hoch (Schlitten, Transportdienst)? [zu bestätigen]
-- Schlitten vor Ort vorhanden oder zu mieten? [zu bestätigen]
+- Eignung für Nicht-Skifahrer: Schlitteln, Schneeschuhe, Winterwandern, Tag am Feuer. [bekannt]
+- Fussweg ab Bergstation, Gepäcktransport, Schlittenmiete: bewusst NICHT auf der Seite. Gäste besprechen das direkt mit Angela und Gallus (Entscheid Marco 2026-06-07).
+
+### Winterbus Savognin–Radons (Stand letzte Saison 2025/26, vor Live je Saison aktualisieren)
+
+Betriebszeiten letzte Saison: 20. Dezember 2025 bis 6. April 2026.
+Haltestellen: ab Bushaltestelle Hotel Aves (Savognin) bis Ferienhaus Pianta, Radons. Fahrzeit je 30 Minuten.
+
+- ab Savognin (Hotel Aves): 9.00, 10.15, 11.30, 13.20, 14.35, 15.50 Uhr
+- ab Radons (Ferienhaus Pianta): 9.35, 10.50, 12.45, 14.00, 15.15, 16.30 Uhr
+
+Der Bus transportiert Schlittenfahrer, jedoch keine Ski- und Snowboardfahrer. Ausnahme: Tourengänger mit dem Bus um 9.00 Uhr.
+Reservation: Sitzplatz bis spätestens 1 Stunde vor Abfahrt unter Tel. +41 79 352 22 65. Für Gruppen ab 8 Personen Reservation bis am Vortag um 18.00 Uhr.
+
+Darstellung: kompakt in der Winter-Anreise-Sektion oder als ausklappbare Info. Die genauen Daten und Zeiten der kommenden Saison vor dem Wintersetup prüfen (Fahrplan ändert je Saison).
 
 ---
 
