@@ -70,12 +70,20 @@ Aktiv in der Mobile-Sommerversion:
 | `sommer-wanderfamilie.png` | Sommerwoche-Banner (KI, Wanderfamilie am Maiensäss) |
 | `umgebung-sommer-2.png` | Sommerumgebung Bild 1 (KI, Familie am Bergsee) |
 | `region-bach.jpeg` | Sommerumgebung Bild 2 (Bergbach) |
-| `familie-wohnzimmer-sommer.png` | Familienleben Bild 1 (KI) |
+| `abendessen-raclette.png` | Wohnen-Leitbild (KI, Raclette am langen Tisch) |
+| `maiensaess-3.jpg` | Wohnen Raumkarte 1 (Doppelzimmer) |
+| `familie-kinderzimmer.png` | Wohnen Raumkarte 2 (Kinder im Dreierzimmer, KI) |
+| `maiensaess-5.jpg` | Wohnen Raumkarte 3 (Dachgalerie) |
+| `maiensaess-2.jpg` | Wohnen Raumkarte 4 (Küche) |
+| `maiensaess-6.jpg` | Wohnen Bad-Detail |
+| `detail-4-sommer.png` | Familienleben Bild 1 (Wohnstube am Fenster, grüne Bergwiese). Winter-Pendant: `detail-4-winter.jpg` |
 | `familie-kueche.png` | Familienleben Bild 2 (Familie am Tisch) |
-| `familie-kinderzimmer.png` | Familienleben Bild 3 (3er-Zimmer mit Kindern, KI) |
+| `familie-wohnzimmer-sommer.png` | Familienleben Bild 3 (KI, Wohnzimmer) |
 | `gastgeber-foto.png` | Gastgeber-Sektion. **KI-Platzhalter**, TODO im Code: durch echtes Foto ersetzen |
 
-Im Code vorhanden, in der Mobile-Sommerversion aktuell NICHT gerendert (Archiv für die Desktop-Runde): `maiensaess-1.jpg`…`maiensaess-6.jpg` und `detail-1.jpg`…`detail-4.jpg` (Haus-Galerie/Detailband), `usp-*`, die übrigen `region-*` (Region-Sektion), `anreise-sommer/-winter`, `gastgeber-portrait.png` (alte Aquarell-Illustration).
+Saison-Bildpaare (Sommer aktiv / Winter im Archiv, Wechsel siehe [docs/SAISON-WECHSEL.md](docs/SAISON-WECHSEL.md)): `hero-sommer.png`/`hero-winter.png`, `detail-4-sommer.png`/`detail-4-winter.jpg`, `anreise-sommer.jpeg`/`anreise-winter.jpg`.
+
+Im Code vorhanden, aber aktuell NICHT gerendert (bewusst, kein Wiedereinbau geplant; Innenräume sind über Wohnen + Familienleben abgedeckt): `maiensaess-1.jpg` (Wohnstube) und `maiensaess-4.jpg` (leeres Dreierzimmer) sowie das alte `detail-4.jpg` (durch `detail-4-sommer` ersetzt, ungenutzt), `detail-1.jpg`…`detail-3.jpg` (Detailband), `usp-*`, die übrigen `region-*` (Region-Sektion), `gastgeber-portrait.png` (alte Aquarell-Illustration).
 
 ## Architektur
 
@@ -133,7 +141,9 @@ Mobile-First-Sommerversion mit Conversion-Fokus auf Sommerbuchungen (Juni bis Se
 - **Sticky-CTA (mobil):** erscheint nur beim Scrollen nach oben, nicht im Hero, blendet im Kontaktbereich aus. Desktop: kein Sticky.
 - **Mobile-Abstände** `py-16`; Desktop (`md:`) bewusst grosszügig für eine spätere dedizierte Desktop-Runde. Region/Empfehlungen ausgeblendet, Haus-Raumgalerie und Detail-Bildband in der Mobile-Version nicht gerendert (Daten in `content.ts` erhalten).
 
-**QA (2026-06-06):** Build + Lint sauber, alle referenzierten Bilder vorhanden (live 200), iPhone 390 px und Desktop 1280 px geprüft (Sektionsreihenfolge, Texte, Formular, Kalender, Sticky-CTA, kein horizontaler Overflow, alt-Texte, eine `h1`). Offen für die Desktop-Runde: echtes Gastgeberfoto statt KI-Platzhalter, Desktop-Feinschliff, Wiedereinbindung Haus-Galerie/Region/Empfehlungen nach Bedarf.
+**QA (2026-06-06):** Build + Lint sauber, alle referenzierten Bilder vorhanden (live 200), iPhone 390 px und Desktop 1280 px geprüft (Sektionsreihenfolge, Texte, Formular, Kalender, Sticky-CTA, kein horizontaler Overflow, alt-Texte, eine `h1`).
+
+**Desktop-Audit (2026-06-07, 1440 px):** Desktop rendert über die `md:`/`lg:`-Breakpoints durchgehend sauber und premium; keine kaputten Layouts. Entscheid Auftraggeber: **keine Wiedereinbindung** von Haus-Galerie/Region/Empfehlungen (Innenräume sind über Wohnen + Familienleben abgedeckt, eine zweite Galerie würde duplizieren). Nächster inhaltlicher Hebel ist die Winter-Edition im Oktober (siehe [docs/SAISON-WECHSEL.md](docs/SAISON-WECHSEL.md)). Weiterhin offen: echtes Gastgeberfoto statt KI-Platzhalter.
 
 ## Design-System
 
@@ -143,7 +153,7 @@ Mobile-First-Sommerversion mit Conversion-Fokus auf Sommerbuchungen (Juni bis Se
 | `linen` | `#F2E8D5` | Sektion-Hintergrund warm |
 | `ink` | `#2A1F14` | Fliesstext |
 | `soapstone` | `#3B2A1A` | Headlines, Markenfarbe |
-| `larch` | `#8B6F47` | Sekundäre Headlines, Links |
+| `larch` | `#7A6039` | Sekundäre Headlines, Links (auf AA-Kontrast 4.5:1 abgedunkelt) |
 | `brass` | `#BFA77A` | Akzentlinien, Trenner |
 | `brass-light` | `#D9C9A6` | Heller Akzent |
 | `charcoal` | `#1F1B17` | Footer, dunkle Sektionen |
