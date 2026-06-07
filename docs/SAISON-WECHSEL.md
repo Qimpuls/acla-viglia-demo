@@ -36,7 +36,7 @@ Alle Winter-Bilder liegen bereits in `public/images/`, nichts zu beschaffen.
 |---------|-----------------|------------------|
 | Hero | `hero-sommer.png` | `hero-winter.png` |
 | OG-/Twitter-Bild (layout.tsx) | `og-image.jpg` (aus hero-sommer) | für Winter ideal aus `hero-winter.png` neu schneiden, sonst `hero-winter.png` direkt |
-| Sommerwoche/Winterwoche Banner | `sommer-wanderfamilie.png` | `anreise-winter.jpg` (Haus im Schnee, Dämmerung) |
+| Sommerwoche/Winterwoche Banner | `sommer-wanderfamilie.png` | `winter-familie.png` (Familie mit Schlitten vor dem Haus, Dämmerung) |
 | Umgebung Bild 1 | `umgebung-sommer-2.png` | `region-tiefschnee.webp` |
 | Umgebung Bild 2 | `region-bach.jpeg` | `region-skigebiet.jpg` |
 | Regentage Leitbild | `detail-4-sommer.png` | `detail-4-winter.jpg` |
@@ -94,7 +94,7 @@ Schnee draussen (praktisch identisch). Für Winter `detail-4-winter.jpg` verwend
 **Winter (bereit):**
 - eyebrow: `WINTERWOCHE IN RADONS`
 - headline: `So fühlt sich eine Woche hier oben an.` (bleibt)
-- banner: `anreise-winter.jpg` (alt: `Maiensäss Acla Viglia in Radons im Schnee bei Dämmerung mit warmem Licht`)
+- banner: `winter-familie.png` (alt: `Familie mit Schlitten vor dem verschneiten Maiensäss Acla Viglia in Radons bei Dämmerung`). Alternative für Stimmung/Anreise: `anreise-winter.jpg` (Haus im Schnee bei Dämmerung, ohne Personen).
 - Morgens: `Frische Spur im Schnee, bevor die Piste voll ist.`
 - Tagsüber: `Skifahren, Schlitteln, Schneeschuhe oder ein Tag am Feuer.`
 - Abends: `Fondue, Wein und Stille über dem verschneiten Tal.`
