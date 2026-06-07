@@ -140,8 +140,8 @@ export const maiensaess = {
   ],
   details: [
     {
-      src: '/images/detail-4.jpg',
-      alt: 'Sessel mit Sicht aus dem Fenster',
+      src: '/images/detail-4-sommer.png',
+      alt: 'Schaukelstuhl mit Blick auf die grüne Bergwiese',
     },
     {
       src: '/images/detail-3.jpg',
@@ -172,11 +172,10 @@ export const wohnen = {
       caption: 'Das grosse Doppelzimmer mit Blick auf die Berge.',
     },
     {
-      // Sauberes Raumfoto des Dreierzimmers ohne Personen. Bewusst nicht
-      // familie-kinderzimmer.png (Personen), das steht in [[Familienleben]] direkt
-      // darunter; so kein Bild-Duplikat in benachbarten Sektionen.
-      src: '/images/maiensaess-4.jpg',
-      alt: 'Dreierzimmer mit Einzelbett und Kajütenbett aus Holz',
+      // Kinder im Dreierzimmer: emotional statt leeres Raumfoto. Steht NUR hier,
+      // nicht mehr in [[Familienleben]] (kein Dreierzimmer-Duplikat).
+      src: '/images/familie-kinderzimmer.png',
+      alt: 'Kinder im Dreierzimmer mit Kajütenbett aus Holz',
       caption: 'Drei Betten für Kinder, Jugendliche oder Freunde.',
     },
     {
@@ -201,11 +200,16 @@ export const familienleben = {
   eyebrow: 'FAMILIENLEBEN IM HAUS',
   headline: 'Auch Regentage haben hier ihren Platz.',
   text: 'Manchmal bleibt man einfach drinnen. Die Kinder spielen, das Feuer brennt, jemand kocht, jemand liest. Genau dafür ist das Haus gemacht.',
+  // Rückzug/Atmosphäre. detail-4-sommer (Lese-Ecke am Fenster) zuerst und prominent.
+  // Kein Dreierzimmer mehr (steht jetzt in [[wohnen]]), keine Bilddoppelung.
   images: [
     {
-      src: '/images/familie-wohnzimmer-sommer.png',
-      alt: 'Familie im Wohnzimmer des Maiensäss mit offenem Cheminée und Specksteinofen',
-      caption: 'Ruhe, Feuer und Platz für gemeinsame Abende.',
+      // Sommer-Variante: gleiche Wohnstube, Blick auf die grüne Bergwiese.
+      // Winter-Pendant liegt als detail-4-winter.jpg im Archiv (public/images),
+      // für den Wintersaison-Wechsel.
+      src: '/images/detail-4-sommer.png',
+      alt: 'Schaukelstuhl am grossen Fenster der Wohnstube mit Blick auf die grüne Bergwiese',
+      caption: 'Ein Buch. Ein Feuer. Ein Blick nach draussen.',
     },
     {
       src: '/images/familie-kueche.png',
@@ -213,9 +217,9 @@ export const familienleben = {
       caption: 'Gemeinsame Morgen, bevor es nach draussen geht.',
     },
     {
-      src: '/images/familie-kinderzimmer.png',
-      alt: 'Kinder im Dreierzimmer mit Kajütenbett aus Holz',
-      caption: 'Drei Betten, viel Holz und ein eigenes kleines Reich.',
+      src: '/images/familie-wohnzimmer-sommer.png',
+      alt: 'Familie im Wohnzimmer des Maiensäss mit offenem Cheminée und Specksteinofen',
+      caption: 'Platz für lange, gemeinsame Abende.',
     },
   ],
 }

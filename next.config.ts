@@ -1,6 +1,11 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  images: {
+    // AVIF zuerst (kleiner), WebP als Fallback. Verkleinert die ausgelieferten
+    // Hero-/Galeriebilder zusätzlich gegenüber den grossen PNG-Quellen.
+    formats: ['image/avif', 'image/webp'],
+  },
   async redirects() {
     return [
       {

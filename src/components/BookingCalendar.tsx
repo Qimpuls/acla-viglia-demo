@@ -71,7 +71,6 @@ function MonthGrid({
           ? {
               role: 'button' as const,
               tabIndex: 0,
-              'aria-label': `Woche vom ${from} bis ${to} anfragen`,
               onClick: () => handleWeekClick(from, to),
               onKeyDown: (e: React.KeyboardEvent) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -84,6 +83,11 @@ function MonthGrid({
 
         return (
           <div key={rowIdx} className={rowClass} {...rowProps}>
+            {clickable && (
+              <span className="sr-only">
+                Freie Woche vom {from} bis {to} anfragen
+              </span>
+            )}
             {row.map((day, colIdx) => {
               if (day.getMonth() !== month) {
                 return <div key={colIdx} className="aspect-square bg-cream/60" />

@@ -64,7 +64,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-charcoal-soft">
-          <p className="text-xs text-parchment/40 leading-relaxed">
+          <p className="text-xs text-parchment/60 leading-relaxed">
             {footer.legal}
           </p>
         </div>
