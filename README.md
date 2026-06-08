@@ -271,6 +271,17 @@ Stichtag für den Domain-Transfer mit Thomas abstimmen, damit Webseite und Mail 
 - Bei Variante 1: DNS-Einträge gesetzt (oder Hoststar-Login zur Selbst-Umstellung)
 - Bei Variante 2: AuthInfo-Code, Domain-Entsperrung, Mail-Postfächer-Inventar (Adressen, Aliase, Weiterleitungen)
 
+## Galerie und Partner-Inserate (sentiero.ch)
+
+Die Foto-Galerie liegt unter `/galerie` ([src/app/galerie/page.tsx](src/app/galerie/page.tsx)), Inhalte in `galerie` in [src/lib/content.ts](src/lib/content.ts). Sie zeigt bewusst Sommer- und Winterbilder und bleibt damit ganzjährig aktuell, ohne Saison-Logik. Verlinkt im Top-Menü (Desktop + Mobile) und im Footer.
+
+Die Galerie ist zugleich das **Klick-Ziel externer Inserate**. Das Inserat **BH575 Acla Viglia Radons** auf [sentiero.ch](https://www.sentiero.ch/de65_berghuette-miete-graubuenden.htm) verlinkt mit allen Fotos und „Mehr Fotos" auf die Pfade der früheren Webseite. Diese werden in [next.config.ts](next.config.ts) per 308 umgeleitet:
+
+- `/impressionen1/*` → `/galerie`
+- `/preise-belegung` → `/#preise`
+
+**Wichtig:** `/galerie` und diese Redirects nicht entfernen und den `/galerie`-Pfad bei künftigen Umbauten stabil halten, sonst laufen die Bestandslinks von sentiero.ch wieder ins Leere (404). Das Wohnküchen-Bild der Galerie (`wohnkueche-cheminee.jpg`) ist eine KI-bereinigte (hundefreie) Version, das Originalfoto bleibt unter `maiensaess-1.jpg` erhalten.
+
 ## Deployment
 
 Pushed `main` deployt automatisch auf Vercel. Lokal ein neuer Stand:
