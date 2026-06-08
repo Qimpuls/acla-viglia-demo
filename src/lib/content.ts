@@ -1,6 +1,7 @@
 export const navigation = [
   { label: 'Sommer', href: '#sommer' },
   { label: 'Haus', href: '#haus' },
+  { label: 'Galerie', href: '/galerie' },
   { label: 'Gastgeber', href: '#gastgeber' },
   { label: 'Preise', href: '#preise' },
   { label: 'Anfrage', href: '#kontakt' },
@@ -449,12 +450,12 @@ export const galerie = {
         {
           src: '/images/abendessen-raclette.png',
           alt: 'Freundesgruppe beim Raclette am rustikalen Holztisch bei Cheminée-Feuer',
-          caption: 'Der grosse Holztisch, das Herz des Hauses.',
+          caption: 'Der rustikale Holztisch, das Herz des Hauses.',
         },
         {
-          src: '/images/maiensaess-1.jpg',
-          alt: 'Wohnstube mit Specksteinofen und rustikalem Esstisch',
-          caption: 'Wohnstube mit Specksteinofen.',
+          src: '/images/wohnkueche-cheminee.jpg',
+          alt: 'Wohnküche mit offenem Cheminée und rustikalem Esstisch',
+          caption: 'Wohnküche mit offenem Cheminée.',
         },
         {
           src: '/images/familie-wohnzimmer-sommer.png',
@@ -463,8 +464,8 @@ export const galerie = {
         },
         {
           src: '/images/maiensaess-2.jpg',
-          alt: 'Gut ausgestattete Wohnküche mit Holz- und Elektroherd',
-          caption: 'Die Wohnküche für eine ganze Woche.',
+          alt: 'Moderne, gut ausgestattete Küche mit Geschirrspüler und Herd',
+          caption: 'Moderne Küche für die ganze Woche.',
         },
         {
           src: '/images/familie-kueche.png',
