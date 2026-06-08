@@ -307,7 +307,7 @@ Umgesetzt (Stand 2026-06-06, live):
 
 Offen:
 
-- Favicon: Schweizerkreuz als `icon.svg` (skalierbar) + `favicon.ico` (16/32/48, RGBA) + `apple-icon.png` (180). Offen: PWA-Manifest-Icons 192/512 + `manifest.webmanifest`
+- Favicon: Serif-Monogramm „A" (Cormorant Garamond 600, als Vektor-Outline) in Messing #D9C9A6 auf Anthrazit #1F1B17 mit Messing-Rahmen, als `icon.svg` (skalierbar) + `favicon.ico` (16/32/48, RGBA) + `apple-icon.png` (180). Offen: PWA-Manifest-Icons 192/512 + `manifest.webmanifest`
 - Eigenes gerendertes OG-Image mit Headline (optional, statt Foto-Crop)
 - Google Search Console + Bing Webmaster
 - Listings: Graubünden Ferien, MySwitzerland, Parc Ela
