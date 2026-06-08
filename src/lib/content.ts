@@ -414,6 +414,173 @@ export const kontakt = {
   note: 'Anfragen werden persönlich von Angela oder Gallus beantwortet.',
 }
 
+// Bildergalerie unter /galerie. Klick-Ziel der Inserate auf Partner-Plattformen
+// (z.B. sentiero.ch) und eigenständige Galerie-Seite. Zeigt bewusst Sommer- und
+// Winterbilder, bleibt damit ganzjährig aktuell, ohne Saison-Logik.
+export const galerie = {
+  eyebrow: 'BILDERGALERIE',
+  headline: 'Acla Viglia Radons in Bildern.',
+  intro:
+    'Das Maiensäss im Sommer und im Winter, die Räume drinnen und die Berge ringsum. Eine Auswahl unserer Bilder aus Radons auf 1885 m im Parc Ela.',
+  groups: [
+    {
+      title: 'Das Maiensäss',
+      images: [
+        {
+          src: '/images/hero-sommer.png',
+          alt: 'Das Maiensäss Acla Viglia in Radons im Sommer vor dem Bergpanorama',
+          caption: 'Das Haus im Sommer.',
+        },
+        {
+          src: '/images/hero-winter.png',
+          alt: 'Das verschneite Maiensäss Acla Viglia im Tiefwinter mit Bergkette',
+          caption: 'Das Haus im Winter.',
+        },
+        {
+          src: '/images/usp-lage.jpeg',
+          alt: 'Das Maiensäss-Dorf Radons auf 1885 Metern mit Bergpanorama',
+          caption: 'Radons auf 1885 m, mitten im Skigebiet von Savognin.',
+        },
+      ],
+    },
+    {
+      title: 'Wohnen und Geniessen',
+      images: [
+        {
+          src: '/images/abendessen-raclette.png',
+          alt: 'Freundesgruppe beim Raclette am rustikalen Holztisch bei Cheminée-Feuer',
+          caption: 'Der grosse Holztisch, das Herz des Hauses.',
+        },
+        {
+          src: '/images/maiensaess-1.jpg',
+          alt: 'Wohnstube mit Specksteinofen und rustikalem Esstisch',
+          caption: 'Wohnstube mit Specksteinofen.',
+        },
+        {
+          src: '/images/familie-wohnzimmer-sommer.png',
+          alt: 'Familie im Wohnzimmer, Kinder spielen auf dem Boden vor dem Specksteinofen',
+          caption: 'Drinnen spielen, lesen, Feuer machen.',
+        },
+        {
+          src: '/images/maiensaess-2.jpg',
+          alt: 'Gut ausgestattete Wohnküche mit Holz- und Elektroherd',
+          caption: 'Die Wohnküche für eine ganze Woche.',
+        },
+        {
+          src: '/images/familie-kueche.png',
+          alt: 'Familie beim Frühstück am grossen Holztisch der Wohnküche mit offenem Cheminée',
+          caption: 'Morgens Kaffee, Brot und Zeit am grossen Tisch.',
+        },
+        {
+          src: '/images/detail-4-sommer.png',
+          alt: 'Schaukelstuhl am grossen Fenster der Wohnstube mit Blick auf die grüne Bergwiese',
+          caption: 'Die Leseecke am Fenster.',
+        },
+        {
+          src: '/images/detail-1.jpg',
+          alt: 'Gewürzregal mit Becherreihe an der Holzdecke der Küche',
+          caption: 'Liebe zum Detail.',
+        },
+      ],
+    },
+    {
+      title: 'Schlafen',
+      images: [
+        {
+          src: '/images/maiensaess-3.jpg',
+          alt: 'Doppelzimmer mit Edelweiss-Bettwäsche und Fenster mit Bergblick',
+          caption: 'Das grosse Doppelzimmer mit Bergblick.',
+        },
+        {
+          src: '/images/familie-kinderzimmer.png',
+          alt: 'Kinder im Dreierzimmer mit Kajütenbett aus Holz',
+          caption: 'Das Dreierzimmer für Kinder, Jugendliche oder Freunde.',
+        },
+        {
+          src: '/images/maiensaess-5.jpg',
+          alt: 'Dachgalerie mit zusätzlichen Schlafplätzen unter Holzbalken',
+          caption: 'Zusätzliche Schlafplätze auf der Dachgalerie.',
+        },
+        {
+          src: '/images/maiensaess-6.jpg',
+          alt: 'Badezimmer mit Dusche im Maiensäss',
+          caption: 'Bad mit Dusche und separaten WCs.',
+        },
+      ],
+    },
+    {
+      title: 'Sommer in Radons',
+      images: [
+        {
+          src: '/images/sommer-wanderfamilie.png',
+          alt: 'Wanderfamilie auf dem Weg zum Maiensäss Acla Viglia in Radons im Sommer',
+          caption: 'Wandern ab der Haustür.',
+        },
+        {
+          src: '/images/umgebung-sommer-2.png',
+          alt: 'Familie auf einem Sommerweg an einem Bergsee bei Radons mit Bergpanorama',
+          caption: 'Bergseen und Sommerwege für ruhige Tage.',
+        },
+        {
+          src: '/images/region-parcela.jpeg',
+          alt: 'Lai Barnagn, Bergsee mit Bergpanorama im Parc Ela',
+          caption: 'Lai Barnagn, einer der Bergseen im Parc Ela.',
+        },
+        {
+          src: '/images/region-bach.jpeg',
+          alt: 'Kristallklarer Bergbach über Steinen mit Berggipfel im Parc Ela',
+          caption: 'Kristallklare Bergbäche und frische Höhenluft.',
+        },
+        {
+          src: '/images/region-pferde.webp',
+          alt: 'Freilaufende Pferde mit Fohlen auf der Sommerweide von Radons vor Bergpanorama',
+          caption: 'Sömmerung auf den Weiden von Radons.',
+        },
+        {
+          src: '/images/region-blumen.jpeg',
+          alt: 'Alpine Wildblumen vor Tal und Bergen im Parc Ela',
+          caption: 'Alpine Blumenwiesen im Sommer.',
+        },
+        {
+          src: '/images/region-wegweiser.webp',
+          alt: 'Gelber Wanderwegweiser in Radons auf 1885 Metern mit Zielen Alp Schmorras, Piz Martegnas und Savognin',
+          caption: 'Wanderknotenpunkt Radons, 1885 m.',
+        },
+      ],
+    },
+    {
+      title: 'Winter in Radons',
+      images: [
+        {
+          src: '/images/dorf-radons-winter.png',
+          alt: 'Das verschneite Maiensäss-Dorf Radons im Winter',
+          caption: 'Radons im Winter.',
+        },
+        {
+          src: '/images/region-skigebiet.jpg',
+          alt: 'Blick über das verschneite Tal im Skigebiet Savognin',
+          caption: 'Skigebiet Savognin, direkt vor dem Haus.',
+        },
+        {
+          src: '/images/region-tiefschnee.webp',
+          alt: 'Unverspurter Tiefschnee mit Skitourenspuren oberhalb der Maiensäss-Häuser von Radons',
+          caption: 'Unverspurter Tiefschnee oberhalb der Hütten.',
+        },
+        {
+          src: '/images/winter-familie.png',
+          alt: 'Familie im Schnee vor dem verschneiten Maiensäss in Radons',
+          caption: 'Wintertage in Radons.',
+        },
+        {
+          src: '/images/anreise-winter.jpg',
+          alt: 'Winterliche Anreise durch den Schnee nach Radons',
+          caption: 'Anreise im Winter mit Ski, Schlitten oder Winterbus.',
+        },
+      ],
+    },
+  ],
+}
+
 export const footer = {
   brand: {
     title: 'ACLA VIGLIA RADONS',
@@ -428,13 +595,16 @@ export const footer = {
       '+41 79 520 87 96',
     ],
   },
+  // Absolute Anker (/#...), damit die Links auch von Unterseiten wie /galerie
+  // zurück auf die Startseite und zur richtigen Sektion führen.
   navigation: [
-    { label: 'Sommer', href: '#sommer' },
-    { label: 'Haus', href: '#haus' },
-    { label: 'Gastgeber', href: '#gastgeber' },
-    { label: 'Preise', href: '#preise' },
-    { label: 'Anreise', href: '#anreise' },
-    { label: 'Kontakt', href: '#kontakt' },
+    { label: 'Sommer', href: '/#sommer' },
+    { label: 'Haus', href: '/#haus' },
+    { label: 'Gastgeber', href: '/#gastgeber' },
+    { label: 'Preise', href: '/#preise' },
+    { label: 'Anreise', href: '/#anreise' },
+    { label: 'Kontakt', href: '/#kontakt' },
+    { label: 'Galerie', href: '/galerie' },
   ],
   legal:
     '© 2026 Angela und Gallus Liesch-Lombris · Persönlich geführt seit 2020 · Ehemals Hotel Restaurant Rätia, Filisur',
