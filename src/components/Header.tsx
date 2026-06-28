@@ -121,7 +121,7 @@ export function Header() {
             </a>
           ))}
           <a
-            href="tel:+41795208796"
+            href="tel:+41793495889"
             onClick={handleNavClick}
             className="mt-8 bg-soapstone text-parchment px-6 py-4 rounded-full text-center font-medium hover:bg-larch transition-colors"
           >

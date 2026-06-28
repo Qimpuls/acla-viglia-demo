@@ -406,8 +406,8 @@ export const kontakt = {
   brand: 'ACLA VIGLIA RADONS',
   postal: 'Radons 104, 7464 Surses',
   region: 'Graubünden, Schweiz',
-  phone: '+41 79 520 87 96',
-  tel: '+41795208796',
+  phone: '+41 79 349 58 89',
+  tel: '+41793495889',
   email: 'ferien@aclavigliaradons.ch',
   mailto:
     'mailto:ferien@aclavigliaradons.ch?subject=Anfrage%20ACLA%20VIGLIA%20RADONS',
@@ -593,7 +593,7 @@ export const footer = {
       'Angela und Gallus Liesch-Lombris',
       'Radons 104, 7464 Surses',
       'ferien@aclavigliaradons.ch',
-      '+41 79 520 87 96',
+      '+41 79 349 58 89',
     ],
   },
   // Absolute Anker (/#...), damit die Links auch von Unterseiten wie /galerie

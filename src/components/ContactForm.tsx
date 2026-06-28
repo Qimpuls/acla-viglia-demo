@@ -359,10 +359,10 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
               Bitte rufen Sie uns an
             </p>
             <a
-              href="tel:+41795208796"
+              href="tel:+41793495889"
               className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors w-full"
             >
-              +41 79 520 87 96
+              +41 79 349 58 89
             </a>
           </div>
         )}
