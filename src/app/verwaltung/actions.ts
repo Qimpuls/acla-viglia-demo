@@ -69,14 +69,19 @@ export interface SaveResult {
   error?: string
 }
 
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+
 /**
- * Setzt den Status einer Woche (Samstag bis Samstag).
- * status 'frei' entfernt die Buchung, sonst wird sie angelegt/aktualisiert.
- * Eine Woche wird über ihren Anreise-Samstag (from) eindeutig identifiziert.
+ * Setzt einen Buchungszeitraum (Anreise `start` bis Abreise `end`, halboffen:
+ * der Abreisetag `end` bleibt frei). Standardfall ist eine Woche Samstag zu
+ * Samstag; für Ausnahmen sind beliebige Zeiträume (auch einzelne Nächte) erlaubt.
+ * status 'frei' entfernt die am `start` beginnende Buchung (leert eine Woche
+ * 1:1 wie bisher). Sonst wird der Zeitraum angelegt/aktualisiert, sofern er sich
+ * mit keinem bestehenden überschneidet. Angrenzen (gemeinsamer Tag) ist erlaubt.
  */
-export async function setWeek(input: {
-  from: string
-  to: string
+export async function setBooking(input: {
+  start: string
+  end: string
   status: BookingStatus | 'frei'
   note?: string
 }): Promise<SaveResult> {
@@ -84,20 +89,62 @@ export async function setWeek(input: {
     return { ok: false, error: 'Nicht angemeldet.' }
   }
 
-  const list = await readBookingsFresh()
-  const next = list.filter((b) => b.start !== input.from)
-
-  if (input.status !== 'frei') {
-    const note = (input.note || '').trim()
-    next.push({
-      start: input.from,
-      end: input.to,
-      status: input.status,
-      ...(note ? { note } : {}),
-    })
+  if (!ISO_DATE.test(input.start)) {
+    return { ok: false, error: 'Ungültiges Datum.' }
   }
 
-  next.sort((a, b) => a.start.localeCompare(b.start))
+  const list = await readBookingsFresh()
+
+  // 'frei': die am start beginnende Buchung entfernen (leert eine Woche wie bisher).
+  if (input.status === 'frei') {
+    const next = list.filter((b) => b.start !== input.start)
+    await saveBookings(next)
+    return { ok: true, bookings: next }
+  }
+
+  if (!ISO_DATE.test(input.end) || !(input.end > input.start)) {
+    return { ok: false, error: 'Die Abreise muss nach der Anreise liegen.' }
+  }
+
+  // Exakte Selbst-Version herausnehmen: erlaubt Dedup / Notiz-Update ohne Overlap-Konflikt.
+  const rest = list.filter(
+    (b) => !(b.start === input.start && b.end === input.end),
+  )
+
+  // Overlap-Guard (halboffen): Angrenzen (A.end === B.start) ist erlaubt,
+  // echte Überschneidung wird abgelehnt statt still zu überschreiben.
+  const clash = rest.find((b) => input.start < b.end && input.end > b.start)
+  if (clash) {
+    return {
+      ok: false,
+      error: `Überschneidet sich mit ${clash.start} bis ${clash.end}. Bitte zuerst entfernen.`,
+    }
+  }
+
+  const note = (input.note || '').trim()
+  rest.push({
+    start: input.start,
+    end: input.end,
+    status: input.status,
+    ...(note ? { note } : {}),
+  })
+  rest.sort((a, b) => a.start.localeCompare(b.start))
+  await saveBookings(rest)
+  return { ok: true, bookings: rest }
+}
+
+/** Entfernt genau einen Buchungseintrag, eindeutig über (start + end). */
+export async function removeBooking(input: {
+  start: string
+  end: string
+}): Promise<SaveResult> {
+  if (!(await isAuthenticated())) {
+    return { ok: false, error: 'Nicht angemeldet.' }
+  }
+  const list = await readBookingsFresh()
+  const next = list.filter(
+    (b) => !(b.start === input.start && b.end === input.end),
+  )
   await saveBookings(next)
   return { ok: true, bookings: next }
 }

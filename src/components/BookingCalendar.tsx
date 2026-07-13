@@ -6,8 +6,9 @@ import {
   MONTH_NAMES,
   WEEKDAYS,
   type MonthRef,
-  bookingForDay,
+  cellBackground,
   buildMonthWeeks,
+  dayShape,
   isWeekFree,
   shiftMonths,
   weekRange,
@@ -19,6 +20,14 @@ const STATUS_COLOR: Record<BookingStatus, string> = {
   reserved: '#C9B66A',
   closed: '#B1564A',
 }
+
+const colorOf = (b?: Booking) =>
+  STATUS_COLOR[(b?.status ?? 'booked') as BookingStatus]
+
+// Heller Halo um die dunkle Tageszahl auf halb gefärbten (diagonalen) Zellen,
+// damit sie auf der Cream-Hälfte wie auf der farbigen Hälfte lesbar bleibt.
+const NUMBER_HALO =
+  '0 0 2px var(--color-parchment), 0.5px 0.5px 0 var(--color-parchment), -0.5px -0.5px 0 var(--color-parchment), 0.5px -0.5px 0 var(--color-parchment), -0.5px 0.5px 0 var(--color-parchment)'
 
 function handleWeekClick(from: string, to: string) {
   const target = document.getElementById('kontakt')
@@ -92,28 +101,35 @@ function MonthGrid({
               if (day.getMonth() !== month) {
                 return <div key={colIdx} className="aspect-square bg-cream/60" />
               }
-              const booking = bookingForDay(ymdOf(day), bookings)
-              const isBooked = booking !== null
+              const info = dayShape(ymdOf(day), bookings)
+              const bg = cellBackground(info, colorOf)
+              // Zweifarbiger Wechseltag (unterschiedliche Statusfarben) zählt
+              // wie eine halbe Zelle für die Textbehandlung.
+              const twoTone =
+                info.shape === 'changeover' &&
+                colorOf(info.departing) !== colorOf(info.arriving)
+              // Voll gefärbt (voller Tag oder gleich-farbiger Wechseltag) → helle
+              // Zahl wie bisher. Halb gefärbt → dunkle Zahl mit hellem Halo.
+              const solidColored =
+                info.shape === 'full' ||
+                (info.shape === 'changeover' && !twoTone)
+              const halfCell =
+                info.shape === 'arrival' ||
+                info.shape === 'departure' ||
+                twoTone
               return (
                 <div
                   key={colIdx}
                   className="relative aspect-square flex items-center justify-center bg-cream text-[0.7rem] md:text-xs"
                 >
-                  {booking && (
-                    <span
-                      className="absolute inset-0"
-                      style={{
-                        backgroundColor:
-                          STATUS_COLOR[
-                            (booking.status ?? 'booked') as BookingStatus
-                          ],
-                      }}
-                    />
+                  {bg && (
+                    <span className="absolute inset-0" style={{ background: bg }} />
                   )}
                   <span
                     className={`relative z-10 font-medium ${
-                      isBooked ? 'text-parchment' : 'text-soapstone'
+                      solidColored ? 'text-parchment' : 'text-soapstone'
                     }`}
+                    style={halfCell ? { textShadow: NUMBER_HALO } : undefined}
                   >
                     {day.getDate()}
                   </span>
@@ -253,10 +269,21 @@ export function BookingCalendar({ bookings }: { bookings: Booking[] }) {
             />
             belegt
           </span>
+          <span className="flex items-center gap-2">
+            <span
+              className="w-3.5 h-3.5 border border-brass/40"
+              style={{
+                background:
+                  'linear-gradient(to bottom right, var(--color-larch) 50%, var(--color-cream) 50%)',
+              }}
+            />
+            Wechseltag (Samstag)
+          </span>
         </div>
         <p className="mt-3 text-xs text-larch italic">
           Wochenmiete jeweils Samstag bis Samstag. Eine farbige Woche steht
-          für eine Buchung.
+          für eine Buchung. Der Samstag ist Wechseltag: vormittags reist der
+          Vorgast ab, nachmittags reist der neue Gast an.
         </p>
       </div>
     </div>

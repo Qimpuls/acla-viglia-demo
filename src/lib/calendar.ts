@@ -47,6 +47,71 @@ export function bookingForDay(
   return null
 }
 
+// Form eines Tages im Kalender. Verfügbarkeit ist nach Nächten modelliert
+// (halboffenes Intervall [start, end)). Der Wechseltag Samstag gehört zwei
+// Parteien: vormittags reist der Vorgast ab (departing), nachmittags reist
+// der neue Gast an (arriving). Deshalb werden An-/Abreise-/Wechseltage als
+// halbe (diagonal geteilte) Zellen dargestellt, Innentage voll.
+export type DayShape = 'free' | 'full' | 'arrival' | 'departure' | 'changeover'
+
+export interface DayShapeInfo {
+  shape: DayShape
+  arriving?: Booking // b.start === dateStr (Anreise, Nachmittag belegt)
+  departing?: Booking // b.end === dateStr (Abreise, Vormittag belegt)
+  occupying?: Booking // b.start < dateStr < b.end (Innentag, ganz belegt)
+}
+
+export function dayShape(dateStr: string, list: Booking[]): DayShapeInfo {
+  let arriving: Booking | undefined
+  let departing: Booking | undefined
+  let occupying: Booking | undefined
+  for (const b of list) {
+    if (b.start === dateStr) arriving = b
+    else if (b.end === dateStr) departing = b
+    else if (dateStr > b.start && dateStr < b.end) occupying = b
+  }
+  // Vorrang: ein echter Innentag degradiert jede Fehl-Überlappung sicher zu "voll".
+  if (occupying) return { shape: 'full', occupying }
+  if (arriving && departing) return { shape: 'changeover', arriving, departing }
+  if (arriving) return { shape: 'arrival', arriving }
+  if (departing) return { shape: 'departure', departing }
+  return { shape: 'free' }
+}
+
+// Die freie Hälfte MUSS opakes Cream sein (nicht transparent): die Zelle liegt
+// über einer klickbaren Zeile mit hover:bg-brass-light/30, sonst schiene der
+// Hover nur durch die halbe Zelle durch. Cream = pixelgleich zu freien Nachbarn.
+const FREE_FILL = 'var(--color-cream)'
+
+/**
+ * CSS-Hintergrund für eine Tageszelle je nach Form. Farb-agnostisch: die
+ * konkrete Statusfarbe liefert der Aufrufer (öffentlich vs. Admin).
+ * Diagonale = Antidiagonale (oben-links → unten-rechts Trennlinie):
+ * oberes-linkes Dreieck = Vormittag (Abreise), unteres-rechtes = Nachmittag (Anreise).
+ */
+export function cellBackground(
+  info: DayShapeInfo,
+  colorFor: (b?: Booking) => string,
+): string | undefined {
+  switch (info.shape) {
+    case 'full':
+      return colorFor(info.occupying)
+    case 'arrival': // Nachmittag belegt → unteres-rechtes Dreieck gefärbt
+      return `linear-gradient(to bottom right, ${FREE_FILL} 50%, ${colorFor(info.arriving)} 50%)`
+    case 'departure': // Vormittag belegt → oberes-linkes Dreieck gefärbt
+      return `linear-gradient(to bottom right, ${colorFor(info.departing)} 50%, ${FREE_FILL} 50%)`
+    case 'changeover': {
+      // Zweifarbiger Fill (departing oben-links, arriving unten-rechts) plus
+      // dünne Cream-Naht als sichtbares Zeichen des Wechseltags.
+      const seam = `linear-gradient(to bottom right, transparent calc(50% - 0.75px), ${FREE_FILL} calc(50% - 0.75px), ${FREE_FILL} calc(50% + 0.75px), transparent calc(50% + 0.75px))`
+      const fill = `linear-gradient(to bottom right, ${colorFor(info.departing)} 50%, ${colorFor(info.arriving)} 50%)`
+      return `${seam}, ${fill}` // Naht-Schicht über dem Fill
+    }
+    default:
+      return undefined // 'free' → kein Overlay, das bg-cream der Zelle zeigt sich
+  }
+}
+
 export function shiftMonths(anchor: MonthRef, offset: number): MonthRef {
   const total = anchor.year * 12 + anchor.month + offset
   const year = Math.floor(total / 12)

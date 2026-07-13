@@ -6,13 +6,14 @@ import {
   MONTH_NAMES,
   WEEKDAYS,
   type MonthRef,
-  bookingForDay,
+  cellBackground,
   buildMonthWeeks,
+  dayShape,
   shiftMonths,
   weekRange,
   ymdOf,
 } from '@/lib/calendar'
-import { logout, setWeek } from '@/app/verwaltung/actions'
+import { logout, removeBooking, setBooking } from '@/app/verwaltung/actions'
 
 type EditStatus = BookingStatus | 'frei'
 
@@ -26,6 +27,12 @@ const EDIT_OPTIONS: { value: EditStatus; label: string; color: string }[] = [
   { value: 'frei', label: 'Frei', color: 'var(--color-cream)' },
   { value: 'booked', label: 'Belegt', color: 'var(--color-larch)' },
 ]
+
+const colorOf = (b?: Booking) => STATUS_META[b?.status ?? 'booked'].color
+
+// Heller Halo um die dunkle Tageszahl auf halb gefärbten (diagonalen) Zellen.
+const NUMBER_HALO =
+  '0 0 2px var(--color-parchment), 0.5px 0.5px 0 var(--color-parchment), -0.5px -0.5px 0 var(--color-parchment), 0.5px -0.5px 0 var(--color-parchment), -0.5px 0.5px 0 var(--color-parchment)'
 
 const PAGE_SIZE = 6
 
@@ -43,6 +50,11 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
   const [status, setStatus] = useState<EditStatus>('booked')
   const [note, setNote] = useState('')
   const [message, setMessage] = useState('')
+  // Ausnahme-Formular: beliebiger Zeitraum / einzelne Tage
+  const [rangeStart, setRangeStart] = useState('')
+  const [rangeEnd, setRangeEnd] = useState('')
+  const [rangeNote, setRangeNote] = useState('')
+  const [rangeMsg, setRangeMsg] = useState('')
   const [isPending, startTransition] = useTransition()
 
   const now = new Date()
@@ -66,9 +78,9 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
     if (!selected) return
     setMessage('')
     startTransition(async () => {
-      const res = await setWeek({
-        from: selected.from,
-        to: selected.to,
+      const res = await setBooking({
+        start: selected.from,
+        end: selected.to,
         status,
         note,
       })
@@ -78,6 +90,40 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
       } else {
         setMessage(res.error || 'Fehler beim Speichern.')
       }
+    })
+  }
+
+  const rangeValid = Boolean(rangeStart && rangeEnd && rangeEnd > rangeStart)
+
+  function saveRange() {
+    if (!rangeValid) {
+      setRangeMsg('Bitte gültige Daten wählen (Abreise nach Anreise).')
+      return
+    }
+    setRangeMsg('')
+    startTransition(async () => {
+      const res = await setBooking({
+        start: rangeStart,
+        end: rangeEnd,
+        status: 'booked',
+        note: rangeNote,
+      })
+      if (res.ok && res.bookings) {
+        setBookings(res.bookings)
+        setRangeMsg('Gespeichert.')
+        setRangeStart('')
+        setRangeEnd('')
+        setRangeNote('')
+      } else {
+        setRangeMsg(res.error || 'Fehler beim Speichern.')
+      }
+    })
+  }
+
+  function remove(start: string, end: string) {
+    startTransition(async () => {
+      const res = await removeBooking({ start, end })
+      if (res.ok && res.bookings) setBookings(res.bookings)
     })
   }
 
@@ -116,7 +162,7 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
           <div className="mb-8 bg-cream border border-brass/40 rounded-xl p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <p className="font-serif text-soapstone text-lg">
-                Woche {fmt(selected.from)} – {fmt(selected.to)}
+                Zeitraum {fmt(selected.from)} bis {fmt(selected.to)}
               </p>
               <button
                 type="button"
@@ -216,6 +262,76 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
           ))}
         </div>
 
+        {/* Ausnahme: einzelne Tage / Zeitraum blockieren */}
+        <section className="mt-8 bg-cream border border-brass/40 rounded-xl p-5 md:p-6 shadow-sm">
+          <h2 className="font-serif text-soapstone text-lg mb-1">
+            Ausnahme: einzelne Tage / Zeitraum blockieren
+          </h2>
+          <p className="text-sm text-larch mb-4">
+            Für normale Wochen genügt ein Klick im Kalender oben. Hier lassen
+            sich abweichende Zeiträume (auch einzelne Nächte) belegen. Anreise
+            = erster Tag, Abreise = Tag der Abreise (bleibt frei).
+          </p>
+          <div className="flex flex-wrap items-end gap-4">
+            <div>
+              <label
+                htmlFor="range-start"
+                className="block text-sm font-medium text-soapstone mb-1.5"
+              >
+                Anreise
+              </label>
+              <input
+                id="range-start"
+                type="date"
+                value={rangeStart}
+                onChange={(e) => setRangeStart(e.target.value)}
+                className="px-4 py-2.5 rounded-lg border border-brass/50 bg-parchment text-ink focus:outline-none focus:ring-2 focus:ring-brass"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="range-end"
+                className="block text-sm font-medium text-soapstone mb-1.5"
+              >
+                Abreise
+              </label>
+              <input
+                id="range-end"
+                type="date"
+                value={rangeEnd}
+                min={rangeStart || undefined}
+                onChange={(e) => setRangeEnd(e.target.value)}
+                className="px-4 py-2.5 rounded-lg border border-brass/50 bg-parchment text-ink focus:outline-none focus:ring-2 focus:ring-brass"
+              />
+            </div>
+            <div className="grow min-w-[12rem]">
+              <label
+                htmlFor="range-note"
+                className="block text-sm font-medium text-soapstone mb-1.5"
+              >
+                Notiz (nur intern)
+              </label>
+              <input
+                id="range-note"
+                type="text"
+                value={rangeNote}
+                onChange={(e) => setRangeNote(e.target.value)}
+                placeholder="z.B. Eigennutzung"
+                className="w-full px-4 py-2.5 rounded-lg border border-brass/50 bg-parchment text-ink focus:outline-none focus:ring-2 focus:ring-brass"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={saveRange}
+              disabled={isPending || !rangeValid}
+              className="px-6 py-2.5 rounded-full bg-soapstone text-parchment font-medium hover:bg-larch transition-colors disabled:opacity-50"
+            >
+              {isPending ? 'Speichern …' : 'Speichern'}
+            </button>
+            {rangeMsg && <span className="text-sm text-larch">{rangeMsg}</span>}
+          </div>
+        </section>
+
         {/* Übersicht */}
         <section className="mt-10">
           <h2 className="font-serif text-soapstone text-lg mb-4">
@@ -229,7 +345,7 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
                 const meta = STATUS_META[b.status ?? 'booked']
                 return (
                   <li
-                    key={b.start}
+                    key={`${b.start}-${b.end}`}
                     className="flex items-center justify-between gap-4 px-4 py-3"
                   >
                     <div className="flex items-center gap-3 min-w-0">
@@ -238,7 +354,7 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
                         style={{ backgroundColor: meta.color }}
                       />
                       <span className="text-sm text-ink whitespace-nowrap">
-                        {fmt(b.start)} – {fmt(b.end)}
+                        {fmt(b.start)} bis {fmt(b.end)}
                       </span>
                       <span className="text-sm text-larch">{meta.label}</span>
                       {b.note && (
@@ -247,13 +363,23 @@ export function BookingAdmin({ initialBookings }: { initialBookings: Booking[] }
                         </span>
                       )}
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => selectWeek(b.start, b.end)}
-                      className="text-sm text-larch hover:text-soapstone shrink-0"
-                    >
-                      Bearbeiten
-                    </button>
+                    <div className="flex items-center gap-4 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => selectWeek(b.start, b.end)}
+                        className="text-sm text-larch hover:text-soapstone"
+                      >
+                        Bearbeiten
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => remove(b.start, b.end)}
+                        disabled={isPending}
+                        className="text-sm text-larch hover:text-soapstone disabled:opacity-50"
+                      >
+                        Entfernen
+                      </button>
+                    </div>
                   </li>
                 )
               })}
@@ -331,25 +457,31 @@ function MonthEditor({
               if (day.getMonth() !== month) {
                 return <div key={colIdx} className="aspect-square bg-cream/60" />
               }
-              const booking = bookingForDay(ymdOf(day), bookings)
-              const color = booking
-                ? STATUS_META[booking.status ?? 'booked'].color
-                : null
+              const info = dayShape(ymdOf(day), bookings)
+              const bg = cellBackground(info, colorOf)
+              const twoTone =
+                info.shape === 'changeover' &&
+                colorOf(info.departing) !== colorOf(info.arriving)
+              const solidColored =
+                info.shape === 'full' ||
+                (info.shape === 'changeover' && !twoTone)
+              const halfCell =
+                info.shape === 'arrival' ||
+                info.shape === 'departure' ||
+                twoTone
               return (
                 <div
                   key={colIdx}
                   className="relative aspect-square flex items-center justify-center bg-cream text-[0.7rem] md:text-xs"
                 >
-                  {color && (
-                    <span
-                      className="absolute inset-0"
-                      style={{ backgroundColor: color }}
-                    />
+                  {bg && (
+                    <span className="absolute inset-0" style={{ background: bg }} />
                   )}
                   <span
                     className={`relative z-10 font-medium ${
-                      booking ? 'text-parchment' : 'text-soapstone'
+                      solidColored ? 'text-parchment' : 'text-soapstone'
                     }`}
+                    style={halfCell ? { textShadow: NUMBER_HALO } : undefined}
                   >
                     {day.getDate()}
                   </span>
