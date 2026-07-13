@@ -179,7 +179,9 @@ Buchungen liegen im **privaten Vercel Blob Store** (`acla-viglia-bookings`) und 
 
 Kein Code, kein Git, kein Deploy. Woche von Anreise- bis Abreise-Samstag (Sa zu Sa).
 
-**Datenmodell** (eine Buchung = eine Woche):
+**Ausnahme (einzelne Tage / abweichender Zeitraum):** Unter dem Kalender steht das Feld «Ausnahme: einzelne Tage / Zeitraum blockieren». Mit zwei Datumsfeldern (Anreise / Abreise) lässt sich ein beliebiger Zeitraum belegen, auch einzelne Nächte, unabhängig vom Sa-zu-Sa-Raster. Überschneidungen mit einer bestehenden Buchung werden abgelehnt (zuerst entfernen), Angrenzen am selben Tag ist erlaubt. In der Buchungs-Übersicht darunter lässt sich jeder Eintrag einzeln «Bearbeiten» oder «Entfernen». Eine Woche mit einzeln blockierten Tagen ist öffentlich nicht mehr als Ganzwoche anklickbar, die betroffenen Tage erscheinen aber korrekt als belegt.
+
+**Datenmodell** (eine Buchung = ein Zeitraum, Standardfall eine Woche):
 
 ```ts
 { start: '2026-12-19', end: '2026-12-26', status: 'booked', note: 'Familie Müller' }
@@ -189,7 +191,7 @@ Kein Code, kein Git, kein Deploy. Woche von Anreise- bis Abreise-Samstag (Sa zu 
 - `status`: `'booked'` (larch). Die Typen `'reserved'`/`'closed'` bleiben im Datenmodell, der Admin bietet aber nur Frei/Belegt
 - `note` = Kundenname, rein intern. Wird für alle öffentlichen Konsumenten serverseitig entfernt (`getPublicBookings`), erscheint nie im Seitenquelltext
 
-**Anzeige-Logik:** Wochen sind als Samstag-zu-Freitag-Zeilen gerendert. Eine Buchungswoche füllt visuell eine Zeile, der Abreise-Samstag bleibt frei. Klick auf eine freie Woche schreibt `#kontakt?from=...&to=...` in die URL und füllt das Anfrage-Formular vor. Standard-Ansicht startet automatisch beim **aktuellen Monat** (dynamisch), Navigation in 6-Monats-Schritten.
+**Anzeige-Logik:** Wochen sind als Samstag-zu-Freitag-Zeilen gerendert (eine Zeile = eine buchbare Woche, bewusst am Anreisetag ausgerichtet). Der Samstag ist Wechseltag und wird als **diagonal geteilte Zelle** dargestellt: Anreisetag = untere-rechte Hälfte gefärbt (Gast kommt nachmittags), Abreisetag = obere-linke Hälfte (Gast reist vormittags ab), reiner Wechseltag (Abreise + Anreise am selben Samstag) = voll gefärbt mit dünner Naht. Innentage (So bis Fr) sind voll gefärbt. Verfügbarkeit ist nach Nächten modelliert (halboffenes Intervall `[start, end)`, der Abreisetag bleibt frei und für die Folgewoche buchbar). Die Logik steckt in `dayShape()` / `cellBackground()` in [src/lib/calendar.ts](src/lib/calendar.ts), gespiegelt im öffentlichen Kalender und im Admin-Editor. Klick auf eine freie Woche schreibt `#kontakt?from=...&to=...` in die URL und füllt das Anfrage-Formular vor. Standard-Ansicht startet automatisch beim **aktuellen Monat** (dynamisch), Navigation in 6-Monats-Schritten.
 
 **Technik:** Login via signiertes Cookie ([src/lib/auth.ts](src/lib/auth.ts)), Speicher-Abstraktion in [src/lib/store.ts](src/lib/store.ts) (Vercel Blob in Produktion, lokale Datei `.data/bookings.json` in der Entwicklung). Benötigte Umgebungsvariablen: `ADMIN_PASSWORD`, `AUTH_SECRET`, `BLOB_READ_WRITE_TOKEN` (siehe [.env.example](.env.example)).
 
