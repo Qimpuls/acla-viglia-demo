@@ -26,38 +26,22 @@ npm run start    # Production-Server lokal
 
 Alle auf der Website genutzten Bilder liegen in `public/images/`. Neue Bilder kommen vom Auftraggeber via `~/Downloads/bilder-fuer-claude-code/` und werden in `public/images/` kopiert.
 
-### Hero-Bilder (saisonal gesteuert)
+### Saisonale Edition (automatisch per Datum)
 
-| Datei | Inhalt | Status | Aktiv in Saison |
-|-------|--------|--------|-----------------|
-| `hero-sommer.png` | Echtes Maiensäss im Sommer, Steinbock-Skulpturen, Strasse als Diagonale | AKTIV | Mai bis Oktober |
-| `hero-winter.png` | Echtes Maiensäss im Tiefwinter, Holzwand-Rahmen links, Bergkette | bereit, archiviert | November bis April |
+Die gesamte Edition (Bilder, Texte, OG-Vorschaubild, Nav-Label) schaltet automatisch nach Kalenderdatum um:
 
-Die Datumslogik in [src/components/Hero.tsx](src/components/Hero.tsx) (Funktion `isWinterSeason`) entscheidet beim **Build-Vorgang**, welches Bild gerendert wird. Die Seite ist statisch und wird auf Vercel-CDN gecached. Das heisst: der Wechsel passiert erst beim nächsten Deploy, nicht automatisch am Stichtag.
+| Edition | Zeitraum | Hero-Bild | OG-Bild |
+|---------|----------|-----------|---------|
+| Sommer | 1. April bis 14. Oktober | `hero-sommer.png` | `og-image.jpg` |
+| Winter | 15. Oktober bis 31. März | `hero-winter.png` | `og-image-winter.jpg` |
 
-**Aktueller Workflow (vereinbart):** Manuelle Aktivierung via Claude, getriggert durch Kalender-Erinnerung. Termine:
+Die Datumslogik liegt zentral in [src/lib/season.ts](src/lib/season.ts) (`getSeason`, Zeitzone Europe/Zurich). Die Startseite ist ISR mit `export const revalidate = 3600` ([src/app/page.tsx](src/app/page.tsx)); der Wechsel greift damit **automatisch** binnen ~1h nach dem Stichtag, ohne Deploy und ohne manuellen Eingriff. Der Vercel-Server entscheidet bei jedem Render nach Datum (kein Mac, keine Session nötig). Beide Editions-Texte leben strukturiert in [src/lib/content.ts](src/lib/content.ts) (je `sommer:`/`winter:` pro Sektion).
 
-- **15. Oktober** → Auftrag an Claude: *"Aktiviere das Winter-Hero-Bild jetzt"* (Vorlauf für Vorbuchungsphase Winter)
-- **15. April** → Auftrag an Claude: *"Aktiviere das Sommer-Hero-Bild jetzt"*
-
-Claude setzt dann `const winter = true` bzw. `false` in Hero.tsx, aktualisiert das OG-Image in layout.tsx, committet und deployt. Dauer: 60 Sekunden.
-
-**Alternative für später** (falls echter Auto-Switch gewünscht): ISR mit `export const revalidate = 86400` auf der Page kombiniert mit einem Vercel-Cron-Job (in `vercel.json`) der am 1.5. und 1.11. einen Revalidate-Endpoint pingt. Aufwand ~30 Minuten.
+**Override:** Weicht die Schneelage vom Kalender ab, in [src/lib/season.ts](src/lib/season.ts) `SEASON_OVERRIDE` auf `'winter'` oder `'sommer'` setzen (wirkt per Redeploy). Vollständige Referenz: [docs/SAISON-WECHSEL.md](docs/SAISON-WECHSEL.md).
 
 ### Responsive Bildausschnitt
 
 Beide Hero-Bilder nutzen unterschiedliche `object-position`-Werte für Desktop und Mobile, definiert in `globals.css` als `.hero-sommer-pos` und `.hero-winter-pos`. Sommer: Desktop `center 35%`, Mobile `center 40%`. Winter: Desktop `center center`, Mobile `70% center` (verschiebt nach rechts, damit das verschneite Maiensäss zentraler sitzt und die dunkle Holzwand-Kante nicht dominiert).
-
-### Manueller Saisonwechsel — Schritt für Schritt
-
-Wenn der Auftrag "Aktiviere das Winter-Hero-Bild jetzt" reinkommt, macht Claude:
-
-1. In [src/components/Hero.tsx](src/components/Hero.tsx): `const winter = isWinterSeason()` → `const winter = true`
-2. In [src/app/layout.tsx](src/app/layout.tsx): OG- und Twitter-Card-Image von `hero-sommer.png` auf `hero-winter.png`
-3. Commit `feat(hero): switch homepage to winter image`, push, Vercel-Deploy
-4. Curl gegen die Live-URL zur Verifikation
-
-Rückwärts genauso (`= false`, OG zurück auf Sommer). Das Winter-Bild liegt bereit unter `public/images/hero-winter.png`, das Sommer-Bild unter `public/images/hero-sommer.png`.
 
 ### Vollständiges Bild-Inventar
 
