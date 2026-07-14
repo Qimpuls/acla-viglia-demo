@@ -72,12 +72,12 @@ export default function GaleriePage() {
         ))}
 
         <section className="max-w-6xl mx-auto px-6 md:px-12 py-12 md:py-20 text-center">
-          <a
+          <Link
             href="/#verfuegbarkeit"
             className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors"
           >
             Verfügbarkeit prüfen
-          </a>
+          </Link>
         </section>
       </main>
 
