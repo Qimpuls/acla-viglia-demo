@@ -29,7 +29,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const season = getSeason()
   const ogImage =
     season === 'winter'
-      ? { url: '/images/hero-winter.png', alt: hero.winter.alt }
+      ? {
+          url: '/images/og-image-winter.jpg',
+          width: 1200,
+          height: 553,
+          alt: hero.winter.alt,
+        }
       : {
           url: '/images/og-image.jpg',
           width: 1200,
