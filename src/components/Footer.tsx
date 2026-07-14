@@ -1,6 +1,9 @@
-import { footer } from '@/lib/content'
+import { footer, getFooterNavigation } from '@/lib/content'
+import { getSeason } from '@/lib/season'
 
 export function Footer() {
+  const nav = getFooterNavigation(getSeason())
+  const year = new Date().getFullYear()
   return (
     <footer className="bg-charcoal border-t border-charcoal-soft py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
@@ -50,7 +53,7 @@ export function Footer() {
           <div>
             <p className="eyebrow !text-brass-light mb-4">Navigation</p>
             <nav className="grid grid-cols-2 gap-y-1.5 gap-x-6 text-sm text-parchment/70">
-              {footer.navigation.map((item) => (
+              {nav.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -65,7 +68,7 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-charcoal-soft">
           <p className="text-xs text-parchment/60 leading-relaxed">
-            {footer.legal}
+            © {year} {footer.legal}
           </p>
         </div>
       </div>

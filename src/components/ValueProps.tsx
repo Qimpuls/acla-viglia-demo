@@ -1,18 +1,20 @@
 import { valueProps } from '@/lib/content'
+import { getSeason } from '@/lib/season'
 
 export function ValueProps() {
+  const vp = valueProps[getSeason()]
   return (
     <section id="sommer" className="bg-parchment py-16 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-12 md:mb-20">
-          <p className="eyebrow mb-5">{valueProps.eyebrow}</p>
+          <p className="eyebrow mb-5">{vp.eyebrow}</p>
           <h2 className="font-serif text-3xl md:text-5xl">
-            {valueProps.headline}
+            {vp.headline}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-          {valueProps.cards.map((card) => (
+          {vp.cards.map((card) => (
             <article
               key={card.number}
               className="bg-cream rounded-2xl border border-brass/30 p-8 md:p-9 flex flex-col gap-4"

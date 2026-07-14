@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { type Booking } from '@/lib/bookings'
+import { kontakt } from '@/lib/content'
 
 interface FormState {
   anreise: string
@@ -141,7 +142,7 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
       form.name,
     ].filter(Boolean)
     const body = lines.join('\n')
-    return `mailto:ferien@aclavigliaradons.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    return `mailto:${kontakt.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -359,10 +360,10 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
               Bitte rufen Sie uns an
             </p>
             <a
-              href="tel:+41793495889"
+              href={`tel:${kontakt.tel}`}
               className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors w-full"
             >
-              +41 79 349 58 89
+              {kontakt.phone}
             </a>
           </div>
         )}

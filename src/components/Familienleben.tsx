@@ -1,20 +1,20 @@
 import Image from 'next/image'
 import { familienleben } from '@/lib/content'
+import { getSeason } from '@/lib/season'
 
-// Regentage-Sektion: ein grosses Leitbild (Rückzug am Fenster) dominiert, daneben
+// Regentage/graue Tage: ein grosses Leitbild (Rückzug am Fenster) dominiert, daneben
 // zwei kleinere Familienbilder. Verkauft Ruhe und Rückzug, nicht eine Galerie.
 export function Familienleben() {
-  const [lead, ...rest] = familienleben.images
+  const fl = familienleben[getSeason()]
+  const [lead, ...rest] = fl.images
   return (
     <section id="familienleben" className="bg-linen py-16 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-12 md:mb-16">
           <p className="eyebrow mb-5">{familienleben.eyebrow}</p>
-          <h2 className="font-serif text-3xl md:text-5xl mb-6">
-            {familienleben.headline}
-          </h2>
+          <h2 className="font-serif text-3xl md:text-5xl mb-6">{fl.headline}</h2>
           <p className="text-ink/85 text-base md:text-lg leading-relaxed">
-            {familienleben.text}
+            {fl.text}
           </p>
         </div>
 

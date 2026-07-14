@@ -1,9 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { brand, navigation } from '@/lib/content'
+import { brand, kontakt, getNavigation } from '@/lib/content'
+import type { Season } from '@/lib/season'
 
-export function Header() {
+// season kommt als Prop aus page.tsx (Server), damit die Season server- und
+// client-seitig identisch ist (kein Hydration-Mismatch am Umschalt-Stichtag).
+export function Header({ season }: { season: Season }) {
+  const navigation = getNavigation(season)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -121,7 +125,7 @@ export function Header() {
             </a>
           ))}
           <a
-            href="tel:+41793495889"
+            href={`tel:${kontakt.tel}`}
             onClick={handleNavClick}
             className="mt-8 bg-soapstone text-parchment px-6 py-4 rounded-full text-center font-medium hover:bg-larch transition-colors"
           >

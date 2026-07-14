@@ -1,18 +1,13 @@
 import Image from 'next/image'
 import { hero } from '@/lib/content'
-
-function isWinterSeason(date = new Date()) {
-  const month = date.getMonth() + 1
-  return month >= 11 || month <= 4
-}
+import { getSeason } from '@/lib/season'
 
 export function Hero() {
-  const winter = isWinterSeason()
-  const heroImage = winter ? hero.imageWinter : hero.imageSummer
-  const heroAlt = winter
-    ? 'Verschneites Maiensäss ACLA VIGLIA RADONS im Tiefwinter mit Bergkette in Radons'
-    : 'Maiensäss ACLA VIGLIA RADONS im Sommer mit Steinbock-Skulpturen und Bergpanorama in Radons'
-  const heroPositionClass = winter ? 'hero-winter-pos' : 'hero-sommer-pos'
+  const season = getSeason()
+  const h = hero[season]
+  const heroImage = h.image
+  const heroAlt = h.alt
+  const heroPositionClass = h.positionClass
 
   return (
     <section
@@ -35,13 +30,13 @@ export function Hero() {
       <div className="relative z-10 flex flex-col justify-end min-h-[70vh] md:min-h-[85vh] max-w-6xl mx-auto px-6 md:px-12 pt-24 pb-14 md:pb-40">
         <p className="eyebrow text-brass-light! mb-5">{hero.eyebrow}</p>
         <h1 className="font-serif text-4xl md:text-7xl text-parchment! max-w-4xl leading-[1.05] text-balance">
-          {hero.headline}
+          {h.headline}
         </h1>
         <p className="mt-3 md:mt-4 font-serif text-brass-light! text-lg md:text-3xl max-w-3xl">
           {hero.claim}
         </p>
         <p className="mt-4 md:mt-5 max-w-2xl text-base md:text-xl text-parchment/95 leading-relaxed">
-          {hero.subline}
+          {h.subline}
         </p>
 
         <div className="mt-5 md:mt-6">

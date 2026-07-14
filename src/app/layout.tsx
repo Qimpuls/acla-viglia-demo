@@ -16,9 +16,10 @@ const inter = Inter({
   display: 'swap',
 })
 
-const SITE_URL = 'https://aclavigliaradons.ch'
-const SITE_TITLE = 'ACLA VIGLIA RADONS · Maiensäss in Savognin mieten'
-const SITE_DESCRIPTION =
+// Geteilt mit page.tsx generateMetadata (saisonales OG-Bild erbt Titel/Beschreibung).
+export const SITE_URL = 'https://aclavigliaradons.ch'
+export const SITE_TITLE = 'ACLA VIGLIA RADONS · Maiensäss in Savognin mieten'
+export const SITE_DESCRIPTION =
   'Maiensäss in Radons über Savognin mieten: das ganze Haus auf 1885 m im Parc Ela, für 2 bis 8 Personen, Wochenmiete Samstag zu Samstag. Persönlich geführt von Angela und Gallus Liesch-Lombris. Im Sommer Zufahrt bis vor das Haus.'
 const OG_IMAGE = {
   url: '/images/og-image.jpg',

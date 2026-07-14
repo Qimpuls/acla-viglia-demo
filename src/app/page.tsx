@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Anreise } from '@/components/Anreise'
 import { Familienleben } from '@/components/Familienleben'
 import { Footer } from '@/components/Footer'
@@ -14,8 +15,45 @@ import { ValueProps } from '@/components/ValueProps'
 import { Verfuegbarkeit } from '@/components/Verfuegbarkeit'
 import { Winterteaser } from '@/components/Winterteaser'
 import { Wohnen } from '@/components/Wohnen'
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '@/app/layout'
+import { anreise, chf, hero, kontakt, preisWerte } from '@/lib/content'
+import { getSeason } from '@/lib/season'
 
-const SITE_URL = 'https://aclavigliaradons.ch'
+// ISR: die Route rendert stündlich neu. Das ist die Voraussetzung dafür, dass die
+// datumsbasierte Saison-Umschaltung (season.ts) und der dynamische Verfügbarkeits-
+// text ohne Buchungsänderung von selbst greifen (nicht im statischen HTML einfrieren).
+export const revalidate = 3600
+
+// OG-/Twitter-Bild folgt der Saison (Startseite überschreibt die Layout-Defaults).
+export async function generateMetadata(): Promise<Metadata> {
+  const season = getSeason()
+  const ogImage =
+    season === 'winter'
+      ? { url: '/images/hero-winter.png', alt: hero.winter.alt }
+      : {
+          url: '/images/og-image.jpg',
+          width: 1200,
+          height: 553,
+          alt: hero.sommer.alt,
+        }
+  return {
+    openGraph: {
+      type: 'website',
+      locale: 'de_CH',
+      url: SITE_URL,
+      siteName: 'Acla Viglia Radons',
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      images: [ogImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      images: [ogImage.url],
+    },
+  }
+}
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -29,8 +67,8 @@ const jsonLd = {
     `${SITE_URL}/images/hero-sommer.png`,
     `${SITE_URL}/images/hero-winter.png`,
   ],
-  telephone: '+41 79 349 58 89',
-  email: 'ferien@aclavigliaradons.ch',
+  telephone: kontakt.phone,
+  email: kontakt.email,
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Radons 104',
@@ -50,10 +88,10 @@ const jsonLd = {
   },
   numberOfRooms: 3,
   numberOfBathroomsTotal: 2,
-  maximumAttendeeCapacity: 8,
+  maximumAttendeeCapacity: preisWerte.capacityMax,
   petsAllowed: true,
   knowsLanguage: ['de-CH'],
-  priceRange: 'CHF 220–280 pro Nacht',
+  priceRange: `CHF ${preisWerte.min} bis ${preisWerte.max} pro Nacht`,
   amenityFeature: [
     {
       '@type': 'LocationFeatureSpecification',
@@ -109,16 +147,16 @@ const jsonLd = {
     priceCurrency: 'CHF',
     priceSpecification: {
       '@type': 'UnitPriceSpecification',
-      price: 220,
-      minPrice: 220,
-      maxPrice: 280,
+      price: preisWerte.min,
+      minPrice: preisWerte.min,
+      maxPrice: preisWerte.max,
       priceCurrency: 'CHF',
-      unitText: 'pro Nacht für das ganze Haus, bis 5 Personen',
+      unitText: `pro Nacht für das ganze Haus, bis ${preisWerte.personsBase} Personen`,
     },
     eligibleQuantity: {
       '@type': 'QuantitativeValue',
-      minValue: 2,
-      maxValue: 8,
+      minValue: preisWerte.capacityMin,
+      maxValue: preisWerte.capacityMax,
       unitText: 'Personen',
     },
   },
@@ -146,7 +184,7 @@ const faqLd = {
       name: 'Wie komme ich im Sommer nach Radons?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Von Ende Mai bis Ende Oktober ist die Zufahrt über Tigignas offen. Sie fahren mit dem Auto bis vor das Maiensäss und parkieren direkt davor. Einkaufen können Sie vorher in Savognin.',
+        text: anreise.sommer.text,
       },
     },
     {
@@ -154,7 +192,7 @@ const faqLd = {
       name: 'Wie ist die Anreise im Winter?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Im Winter ist die Zufahrtsstrasse gesperrt. Gäste reisen mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus ab Savognin an.',
+        text: anreise.winter.text,
       },
     },
     {
@@ -162,7 +200,7 @@ const faqLd = {
       name: 'Was kostet das Maiensäss?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Das ganze Haus kostet ab CHF 220 pro Nacht für bis zu 5 Personen, je nach Saison bis CHF 280. Jede weitere erwachsene Person CHF 10 pro Tag. Nicht enthalten sind Endreinigung, Wäsche und Kurtaxen.',
+        text: `Das ganze Haus kostet ab ${chf(preisWerte.min)} pro Nacht für bis zu ${preisWerte.personsBase} Personen, je nach Saison bis ${chf(preisWerte.max)}. Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Tag. Nicht enthalten sind Endreinigung, Wäsche und Kurtaxen.`,
       },
     },
     {
@@ -193,9 +231,10 @@ const faqLd = {
 }
 
 export default function Home() {
+  const season = getSeason()
   return (
     <>
-      <Header />
+      <Header season={season} />
       <main>
         <Hero />
         <ValueProps />

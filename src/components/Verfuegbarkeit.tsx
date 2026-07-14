@@ -1,17 +1,23 @@
 import { BookingCalendarSection } from '@/components/BookingCalendarSection'
 import { verfuegbarkeit } from '@/lib/content'
+import { availabilityText } from '@/lib/availability'
+import { getPublicBookings } from '@/lib/store'
+import { getSeason } from '@/lib/season'
 
-export function Verfuegbarkeit() {
+export async function Verfuegbarkeit() {
+  const season = getSeason()
+  const bookings = await getPublicBookings()
+  const text = availabilityText(bookings)
   return (
     <section id="verfuegbarkeit" className="bg-parchment py-16 md:py-32">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-10 md:mb-14">
           <p className="eyebrow mb-5">{verfuegbarkeit.eyebrow}</p>
           <h2 className="font-serif text-3xl md:text-5xl mb-5">
-            {verfuegbarkeit.headline}
+            {verfuegbarkeit[season].headline}
           </h2>
           <p className="text-ink/85 text-base md:text-lg leading-relaxed">
-            {verfuegbarkeit.text}
+            {text}
           </p>
           <a
             href={verfuegbarkeit.cta.href}
@@ -21,7 +27,7 @@ export function Verfuegbarkeit() {
           </a>
         </div>
 
-        <BookingCalendarSection />
+        <BookingCalendarSection bookings={bookings} />
       </div>
     </section>
   )

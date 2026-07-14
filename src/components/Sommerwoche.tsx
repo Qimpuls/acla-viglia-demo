@@ -1,21 +1,21 @@
 import Image from 'next/image'
 import { sommerwoche } from '@/lib/content'
+import { getSeason } from '@/lib/season'
 
 export function Sommerwoche() {
+  const sw = sommerwoche[getSeason()]
   return (
     <section id="sommerwoche" className="bg-linen py-16 md:py-32">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-10 md:mb-14">
-          <p className="eyebrow mb-5">{sommerwoche.eyebrow}</p>
-          <h2 className="font-serif text-3xl md:text-5xl">
-            {sommerwoche.headline}
-          </h2>
+          <p className="eyebrow mb-5">{sw.eyebrow}</p>
+          <h2 className="font-serif text-3xl md:text-5xl">{sw.headline}</h2>
         </div>
 
         <div className="relative aspect-[16/10] sm:aspect-[2/1] w-full overflow-hidden rounded-2xl mb-12 md:mb-16">
           <Image
-            src={sommerwoche.banner.src}
-            alt={sommerwoche.banner.alt}
+            src={sw.banner.src}
+            alt={sw.banner.alt}
             fill
             sizes="(min-width: 1024px) 64rem, 100vw"
             className="object-cover"
@@ -23,7 +23,7 @@ export function Sommerwoche() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          {sommerwoche.timeline.map((item) => (
+          {sw.timeline.map((item) => (
             <div
               key={item.time}
               className="bg-cream rounded-2xl border border-brass/30 p-6"
