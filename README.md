@@ -312,9 +312,16 @@ Offen:
 
 ## Was die Demo bewusst NICHT hat
 
-- Kein Backend-Versand (Form öffnet Mail-Client des Besuchers)
-- Keine Analytics, kein GTM, kein Plausible
-- Keine Cookies, kein Consent-Banner
+- Kein Backend-Versand (Form öffnet Mail-Client des Besuchers). Bewusster
+  Entscheid, von Angela praktisch getestet und von Marco am 15.07.2026
+  bestätigt: bleibt so.
+- Kein GTM, kein Plausible. Seit 15.07.2026 läuft Vercel Web Analytics
+  (cookiefrei, keine Wiedererkennung einzelner Personen, deshalb ohne
+  Consent-Banner). Muss im Vercel-Dashboard aktiviert sein, sonst lädt das
+  Script ins Leere.
+- Keine Cookies für Gäste, kein Consent-Banner. Ausnahme, schon vorher: das
+  technisch notwendige Session-Cookie `av_session` im Admin unter
+  `/verwaltung`. Beides ist in `/datenschutz` deklariert.
 - Keine Mehrsprachigkeit
 - Keine externen Widgets (Maps, Wetter)
 - Keine Newsletter-Anmeldung

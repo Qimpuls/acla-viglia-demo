@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import './globals.css'
 
@@ -91,7 +92,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de-CH" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-parchment text-ink">{children}</body>
+      <body className="min-h-screen bg-parchment text-ink">
+        {children}
+        {/* Vercel Web Analytics: cookiefrei, keine Wiedererkennung einzelner
+            Personen, deshalb ohne Consent-Banner zulaessig. In /datenschutz
+            deklariert. Muss zusaetzlich im Vercel-Dashboard aktiviert sein,
+            sonst laedt das Script ins Leere. */}
+        <Analytics />
+      </body>
     </html>
   )
 }

@@ -66,10 +66,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-charcoal-soft">
+        <div className="mt-16 pt-8 border-t border-charcoal-soft flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
           <p className="text-xs text-parchment/60 leading-relaxed">
             © {year} {footer.legal}
           </p>
+          <a
+            href="/datenschutz"
+            className="text-xs text-parchment/60 hover:text-parchment transition-colors whitespace-nowrap"
+          >
+            Datenschutz
+          </a>
         </div>
       </div>
     </footer>

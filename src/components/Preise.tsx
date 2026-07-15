@@ -124,9 +124,20 @@ export function Preise() {
                 </li>
               ))}
             </ul>
-            {/* Die Kurtaxe ist keine reine Zusatzkost: sie bringt die Gaestekarte. */}
+            {/* Die Kurtaxe ist keine reine Zusatzkost: sie bringt die Gaestekarte.
+                Betriebszeiten bewusst nicht hier, sondern verlinkt: sie aendern
+                jaehrlich und wuerden auf der Seite still veralten. */}
             <p className="mt-4 text-sm text-ink/75 leading-relaxed">
-              {preise.zusatzkosten.note}
+              {preise.zusatzkosten.note}{' '}
+              <a
+                href={preise.zusatzkosten.noteLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-larch underline underline-offset-2 hover:text-soapstone transition-colors"
+              >
+                {preise.zusatzkosten.noteLink.label}
+              </a>
+              .
             </p>
           </div>
         </div>

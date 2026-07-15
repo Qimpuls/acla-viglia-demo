@@ -41,7 +41,7 @@ Eine Woche ist Samstag bis Samstag, also ${preisWerte.nightsPerWeek} Nächte.
 - Jede weitere erwachsene Person: ${chf(preisWerte.extraPerson)} pro Nacht
 - Im Preis enthalten: MWST, Strom und Wasser, WLAN, Holz für Cheminée und Kochherd, SodaStream am Bergquellwasser, eine Flasche Prosecco und eine Flasche Amarone bei Anreise
 - Zusatzkosten: Endreinigung ${chf(preisWerte.cleaning)} pauschal, Bett- und Frotteewäsche ${chf(preisWerte.laundry)} pro Woche und Person, Kurtaxen (Erwachsene ${chf(preisWerte.taxAdult)} pro Logiernacht, Kinder 6 bis 16 Jahre ${chf(preisWerte.taxChild)} pro Logiernacht)
-- Die Kurtaxe enthält die Gästekarte Val Surses: im Sommer Gondelbahnen Savognin nach Tigignas und Somtgant kostenlos, Postauto im Tal ganzjährig kostenlos
+- Die Kurtaxe enthält die Gästekarte Val Surses: Postauto im Tal ganzjährig kostenlos, Savogniner Bergbahnen im Sommer während ihrer Betriebszeiten kostenlos. Betriebszeiten und Leistungen ändern jährlich, aktuell bei valsurses.ch
 - Keine öffentlichen Rabatte oder Aktionen
 
 ## Buchung und Kontakt

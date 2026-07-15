@@ -535,9 +535,22 @@ export const preise = {
         value: `${chf(preisWerte.taxChild)} pro Nacht`,
       },
     ],
-    // Leistungen der Gästekarte Val Surses, Stand Sommer 2026 (valsurses.ch).
-    // Bergbahnen nur in der Sommersaison, Postauto ganzjährig.
-    note: 'Mit der Kurtaxe erhalten Sie die Gästekarte Val Surses. Im Sommer fahren Sie damit kostenlos mit den Gondelbahnen von Savognin nach Tigignas und weiter nach Somtgant. Das Postauto im Tal ist im Sommer und im Winter inbegriffen.',
+    // Gästekarte Val Surses. Belegt an zwei Primärquellen: valsurses.ch Anspruch
+    // ("Gäste ab einer Übernachtung erhalten die Karte vom Gastgeber") und die
+    // Tarifseite der Savognin Bergbahnen ("Der Personentransport ist mit der
+    // Gästekarte Val Surses im Sommer kostenlos").
+    //
+    // BEWUSST OHNE Betriebszeiten und ohne Aufzählung einzelner Bahnen: der
+    // Sommerfahrplan 2026 läuft nur 30.05. bis 18.10., im Juni nur an Wochenenden
+    // und ohne 2. Sektion. Konkrete Daten würden hier jährlich veralten und im
+    // Einzelfall falsche Erwartungen wecken. Deshalb Leistung nennen, Zeiten
+    // verlinken.
+    note: 'Mit der Kurtaxe erhalten Sie die Gästekarte Val Surses. Das Postauto im Tal ist damit ganzjährig kostenlos, die Savogniner Bergbahnen im Sommer während ihrer Betriebszeiten.',
+    // URL am 15.07.2026 auf 200 geprüft (die naheliegende /de/inhalt/... ist 404).
+    noteLink: {
+      label: 'Aktuelle Leistungen und Betriebszeiten bei Val Surses',
+      href: 'https://www.valsurses.ch/de/buchen/gaestekarte-val-surses',
+    },
   },
   cta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
 }
@@ -604,6 +617,69 @@ export const empfehlungen = {
   ],
   footnote:
     'Diese Tipps sind kuratiert und werden saisonal aktualisiert. Die persönliche Empfehlung erhalten Sie bei Ihrer Anreise.',
+}
+
+// Datenschutzerklärung. Bewusst kurz und in Alltagssprache: die Seite erhebt fast
+// nichts, das darf man auch so sagen. Deckt revDSG Art. 19 (Informationspflicht,
+// in Kraft seit 01.09.2023) und, für Gäste aus der EU, DSGVO Art. 13 ab.
+// Rechtstext: Änderungen nur nach Freigabe durch Marco/die Gastgeber.
+export const datenschutz = {
+  title: 'Datenschutz',
+  headline: 'Was wir mit Ihren Daten machen.',
+  stand: 'Stand: Juli 2026',
+  intro:
+    'Kurz gesagt: wir sammeln so wenig wie möglich. Das Anfrageformular sendet nichts an diese Website, es öffnet Ihr eigenes Mail-Programm. Wir setzen keine Werbe-Cookies und geben Ihre Daten niemals für Werbung weiter.',
+  sections: [
+    {
+      title: 'Wer verantwortlich ist',
+      body: [
+        'Angela und Gallus Liesch-Lombris, Radons 104, 7464 Surses. Sie erreichen uns unter ferien@aclavigliaradons.ch oder +41 79 349 58 89.',
+      ],
+    },
+    {
+      title: 'Das Anfrageformular',
+      body: [
+        'Das Formular auf dieser Seite schickt Ihre Angaben nicht an unseren Server. Es öffnet Ihr Mail-Programm mit einer vorbereiteten Nachricht. Erst wenn Sie dort auf Senden drücken, erreichen uns Ihre Angaben als ganz normale E-Mail.',
+        'Wir erhalten dann Ihren Namen, Ihre E-Mail-Adresse, die gewünschten Reisedaten, die Anzahl Personen und, falls Sie sie angeben, Ihre Telefonnummer und Ihre Bemerkungen. Wir verwenden das ausschliesslich, um Ihre Anfrage zu beantworten und eine Buchung vorzubereiten. Grundlage ist Ihre Anfrage selbst.',
+      ],
+    },
+    {
+      title: 'Wenn Sie bei uns übernachten',
+      body: [
+        'Das Gesetz über die Gäste- und Tourismustaxen verpflichtet uns, Übernachtungsgäste bei der Gemeinde Surses zu melden und die Gästetaxe abzurechnen. Dafür geben wir die im Meldeschein verlangten Angaben an das Meldesystem der Tourismus Savognin Bivio Albula AG weiter. Das ist eine gesetzliche Pflicht und keine freiwillige Weitergabe.',
+      ],
+    },
+    {
+      title: 'Website und Hosting',
+      body: [
+        'Diese Website läuft bei Vercel Inc. Wie jeder Webserver protokolliert Vercel technische Daten wie IP-Adresse, Zeitpunkt und aufgerufene Seite. Diese Protokolle dienen dem Betrieb und der Sicherheit. Die Bearbeitung kann auch ausserhalb der Schweiz stattfinden.',
+      ],
+    },
+    {
+      title: 'Reichweitenmessung',
+      body: [
+        'Wir messen mit Vercel Web Analytics, wie oft welche Seite aufgerufen wird. Das läuft ohne Cookies und ohne Wiedererkennung einzelner Personen. Wir sehen Zahlen, keine Profile.',
+      ],
+    },
+    {
+      title: 'Cookies',
+      body: [
+        'Für Sie als Gast setzt diese Website keine Cookies. Ein einziges technisch notwendiges Cookie gibt es in unserem internen Verwaltungsbereich, den nur wir benutzen.',
+      ],
+    },
+    {
+      title: 'Wie lange wir etwas aufbewahren',
+      body: [
+        'Anfragen, aus denen keine Buchung wird, löschen wir, sobald sie erledigt sind. Unterlagen zu Buchungen bewahren wir so lange auf, wie es die gesetzlichen Aufbewahrungsfristen verlangen, in der Regel zehn Jahre.',
+      ],
+    },
+    {
+      title: 'Ihre Rechte',
+      body: [
+        'Sie können jederzeit erfahren, welche Daten wir über Sie haben, und deren Berichtigung oder Löschung verlangen. Eine kurze Mail an ferien@aclavigliaradons.ch genügt. Wenn Sie in der EU wohnen, stehen Ihnen zusätzlich die Rechte der Datenschutz-Grundverordnung zu.',
+      ],
+    },
+  ],
 }
 
 export const kontakt = {
