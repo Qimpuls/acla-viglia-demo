@@ -23,8 +23,12 @@ export function Hero() {
         className={`object-cover ${heroPositionClass}`}
       />
       {/* Links abgedunkelt für die Lesbarkeit, rechts hell, damit Maiensäss,
-          Holzfassade und Berge sichtbar bleiben (keine flächige Verdunkelung). */}
-      <div className="absolute inset-0 bg-linear-to-r from-soapstone/85 via-soapstone/30 to-transparent" />
+          Holzfassade und Berge sichtbar bleiben (keine flächige Verdunkelung).
+          Mittelstufe von /30 auf /50 angehoben: der Claim reicht bis etwa 48
+          Prozent der Breite und stand dort teils auf besonntem Fels. Gemessen
+          schwankte sein Kontrast über eine Zeile zwischen 3.27:1 und 9.37:1.
+          Der Abfall nach rechts bleibt, das Haus bleibt sichtbar. */}
+      <div className="absolute inset-0 bg-linear-to-r from-soapstone/90 via-soapstone/50 to-transparent" />
       <div className="absolute inset-0 md:hidden bg-linear-to-t from-soapstone/75 via-soapstone/15 to-transparent" />
 
       <div className="relative z-10 flex flex-col justify-end min-h-[70vh] md:min-h-[85vh] max-w-6xl mx-auto px-6 md:px-12 pt-24 pb-14 md:pb-40">
@@ -32,9 +36,6 @@ export function Hero() {
         <h1 className="font-serif text-4xl md:text-7xl text-parchment! max-w-4xl leading-[1.05] text-balance">
           {h.headline}
         </h1>
-        <p className="mt-3 md:mt-4 font-serif text-brass-light! text-lg md:text-3xl max-w-3xl">
-          {hero.claim}
-        </p>
         <p className="mt-4 md:mt-5 max-w-2xl text-base md:text-xl text-parchment/95 leading-relaxed">
           {h.subline}
         </p>

@@ -72,8 +72,11 @@ function MonthGrid({
         const clickable = saturdayInMonth && isWeekFree(saturday, bookings)
         const { from, to } = weekRange(saturday)
 
+        // outline-none entfernt: der Hintergrundwechsel allein war als
+        // Fokus-Anzeige fuer eine 7-Zellen-Reihe zu schwach. Jetzt greift
+        // zusaetzlich die globale :focus-visible-Regel aus globals.css.
         const rowClass = clickable
-          ? 'grid grid-cols-7 cursor-pointer hover:bg-brass-light/30 focus-visible:bg-brass-light/40 focus-visible:outline-none transition-colors'
+          ? 'grid grid-cols-7 cursor-pointer hover:bg-brass-light/30 focus-visible:bg-brass-light/40 transition-colors'
           : 'grid grid-cols-7'
 
         const rowProps = clickable

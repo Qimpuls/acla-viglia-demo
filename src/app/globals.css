@@ -25,6 +25,29 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* Die ganze Seite ist Anker-Navigation ueber rund 14'000px. Wer weiche
+   Bewegung abgestellt hat, bekam sie hier trotzdem. Die .fade-in-Regel weiter
+   unten respektiert die Einstellung bereits, beim Scrollen war sie vergessen. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Es gab im ganzen Projekt keine einzige Focus-Regel. Wer mit der Tastatur
+   navigiert, war auf den Browser-Standard angewiesen, der auf dem Hero-Bild
+   kaum sichtbar ist. Messing auf beiden Gruenden gut erkennbar. */
+:focus-visible {
+  outline: 2px solid var(--color-larch);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.bg-charcoal :focus-visible,
+.bg-soapstone :focus-visible {
+  outline-color: var(--color-brass-light);
+}
+
 section[id] {
   scroll-margin-top: 5rem;
 }

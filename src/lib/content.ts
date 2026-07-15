@@ -23,9 +23,12 @@ export const brand = {
 
 // Gemeinsame Felder plus saisonale Varianten. Hero.tsx liest hero.eyebrow etc.
 // und hero[season].headline. Winter-Texte aus docs/SAISON-WECHSEL.md.
+// Der Claim "Ein Maiensäss. Geführt wie ein gutes Hotel." stand hier UND über
+// den Gastgebern, zweimal innerhalb von zwei Bildschirmen. Er lebt jetzt nur
+// noch dort (siehe `claim`), wo er die beiden Hoteliers einleitet. Der Hero
+// trägt die Aussage weiterhin über die trust-Zeile "Persönlich geführt von".
 export const hero = {
   eyebrow: 'MAIENSÄSS IN RADONS · 1885 M',
-  claim: 'Ein Maiensäss. Geführt wie ein gutes Hotel.',
   primaryCta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
   trust: 'Persönlich geführt von Angela und Gallus · Samstag bis Samstag',
   sommer: {
