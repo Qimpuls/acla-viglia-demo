@@ -13,11 +13,14 @@ export function ValueProps() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
+        {/* Drei Spalten erst ab lg. Auf dem iPad hoch (820/834) ergaben md:grid-cols-3
+            Karten von 209px, davon 72px Polster: 137px Textspalte, achtzeilige Umbrueche
+            und ~150px Totraum in den kuerzeren Karten. */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
           {vp.cards.map((card) => (
             <article
               key={card.number}
-              className="bg-cream rounded-2xl border border-brass/30 p-8 md:p-9 flex flex-col gap-4"
+              className="bg-cream rounded-2xl border border-brass/30 p-8 lg:p-9 flex flex-col gap-4"
             >
               <span className="font-serif text-larch text-2xl">
                 {card.number}

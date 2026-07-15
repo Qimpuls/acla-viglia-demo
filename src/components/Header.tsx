@@ -47,15 +47,18 @@ export function Header({ season }: { season: Season }) {
             className="flex flex-col leading-tight"
             aria-label={brand.name}
           >
+            {/* whitespace-nowrap: die Wortmarke brach zwischen 768 und 880px zwei-
+                zeilig um, das traf jedes iPad im Hochformat (820, 834). Die volle
+                Groesse und die Ortszeile kommen deshalb erst ab lg. */}
             <span
-              className={`font-serif text-base md:text-xl tracking-[0.18em] ${
+              className={`font-serif text-base lg:text-xl tracking-[0.14em] lg:tracking-[0.18em] whitespace-nowrap ${
                 showLight ? 'text-parchment' : 'text-soapstone'
               } transition-colors`}
             >
               {brand.name}
             </span>
             <span
-              className={`hidden md:block text-[0.65rem] tracking-[0.2em] uppercase mt-0.5 ${
+              className={`hidden lg:block text-[0.65rem] tracking-[0.2em] uppercase mt-0.5 whitespace-nowrap ${
                 showLight ? 'text-brass-light' : 'text-larch'
               } transition-colors`}
             >
@@ -63,7 +66,7 @@ export function Header({ season }: { season: Season }) {
             </span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-8">
             {navigation.map((item) => (
               <a
                 key={item.href}
