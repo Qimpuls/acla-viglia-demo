@@ -16,7 +16,7 @@ import { Verfuegbarkeit } from '@/components/Verfuegbarkeit'
 import { Winterteaser } from '@/components/Winterteaser'
 import { Wohnen } from '@/components/Wohnen'
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '@/app/layout'
-import { anreise, chf, hero, kontakt, preisWerte } from '@/lib/content'
+import { anreise, chf, chfWoche, hero, kontakt, preisWerte } from '@/lib/content'
 import { getSeason } from '@/lib/season'
 
 // ISR: die Route rendert stündlich neu. Das ist die Voraussetzung dafür, dass die
@@ -205,7 +205,7 @@ const faqLd = {
       name: 'Was kostet das Maiensäss?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: `Das ganze Haus kostet ab ${chf(preisWerte.min)} pro Nacht für bis zu ${preisWerte.personsBase} Personen, je nach Saison bis ${chf(preisWerte.max)}. Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Tag. Nicht enthalten sind Endreinigung, Wäsche und Kurtaxen.`,
+        text: `Das ganze Haus kostet ab ${chf(preisWerte.min)} pro Nacht für bis zu ${preisWerte.personsBase} Personen, je nach Saison bis ${chf(preisWerte.max)}. Eine Woche von Samstag bis Samstag sind ${preisWerte.nightsPerWeek} Nächte, also ab ${chfWoche(preisWerte.min)}. Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Nacht. Nicht enthalten sind Endreinigung, Wäsche und Kurtaxen.`,
       },
     },
     {

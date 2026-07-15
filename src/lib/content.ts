@@ -429,7 +429,9 @@ export const preisWerte = {
   max: 280, // Obergrenze, Hochsaison Winter / Festtage
   sommerHoch: 260, // Juli und August
   winterNeben: 260, // Nebensaison Winter
-  extraPerson: 10, // pro weitere erwachsene Person und Tag
+  // Pro weitere erwachsene Person und Nacht. Angeglichen an den Nachtpreis des
+  // Hauses (Entscheid Marco 15.07.2026), vorher inkonsistent als "pro Tag" geführt.
+  extraPerson: 10,
   cleaning: 195, // Endreinigung pauschal
   laundry: 25, // Bett- und Frotteewäsche pro Woche und Person
   // Gästetaxe Gemeinde Surses, Ausführungsbestimmungen zum GTT ab 01.05.2024, Art. 7.
@@ -472,7 +474,7 @@ export const preise = {
     amount: chf(preisWerte.min),
     unit: 'pro Nacht',
     subline: `für bis zu ${preisWerte.personsBase} Personen`,
-    hint: `Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Tag.`,
+    hint: `Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Nacht.`,
   },
   // week wird aus price abgeleitet (chfWoche), damit es nur eine Zahlenquelle gibt.
   seasons: [

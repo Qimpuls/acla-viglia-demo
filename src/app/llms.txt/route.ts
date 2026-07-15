@@ -38,7 +38,7 @@ Eine Woche ist Samstag bis Samstag, also ${preisWerte.nightsPerWeek} Nächte.
 - Juli und August: ${chf(preisWerte.sommerHoch)} pro Nacht, ${chfWoche(preisWerte.sommerHoch)} pro Woche
 - Nebensaison Winter: ${chf(preisWerte.winterNeben)} pro Nacht, ${chfWoche(preisWerte.winterNeben)} pro Woche
 - Hochsaison Winter sowie Weihnachten, Neujahr, Februar: ${chf(preisWerte.max)} pro Nacht, ${chfWoche(preisWerte.max)} pro Woche
-- Jede weitere erwachsene Person: ${chf(preisWerte.extraPerson)} pro Tag
+- Jede weitere erwachsene Person: ${chf(preisWerte.extraPerson)} pro Nacht
 - Im Preis enthalten: MWST, Strom und Wasser, WLAN, Holz für Cheminée und Kochherd, SodaStream am Bergquellwasser, eine Flasche Prosecco und eine Flasche Amarone bei Anreise
 - Zusatzkosten: Endreinigung ${chf(preisWerte.cleaning)} pauschal, Bett- und Frotteewäsche ${chf(preisWerte.laundry)} pro Woche und Person, Kurtaxen (Erwachsene ${chf(preisWerte.taxAdult)} pro Logiernacht, Kinder 6 bis 16 Jahre ${chf(preisWerte.taxChild)} pro Logiernacht)
 - Die Kurtaxe enthält die Gästekarte Val Surses: im Sommer Gondelbahnen Savognin nach Tigignas und Somtgant kostenlos, Postauto im Tal ganzjährig kostenlos
