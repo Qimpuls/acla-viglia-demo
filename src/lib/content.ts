@@ -432,23 +432,40 @@ export const preisWerte = {
   extraPerson: 10, // pro weitere erwachsene Person und Tag
   cleaning: 195, // Endreinigung pauschal
   laundry: 25, // Bett- und Frotteewäsche pro Woche und Person
-  taxAdult: 2.5, // Kurtaxe Erwachsene pro Tag
-  taxChild: 1.25, // Kurtaxe Kinder 6 bis 16 pro Tag
+  // Gästetaxe Gemeinde Surses, Ausführungsbestimmungen zum GTT ab 01.05.2024, Art. 7.
+  // Radons hat PLZ 7464 Parsonz und liegt damit in Feriendestinationszone C
+  // (Tinizong, Rona, Riom, Parsonz) = CHF 2.50, nicht Zone A Savognin = CHF 4.00.
+  // Erhebung pro LOGIERNACHT (GTT Art. 4), nicht pro Kalendertag.
+  taxAdult: 2.5,
+  // GTT Art. 6 Abs. 2: Kinder vom vollendeten 6. bis 16. Altersjahr zahlen die Hälfte.
+  // Art. 6 Abs. 1 lit. a: Kinder unter 6 Jahren sind befreit (bewusst nicht auf der
+  // Seite ausgewiesen, wird bei der Anfrage persönlich geklärt).
+  taxChild: 1.25,
   personsBase: 5, // im Grundpreis enthalten
   capacityMin: 2,
   capacityMax: 8,
+  nightsPerWeek: 7, // Sa bis Sa = 7 Logiernächte, 8 Kalendertage
 }
 
 // Formatiert CHF-Beträge: ganze Zahl ohne Dezimal, sonst zwei Stellen (2.50, 1.25).
+// Tausender mit Schweizer Hochkomma (CHF 1'540).
 export function chf(n: number): string {
-  return Number.isInteger(n) ? `CHF ${n}` : `CHF ${n.toFixed(2)}`
+  const s = Number.isInteger(n) ? String(n) : n.toFixed(2)
+  const [whole, frac] = s.split('.')
+  const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, "'")
+  return `CHF ${frac ? `${grouped}.${frac}` : grouped}`
+}
+
+// Wochenpreis aus dem Nachtpreis. Eine Quelle, keine zweite Zahlenpflege.
+export function chfWoche(proNacht: number): string {
+  return chf(proNacht * preisWerte.nightsPerWeek)
 }
 
 export const preise = {
   eyebrow: 'PREISE',
   headline: 'Transparent. Inklusive.',
   intro:
-    'Wochenmiete von Samstag bis Samstag. Alle Nebenkosten sind im Tagespreis enthalten, ausser Endreinigung, Wäsche und Kurtaxen.',
+    'Wochenmiete von Samstag bis Samstag. Alle Nebenkosten sind im Preis enthalten, ausser Endreinigung, Wäsche und Kurtaxen.',
   priceBox: {
     label: 'Das ganze Maiensäss',
     prefix: 'ab',
@@ -457,24 +474,42 @@ export const preise = {
     subline: `für bis zu ${preisWerte.personsBase} Personen`,
     hint: `Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Tag.`,
   },
+  // week wird aus price abgeleitet (chfWoche), damit es nur eine Zahlenquelle gibt.
   seasons: [
     {
       label: 'Weihnachten, Neujahr, Februar',
       tag: 'Hochsaison',
       price: chf(preisWerte.max),
+      week: chfWoche(preisWerte.max),
     },
-    { label: 'Hochsaison Winter', tag: 'Hochsaison', price: chf(preisWerte.max) },
+    {
+      label: 'Hochsaison Winter',
+      tag: 'Hochsaison',
+      price: chf(preisWerte.max),
+      week: chfWoche(preisWerte.max),
+    },
     {
       label: 'Nebensaison Winter',
       tag: 'Winter',
       price: chf(preisWerte.winterNeben),
+      week: chfWoche(preisWerte.winterNeben),
     },
-    { label: 'Juli und August', tag: 'Sommer', price: chf(preisWerte.sommerHoch) },
-    { label: 'Nebensaison Sommer', tag: 'Sommer', price: chf(preisWerte.min) },
+    {
+      label: 'Juli und August',
+      tag: 'Sommer',
+      price: chf(preisWerte.sommerHoch),
+      week: chfWoche(preisWerte.sommerHoch),
+    },
+    {
+      label: 'Nebensaison Sommer',
+      tag: 'Sommer',
+      price: chf(preisWerte.min),
+      week: chfWoche(preisWerte.min),
+    },
   ],
-  perDayNote: `Preise pro Nacht für das ganze Haus, für bis zu ${preisWerte.personsBase} Personen.`,
+  perDayNote: `Preise für das ganze Haus, für bis zu ${preisWerte.personsBase} Personen. Eine Woche sind ${preisWerte.nightsPerWeek} Nächte, von Samstag bis Samstag.`,
   inklusive: {
-    label: 'Im Tagespreis enthalten',
+    label: 'Im Preis enthalten',
     items: [
       'MWST',
       'Strom und Wasser',
@@ -492,12 +527,15 @@ export const preise = {
         label: 'Bett- und Frotteewäsche',
         value: `${chf(preisWerte.laundry)} pro Woche und Person`,
       },
-      { label: 'Kurtaxen Erwachsene', value: `${chf(preisWerte.taxAdult)} pro Tag` },
+      { label: 'Kurtaxen Erwachsene', value: `${chf(preisWerte.taxAdult)} pro Nacht` },
       {
         label: 'Kurtaxen Kinder (6 bis 16 Jahre)',
-        value: `${chf(preisWerte.taxChild)} pro Tag`,
+        value: `${chf(preisWerte.taxChild)} pro Nacht`,
       },
     ],
+    // Leistungen der Gästekarte Val Surses, Stand Sommer 2026 (valsurses.ch).
+    // Bergbahnen nur in der Sommersaison, Postauto ganzjährig.
+    note: 'Mit der Kurtaxe erhalten Sie die Gästekarte Val Surses. Im Sommer fahren Sie damit kostenlos mit den Gondelbahnen von Savognin nach Tigignas und weiter nach Somtgant. Das Postauto im Tal ist im Sommer und im Winter inbegriffen.',
   },
   cta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
 }

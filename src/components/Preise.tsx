@@ -70,7 +70,7 @@ export function Preise() {
                     key={season.label}
                     className="grid grid-cols-12 gap-3 items-center px-6 py-4"
                   >
-                    <div className="col-span-8 md:col-span-9">
+                    <div className="col-span-7 md:col-span-8">
                       <p className="text-soapstone font-medium">
                         {season.label}
                       </p>
@@ -78,8 +78,14 @@ export function Preise() {
                         {season.tag}
                       </p>
                     </div>
-                    <div className="col-span-4 md:col-span-3 text-right font-serif text-xl md:text-2xl text-soapstone">
-                      {season.price}
+                    {/* Nachtpreis bleibt der Anker, Wochenpreis ergaenzt ihn ruhig. */}
+                    <div className="col-span-5 md:col-span-4 text-right">
+                      <p className="font-serif text-xl md:text-2xl text-soapstone leading-tight">
+                        {season.price}
+                      </p>
+                      <p className="text-xs text-larch mt-1">
+                        {season.week} pro Woche
+                      </p>
                     </div>
                   </li>
                 ))}
@@ -115,6 +121,10 @@ export function Preise() {
                 </li>
               ))}
             </ul>
+            {/* Die Kurtaxe ist keine reine Zusatzkost: sie bringt die Gaestekarte. */}
+            <p className="mt-4 text-sm text-ink/75 leading-relaxed">
+              {preise.zusatzkosten.note}
+            </p>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { brand, chf, kontakt, preisWerte } from '@/lib/content'
+import { brand, chf, chfWoche, kontakt, preisWerte } from '@/lib/content'
 
 // /llms.txt aus den zentralen content-Konstanten generiert (Preise/Kontakt bleiben
 // so automatisch synchron zur Website). Ersetzt die frühere statische public/llms.txt.
@@ -32,14 +32,16 @@ Positionierung: Ein Maiensäss. Geführt wie ein gutes Hotel. Kein Hotel, kein A
 - Zufahrtsstrasse gesperrt; Anreise auf Skiern, mit dem Schlitten, zu Fuss oder mit dem Winterbus ab Savognin
 - Schlitteln, Schneeschuhwandern und Skitouren ab der Haustür
 
-## Preise (ganzes Haus, pro Nacht, bis ${preisWerte.personsBase} Personen)
-- Nebensaison Sommer: ${chf(preisWerte.min)}
-- Juli und August: ${chf(preisWerte.sommerHoch)}
-- Nebensaison Winter: ${chf(preisWerte.winterNeben)}
-- Hochsaison Winter sowie Weihnachten, Neujahr, Februar: ${chf(preisWerte.max)}
+## Preise (ganzes Haus, bis ${preisWerte.personsBase} Personen)
+Eine Woche ist Samstag bis Samstag, also ${preisWerte.nightsPerWeek} Nächte.
+- Nebensaison Sommer: ${chf(preisWerte.min)} pro Nacht, ${chfWoche(preisWerte.min)} pro Woche
+- Juli und August: ${chf(preisWerte.sommerHoch)} pro Nacht, ${chfWoche(preisWerte.sommerHoch)} pro Woche
+- Nebensaison Winter: ${chf(preisWerte.winterNeben)} pro Nacht, ${chfWoche(preisWerte.winterNeben)} pro Woche
+- Hochsaison Winter sowie Weihnachten, Neujahr, Februar: ${chf(preisWerte.max)} pro Nacht, ${chfWoche(preisWerte.max)} pro Woche
 - Jede weitere erwachsene Person: ${chf(preisWerte.extraPerson)} pro Tag
-- Im Tagespreis enthalten: MWST, Strom und Wasser, WLAN, Holz für Cheminée und Kochherd, SodaStream am Bergquellwasser, eine Flasche Prosecco und eine Flasche Amarone bei Anreise
-- Zusatzkosten: Endreinigung ${chf(preisWerte.cleaning)} pauschal, Bett- und Frotteewäsche ${chf(preisWerte.laundry)} pro Woche und Person, Kurtaxen (Erwachsene ${chf(preisWerte.taxAdult)} pro Tag, Kinder 6 bis 16 Jahre ${chf(preisWerte.taxChild)} pro Tag)
+- Im Preis enthalten: MWST, Strom und Wasser, WLAN, Holz für Cheminée und Kochherd, SodaStream am Bergquellwasser, eine Flasche Prosecco und eine Flasche Amarone bei Anreise
+- Zusatzkosten: Endreinigung ${chf(preisWerte.cleaning)} pauschal, Bett- und Frotteewäsche ${chf(preisWerte.laundry)} pro Woche und Person, Kurtaxen (Erwachsene ${chf(preisWerte.taxAdult)} pro Logiernacht, Kinder 6 bis 16 Jahre ${chf(preisWerte.taxChild)} pro Logiernacht)
+- Die Kurtaxe enthält die Gästekarte Val Surses: im Sommer Gondelbahnen Savognin nach Tigignas und Somtgant kostenlos, Postauto im Tal ganzjährig kostenlos
 - Keine öffentlichen Rabatte oder Aktionen
 
 ## Buchung und Kontakt
