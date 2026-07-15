@@ -5,8 +5,9 @@ import { wohnen } from '@/lib/content'
 // Freunde am langen Tisch) als dominantes Bild, darunter 4 kleinere Raumkarten und
 // ein dezentes Bad-Detail. Sitzt zwischen Haus und Familienleben.
 export function Wohnen() {
+  // Folge-Sektion im Kapitel "Das Haus": kein pt.
   return (
-    <section id="wohnen" className="bg-parchment py-16 md:py-32">
+    <section id="wohnen" className="bg-parchment pb-14 md:pb-20 lg:pb-28">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-10 md:mb-14">
           <p className="eyebrow mb-5">{wohnen.eyebrow}</p>

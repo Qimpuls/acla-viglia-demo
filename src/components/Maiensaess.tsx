@@ -1,8 +1,12 @@
 import { maiensaess } from '@/lib/content'
 
 export function Maiensaess() {
+  // Kapitel "Das Haus" (Maiensaess + Wohnen + Familienleben), parchment, Anfang.
   return (
-    <section id="haus" className="bg-parchment py-16 md:py-32">
+    <section
+      id="haus"
+      className="bg-parchment pt-14 md:pt-20 lg:pt-28 pb-14 md:pb-20 lg:pb-28"
+    >
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div>

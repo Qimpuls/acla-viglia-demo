@@ -5,8 +5,10 @@ import { getSeason } from '@/lib/season'
 // Bewusst kompakt gehalten: die Nebensaison darf den Hauptflow nicht dominieren.
 export function Winterteaser() {
   const t = winterteaser[getSeason()]
+  // Muss parchment bleiben: die Karte ist bg-linen und wuerde auf linen
+  // unsichtbar. Kein pt, der Farbwechsel gegenueber Anreise traegt die Trennung.
   return (
-    <section id="winter" className="bg-parchment pb-16 md:pb-28">
+    <section id="winter" className="bg-parchment pb-14 md:pb-20 lg:pb-28">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="bg-linen rounded-2xl border border-brass/30 p-8 md:p-12">
           <p className="eyebrow mb-4">{t.eyebrow}</p>

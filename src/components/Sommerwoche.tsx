@@ -4,8 +4,12 @@ import { getSeason } from '@/lib/season'
 
 export function Sommerwoche() {
   const sw = sommerwoche[getSeason()]
+  // Kapitel "Die Woche" (Sommerwoche + Sommerumgebung), Grund linen, Anfang.
   return (
-    <section id="sommerwoche" className="bg-linen py-16 md:py-32">
+    <section
+      id="sommerwoche"
+      className="bg-linen pt-14 md:pt-20 lg:pt-28 pb-14 md:pb-20 lg:pb-28"
+    >
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-10 md:mb-14">
           <p className="eyebrow mb-5">{sw.eyebrow}</p>

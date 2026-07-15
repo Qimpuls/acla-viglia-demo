@@ -7,8 +7,11 @@ import { getSeason } from '@/lib/season'
 export function Familienleben() {
   const fl = familienleben[getSeason()]
   const [lead, ...rest] = fl.images
+  // Folge-Sektion im Kapitel "Das Haus": parchment statt linen, kein pt. Damit
+  // faellt auch die tote Grenze zu Preise weg, das danach linen bleibt. Enthaelt
+  // keine Karten, der Farbwechsel ist gefahrlos.
   return (
-    <section id="familienleben" className="bg-linen py-16 md:py-32">
+    <section id="familienleben" className="bg-parchment pb-14 md:pb-20 lg:pb-28">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-12 md:mb-16">
           <p className="eyebrow mb-5">{familienleben.eyebrow}</p>

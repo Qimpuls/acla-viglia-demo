@@ -4,8 +4,12 @@ import { getPublicBookings } from '@/lib/store'
 
 export async function Kontakt() {
   const bookings = await getPublicBookings()
+  // Kapitel "Kontakt" (mit Footer), charcoal.
   return (
-    <section id="kontakt" className="bg-charcoal py-16 md:py-32">
+    <section
+      id="kontakt"
+      className="bg-charcoal pt-14 md:pt-20 lg:pt-28 pb-14 md:pb-20 lg:pb-28"
+    >
       <div className="max-w-3xl mx-auto px-6 md:px-12">
         <div className="text-center mb-12">
           <p className="eyebrow !text-brass-light mb-5">{kontakt.eyebrow}</p>

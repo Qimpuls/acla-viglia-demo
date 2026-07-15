@@ -7,8 +7,14 @@ import { getSeason } from '@/lib/season'
 // Tourismusgalerie. Im Winter zusätzlich ein breites Leitbild über dem 2er-Grid.
 export function Sommerumgebung() {
   const su = sommerumgebung[getSeason()]
+  // Folge-Sektion im Kapitel "Die Woche": linen statt parchment (schliesst das
+  // Kapitel mit Sommerwoche zusammen), kein pt. Enthaelt keine Karten, deshalb
+  // ist der Farbwechsel gefahrlos.
   return (
-    <section id="sommerumgebung" className="bg-parchment py-16 md:py-28">
+    <section
+      id="sommerumgebung"
+      className="bg-linen pb-14 md:pb-20 lg:pb-28"
+    >
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-12 md:mb-16">
           <p className="eyebrow mb-5">{su.eyebrow}</p>

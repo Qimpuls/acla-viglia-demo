@@ -3,8 +3,17 @@ import { getSeason } from '@/lib/season'
 
 export function ValueProps() {
   const vp = valueProps[getSeason()]
+  // Kapitel "Warum und Wer" (ValueProps + Gastgeber), Grund parchment.
+  // Kapitel-Anfang, deshalb mit pt. Die Folge-Sektion Gastgeber hat keins.
+  //
+  // pt/pb bewusst getrennt statt py-*: ein py-* mit md:-Variante wuerde ein
+  // spaeteres pt-0 still ueberschreiben, weil Varianten im Stylesheet nach den
+  // unvarianten Utilities stehen und bei gleicher Spezifitaet gewinnen.
   return (
-    <section id="sommer" className="bg-parchment py-16 md:py-32">
+    <section
+      id="sommer"
+      className="bg-parchment pt-14 md:pt-20 lg:pt-28 pb-14 md:pb-20 lg:pb-28"
+    >
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="max-w-2xl mb-12 md:mb-20">
           <p className="eyebrow mb-5">{vp.eyebrow}</p>

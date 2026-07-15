@@ -2,8 +2,14 @@ import Image from 'next/image'
 import { claim, gastgeber } from '@/lib/content'
 
 export function Gastgeber() {
+  // Folge-Sektion im Kapitel "Warum und Wer": kein pt, die Trennung leistet das
+  // pb von ValueProps. scroll-mt erhoeht, weil die Claim-Zeile ohne pt beim
+  // Ankersprung (#gastgeber steht im Menue) sonst an der Header-Kante klebt.
   return (
-    <section id="gastgeber" className="bg-parchment py-16 md:py-32">
+    <section
+      id="gastgeber"
+      className="bg-parchment pb-14 md:pb-20 lg:pb-28 scroll-mt-28 md:scroll-mt-36 lg:scroll-mt-44"
+    >
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         {/* Schmale, elegante Claim-Zeile statt grossem dunklem Block */}
         <div className="text-center mb-14 md:mb-20">
