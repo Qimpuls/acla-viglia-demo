@@ -28,6 +28,14 @@ const INITIAL: FormState = {
 // (z. B. bei gestörtem Mailempfang), auf true ist das Mail-Formular aktiv.
 const MAIL_AKTIV = true
 
+// Zeichenlimit für die Bemerkungen. Der Anfrage-Weg ist ein mailto:-Link; dessen
+// URL bricht bei Outlook/Windows typisch um 2000 Zeichen. Die Grundlast (Betreff,
+// Anrede, Datumsfelder, Name, Mail) liegt bei rund 510 Zeichen, jedes Bemerkungs-
+// zeichen wird beim Kodieren teils auf mehrere Zeichen aufgeblaeht (Umlaute,
+// Zeilenumbrueche). 600 haelt den Gesamt-Link mit Reserve unter der Bruchgrenze
+// und reicht fuer eine ausfuehrliche Anfrage (~100 Woerter).
+const BEMERKUNGEN_MAX = 600
+
 function parseHash(): { from?: string; to?: string } {
   if (typeof window === 'undefined') return {}
   const hash = window.location.hash.replace(/^#/, '')
@@ -329,10 +337,20 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
           id="anfrage-bemerkungen"
           rows={5}
           value={form.bemerkungen}
-          onChange={(e) => update('bemerkungen', e.target.value)}
+          onChange={(e) =>
+            update('bemerkungen', e.target.value.slice(0, BEMERKUNGEN_MAX))
+          }
+          maxLength={BEMERKUNGEN_MAX}
           placeholder="Hund dabei, Fragen zur Anreise, Kinderbett gewünscht oder weitere Hinweise ..."
           className={`${inputBase} resize-y`}
         />
+        {/* Zaehler wird erst ab der Haelfte sichtbar, damit er bei kurzen Anfragen
+            nicht stoert, aber vor dem Limit warnt. */}
+        {form.bemerkungen.length > BEMERKUNGEN_MAX / 2 && (
+          <p className="mt-1.5 text-xs text-larch text-right">
+            {form.bemerkungen.length} / {BEMERKUNGEN_MAX} Zeichen
+          </p>
+        )}
       </div>
 
       {/* 8: CTA */}
