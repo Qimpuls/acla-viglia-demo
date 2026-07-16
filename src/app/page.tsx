@@ -69,7 +69,7 @@ const jsonLd = {
     'Persönlich geführtes Maiensäss auf 1885 m in Radons über Savognin, mitten im Parc Ela. Wochenmiete Samstag zu Samstag für 2 bis 8 Personen. Im Sommer bequeme Zufahrt bis vor das Haus.',
   url: SITE_URL,
   image: [
-    `${SITE_URL}/images/hero-sommer.png`,
+    `${SITE_URL}/images/hero-sommer-golden.png`,
     `${SITE_URL}/images/hero-winter.png`,
   ],
   telephone: kontakt.phone,

@@ -35,8 +35,12 @@ export const hero = {
     headline: 'Eine Woche, die länger nachwirkt.',
     subline:
       'Berge, Ruhe und ein Haus, das für gemeinsame Zeit gebaut wurde.',
-    image: '/images/hero-sommer.png',
-    alt: 'Maiensäss ACLA VIGLIA RADONS im Sommer mit Steinbock-Skulpturen und Bergpanorama in Radons',
+    // hero-sommer-golden: dasselbe reale Maiensäss, per Bildbearbeitung ins warme
+    // Abendlicht gesetzt (Fenster beleuchtet, Strasse und Architektur unverändert).
+    // Zwischenlösung bis zum echten Fotoshooting. Das reine Original liegt weiterhin
+    // als hero-sommer.png im Repo.
+    image: '/images/hero-sommer-golden.png',
+    alt: 'Maiensäss ACLA VIGLIA RADONS im Sommer im warmen Abendlicht mit Steinbock-Skulpturen und Bergpanorama in Radons',
     positionClass: 'hero-sommer-pos',
   },
   winter: {
