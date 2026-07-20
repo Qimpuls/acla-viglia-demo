@@ -31,6 +31,7 @@ const OG_IMAGE = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  verification: { google: 'YH3fkTH29mjv4p4drEaAIRhhoTDuHlngCnn0jAxEZPI' },
   title: {
     default: SITE_TITLE,
     template: '%s · Acla Viglia Radons',
