@@ -2,10 +2,8 @@ import { BookingCalendarSection } from '@/components/BookingCalendarSection'
 import { verfuegbarkeit } from '@/lib/content'
 import { availabilityText } from '@/lib/availability'
 import { getPublicBookings } from '@/lib/store'
-import { getSeason } from '@/lib/season'
 
 export async function Verfuegbarkeit() {
-  const season = getSeason()
   const bookings = await getPublicBookings()
   const text = availabilityText(bookings)
   // Eigenes Kapitel und bewusst parchment: der Kalender rahmt sich mit
@@ -21,7 +19,7 @@ export async function Verfuegbarkeit() {
         <div className="max-w-2xl mb-10 md:mb-14">
           <p className="eyebrow mb-5">{verfuegbarkeit.eyebrow}</p>
           <h2 className="font-serif text-3xl md:text-5xl mb-5">
-            {verfuegbarkeit[season].headline}
+            {verfuegbarkeit.headline}
           </h2>
           <p className="text-ink/85 text-base md:text-lg leading-relaxed">
             {text}

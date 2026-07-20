@@ -9,6 +9,7 @@ import {
   cellBackground,
   buildMonthWeeks,
   dayShape,
+  isPastWeek,
   isWeekFree,
   shiftMonths,
   weekRange,
@@ -49,6 +50,10 @@ function MonthGrid({
   bookings: Booking[]
 }) {
   const weeks = buildMonthWeeks(year, month)
+  // Für die Dämpfung vergangener Tage (der Kalender startet beim aktuellen
+  // Monat, dessen erste Tage können bereits verstrichen sein).
+  const now = new Date()
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
   return (
     <div className="bg-cream rounded-lg overflow-hidden border border-brass/40 shadow-sm">
@@ -69,7 +74,11 @@ function MonthGrid({
       {weeks.map((row, rowIdx) => {
         const saturday = row[0]
         const saturdayInMonth = saturday.getMonth() === month
-        const clickable = saturdayInMonth && isWeekFree(saturday, bookings)
+        // Vergangene Wochen sind nie anfragbar, auch wenn sie unbelegt sind.
+        const clickable =
+          saturdayInMonth &&
+          !isPastWeek(saturday) &&
+          isWeekFree(saturday, bookings)
         const { from, to } = weekRange(saturday)
 
         // outline-none entfernt: der Hintergrundwechsel allein war als
@@ -120,10 +129,13 @@ function MonthGrid({
                 info.shape === 'arrival' ||
                 info.shape === 'departure' ||
                 twoTone
+              const isPast = day < startOfToday
               return (
                 <div
                   key={colIdx}
-                  className="relative aspect-square flex items-center justify-center bg-cream text-[0.7rem] md:text-xs"
+                  className={`relative aspect-square flex items-center justify-center bg-cream text-[0.7rem] md:text-xs ${
+                    isPast ? 'opacity-40' : ''
+                  }`}
                 >
                   {bg && (
                     <span className="absolute inset-0" style={{ background: bg }} />

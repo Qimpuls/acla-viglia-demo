@@ -477,34 +477,31 @@ export const preise = {
     hint: `Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Nacht.`,
   },
   // week wird aus price abgeleitet (chfWoche), damit es nur eine Zahlenquelle gibt.
+  // Jede Saison genau einmal, mit Zeitraum: der Gast muss seine Wunschwoche
+  // eindeutig einer Zeile zuordnen können (Entscheid Marco 20.07.2026, inkl.
+  // November als Nebensaison Winter).
   seasons: [
     {
-      label: 'Weihnachten, Neujahr, Februar',
-      tag: 'Hochsaison',
-      price: chf(preisWerte.max),
-      week: chfWoche(preisWerte.max),
-    },
-    {
       label: 'Hochsaison Winter',
-      tag: 'Hochsaison',
+      zeitraum: 'Weihnachten, Neujahr und Februar',
       price: chf(preisWerte.max),
       week: chfWoche(preisWerte.max),
     },
     {
       label: 'Nebensaison Winter',
-      tag: 'Winter',
+      zeitraum: 'November bis vor Weihnachten, Januar und März',
       price: chf(preisWerte.winterNeben),
       week: chfWoche(preisWerte.winterNeben),
     },
     {
-      label: 'Juli und August',
-      tag: 'Sommer',
+      label: 'Hauptsaison Sommer',
+      zeitraum: 'Juli und August',
       price: chf(preisWerte.sommerHoch),
       week: chfWoche(preisWerte.sommerHoch),
     },
     {
       label: 'Nebensaison Sommer',
-      tag: 'Sommer',
+      zeitraum: 'Ende Mai bis Juni, September und Oktober',
       price: chf(preisWerte.min),
       week: chfWoche(preisWerte.min),
     },
@@ -555,16 +552,18 @@ export const preise = {
   cta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
 }
 
-// Nur headline saisonal. Der Fliesstext ist dynamisch (src/lib/availability.ts,
-// aus dem Belegungskalender abgeleitet), steht nicht mehr statisch hier.
+// Headline bewusst saison-neutral: der Kalender zeigt immer mehrere Monate
+// über beide Saisons hinweg ("Freie Sommerwochen" über Novemberwochen wäre
+// irreführend, gespiegelt gilt dasselbe im Winter). Der Fliesstext ist
+// dynamisch (src/lib/availability.ts, aus dem Belegungskalender abgeleitet).
 export const verfuegbarkeit = {
   eyebrow: 'VERFÜGBARKEIT',
   cta: { label: 'Verfügbarkeit prüfen', href: '#kontakt' },
-  sommer: { headline: 'Freie Sommerwochen prüfen.' },
-  winter: { headline: 'Freie Winterwochen prüfen.' },
+  headline: 'Freie Wochen prüfen.',
 }
 
 // Anreise.tsx liest anreise[season]. Winter aus docs/SAISON-WECHSEL.md.
+// lage ist saison-unabhängig: Distanzen bis Savognin ändern sich nicht.
 export const anreise = {
   sommer: {
     eyebrow: 'ANREISE IM SOMMER',
@@ -575,6 +574,13 @@ export const anreise = {
     eyebrow: 'ANREISE IM WINTER',
     headline: 'Im Winter kommen Sie mit Ski, Schlitten oder Winterbus.',
     text: 'Im Winter ist die Zufahrtsstrasse gesperrt. Von Savognin reisen Sie mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus an. Einkaufen können Sie vorher in Savognin. In Radons selbst gibt es keinen Lebensmittelladen.',
+  },
+  lage: {
+    text: 'Radons liegt auf 1885 m über Savognin im Val Surses, mitten im Parc Ela. Mit dem Auto erreichen Sie Savognin ab Chur in rund 45 Minuten, ab Zürich in rund 2 Stunden. Mit dem ÖV fahren Sie mit dem Zug bis Tiefencastel und weiter mit dem Postauto nach Savognin.',
+    mapLabel: 'Lage auf der Karte öffnen',
+    // Externer Link statt eingebetteter Karte: kein Drittanbieter-Request,
+    // kein CSP-/Datenschutz-Zusatz. Koordinaten identisch zum JSON-LD geo.
+    mapHref: 'https://maps.google.com/?q=46.5598,9.5546',
   },
 }
 
@@ -591,6 +597,52 @@ export const winterteaser = {
     headline: 'Im Sommer fahren Sie bis vor das Haus.',
     text: 'Von Ende Mai bis Ende Oktober ist die Zufahrt offen. Wanderwege ab der Haustür, Bergseen und lange, helle Abende. Ab dem Frühjahr rückt der Sommer wieder in den Vordergrund.',
   },
+}
+
+// Häufige Fragen. EINE Quelle für die sichtbare FAQ-Sektion (Faq.tsx) und das
+// FAQPage-JSON-LD (page.tsx). Google akzeptiert FAQ-Markup nur, wenn der Inhalt
+// auch sichtbar auf der Seite steht; aus derselben Quelle können beide nie
+// auseinanderlaufen.
+export const faq = {
+  eyebrow: 'HÄUFIGE FRAGEN',
+  headline: 'Was Gäste vor der Anfrage wissen wollen.',
+  items: [
+    {
+      frage: 'Für wie viele Personen ist das Maiensäss Acla Viglia?',
+      antwort:
+        'Das ganze Maiensäss bietet Platz für 2 bis 8 Personen: ein Doppelzimmer, ein Dreierzimmer und zwei Doppelmatratzen auf der Dachgalerie.',
+    },
+    {
+      frage: 'Wie komme ich im Sommer nach Radons?',
+      antwort: anreise.sommer.text,
+    },
+    {
+      frage: 'Wie ist die Anreise im Winter?',
+      antwort: anreise.winter.text,
+    },
+    {
+      frage: 'Was kostet das Maiensäss?',
+      antwort: `Das ganze Haus kostet ab ${chf(preisWerte.min)} pro Nacht für bis zu ${preisWerte.personsBase} Personen, je nach Saison bis ${chf(preisWerte.max)}. Eine Woche von Samstag bis Samstag sind ${preisWerte.nightsPerWeek} Nächte, also ab ${chfWoche(preisWerte.min)}. Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Nacht. Nicht enthalten sind Endreinigung, Wäsche und Kurtaxen.`,
+    },
+    {
+      frage: 'Wann sind Anreise und Abreise?',
+      antwort:
+        'Der Samstag ist Wechseltag: Anreise am Samstag ab 15 Uhr, Abreise am Samstag bis 10 Uhr. So bleibt genug Zeit für Reinigung und Wäschewechsel zwischen den Gästen.',
+    },
+    {
+      frage: 'Sind Haustiere erlaubt?',
+      antwort: 'Ja, Haustiere sind nach Absprache erlaubt.',
+    },
+    {
+      frage: 'Gibt es WLAN im Maiensäss?',
+      antwort: 'Ja, im Maiensäss ist WLAN vorhanden.',
+    },
+    {
+      frage: 'Wie läuft die Buchung ab?',
+      antwort:
+        'Sie senden eine unverbindliche Anfrage über das Formular oder per E-Mail. Angela oder Gallus antworten persönlich.',
+    },
+  ],
 }
 
 export const empfehlungen = {

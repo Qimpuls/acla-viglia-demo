@@ -77,8 +77,8 @@ export function Preise() {
                       <p className="text-soapstone font-medium">
                         {season.label}
                       </p>
-                      <p className="text-xs text-larch tracking-wider uppercase mt-0.5">
-                        {season.tag}
+                      <p className="text-xs text-larch mt-0.5">
+                        {season.zeitraum}
                       </p>
                     </div>
                     {/* Nachtpreis bleibt der Anker, Wochenpreis ergaenzt ihn ruhig. */}

@@ -151,6 +151,21 @@ export function weekRange(saturday: Date) {
   return { from: ymdOf(saturday), to: ymdOf(end) }
 }
 
+/**
+ * True, wenn der Anreise-Samstag vor dem heutigen Tag liegt. Vergangene Wochen
+ * dürfen nie als anfragbar erscheinen, unabhängig davon, ob die Buchungsdaten
+ * gepflegt wurden (der Kalender beginnt beim aktuellen Monat und enthält damit
+ * immer auch schon verstrichene Wochen).
+ */
+export function isPastWeek(saturday: Date, today: Date = new Date()): boolean {
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  )
+  return saturday < startOfToday
+}
+
 export function isWeekFree(saturday: Date, list: Booking[]): boolean {
   for (let offset = 0; offset < 7; offset++) {
     const d = new Date(saturday)
