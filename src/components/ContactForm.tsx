@@ -68,6 +68,15 @@ const todayIso = () => {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
 }
 
+// Anreise ausserhalb der Sommer-Zufahrt (November bis März): die Strasse nach
+// Radons ist gesperrt. Der Gast soll das VOR dem Absenden wissen, nicht erst
+// in der Antwortmail (sonst entstehen Anfragen mit falschen Erwartungen).
+function isWinterArrival(iso: string): boolean {
+  if (!iso) return false
+  const month = Number(iso.slice(5, 7))
+  return month >= 11 || month <= 3
+}
+
 export function ContactForm({ bookings }: { bookings: Booking[] }) {
   const [form, setForm] = useState<FormState>(INITIAL)
   const [touched, setTouched] = useState<Record<string, boolean>>({})
@@ -246,6 +255,15 @@ export function ContactForm({ bookings }: { bookings: Booking[] }) {
       {errors.range && (
         <p className="mt-4 px-4 py-3 rounded-lg bg-[#B1564A]/10 border border-[#B1564A]/30 text-sm text-soapstone">
           {errors.range}
+        </p>
+      )}
+
+      {isWinterArrival(form.anreise) && (
+        <p className="mt-4 px-4 py-3 rounded-lg bg-linen border border-brass/40 text-sm text-soapstone leading-relaxed">
+          <span className="font-semibold">Winteranreise:</span> Die Strasse
+          nach Radons ist gesperrt. Sie reisen ab Savognin mit dem Winterbus,
+          mit Skiern, Schlitten oder zu Fuss an. Einkaufen können Sie vorher
+          in Savognin.
         </p>
       )}
 

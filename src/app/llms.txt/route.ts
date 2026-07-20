@@ -34,10 +34,10 @@ Positionierung: Ein Maiensäss. Geführt wie ein gutes Hotel. Kein Hotel, kein A
 
 ## Preise (ganzes Haus, bis ${preisWerte.personsBase} Personen)
 Eine Woche ist Samstag bis Samstag, also ${preisWerte.nightsPerWeek} Nächte.
-- Nebensaison Sommer: ${chf(preisWerte.min)} pro Nacht, ${chfWoche(preisWerte.min)} pro Woche
-- Juli und August: ${chf(preisWerte.sommerHoch)} pro Nacht, ${chfWoche(preisWerte.sommerHoch)} pro Woche
-- Nebensaison Winter: ${chf(preisWerte.winterNeben)} pro Nacht, ${chfWoche(preisWerte.winterNeben)} pro Woche
-- Hochsaison Winter sowie Weihnachten, Neujahr, Februar: ${chf(preisWerte.max)} pro Nacht, ${chfWoche(preisWerte.max)} pro Woche
+- Nebensaison Sommer (Ende Mai bis Juni, September und Oktober): ${chf(preisWerte.min)} pro Nacht, ${chfWoche(preisWerte.min)} pro Woche
+- Hauptsaison Sommer (Juli und August): ${chf(preisWerte.sommerHoch)} pro Nacht, ${chfWoche(preisWerte.sommerHoch)} pro Woche
+- Nebensaison Winter (November bis vor Weihnachten, Januar und März): ${chf(preisWerte.winterNeben)} pro Nacht, ${chfWoche(preisWerte.winterNeben)} pro Woche
+- Hochsaison Winter (Weihnachten, Neujahr und Februar): ${chf(preisWerte.max)} pro Nacht, ${chfWoche(preisWerte.max)} pro Woche
 - Jede weitere erwachsene Person: ${chf(preisWerte.extraPerson)} pro Nacht
 - Im Preis enthalten: MWST, Strom und Wasser, WLAN, Holz für Cheminée und Kochherd, SodaStream am Bergquellwasser, eine Flasche Prosecco und eine Flasche Amarone bei Anreise
 - Zusatzkosten: Endreinigung ${chf(preisWerte.cleaning)} pauschal, Bett- und Frotteewäsche ${chf(preisWerte.laundry)} pro Woche und Person, Kurtaxen (Erwachsene ${chf(preisWerte.taxAdult)} pro Logiernacht, Kinder 6 bis 16 Jahre ${chf(preisWerte.taxChild)} pro Logiernacht)
@@ -47,6 +47,7 @@ Eine Woche ist Samstag bis Samstag, also ${preisWerte.nightsPerWeek} Nächte.
 ## Buchung und Kontakt
 - Verfügbarkeit prüfen (Belegungskalender) und unverbindlich anfragen über das Formular: https://aclavigliaradons.ch
 - Anfragen werden persönlich von Angela oder Gallus beantwortet
+- Wechseltag Samstag: Anreise ab 15 Uhr, Abreise bis 10 Uhr
 - E-Mail: ${kontakt.email}
 - Telefon: ${kontakt.phone}
 - Gastgeber: ${kontakt.hosts} (ehemals Hotel Restaurant Rätia, Filisur)

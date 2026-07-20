@@ -9,6 +9,7 @@ export function getNavigation(season: Season) {
     { label: 'Galerie', href: '/galerie' },
     { label: 'Gastgeber', href: '#gastgeber' },
     { label: 'Preise', href: '#preise' },
+    { label: 'Fragen', href: '#faq' },
     { label: 'Anfrage', href: '#kontakt' },
   ]
 }

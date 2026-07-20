@@ -17,6 +17,19 @@ export function Anreise() {
         <p className="text-ink/85 text-base md:text-lg leading-relaxed">
           {a.text}
         </p>
+        {/* Lage und Fahrzeiten sind saison-unabhängig. Externer Kartenlink
+            statt Einbettung: kein Drittanbieter-Request, kein CSP-Zusatz. */}
+        <p className="mt-5 text-ink/85 text-base md:text-lg leading-relaxed">
+          {anreise.lage.text}
+        </p>
+        <a
+          href={anreise.lage.mapHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-block text-larch underline underline-offset-2 hover:text-soapstone transition-colors"
+        >
+          {anreise.lage.mapLabel}
+        </a>
       </div>
     </section>
   )

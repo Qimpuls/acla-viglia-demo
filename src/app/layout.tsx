@@ -25,7 +25,7 @@ export const SITE_DESCRIPTION =
 const OG_IMAGE = {
   url: '/images/og-image.jpg',
   width: 1200,
-  height: 553,
+  height: 630,
   alt: 'Maiensäss Acla Viglia in Radons über Savognin im Sommer',
 }
 
@@ -40,23 +40,7 @@ export const metadata: Metadata = {
   applicationName: 'Acla Viglia Radons',
   authors: [{ name: 'Angela und Gallus Liesch-Lombris' }],
   creator: 'Angela und Gallus Liesch-Lombris',
-  keywords: [
-    'Maiensäss Radons',
-    'Maiensäss mieten',
-    'Ferienhaus Savognin',
-    'Ferienhaus Graubünden',
-    'Ferienhaus für Gruppen',
-    'Ferienhaus mit Hund',
-    'Sommerferien Savognin',
-    'Wandern Parc Ela',
-    'Skiferien Savognin',
-    'Ski-In Ski-Out Savognin',
-    'Parc Ela',
-    'Val Surses',
-    'Ferien Graubünden',
-    'Maiensäss Graubünden',
-    'Surses',
-  ],
+  // Bewusst ohne meta keywords: von keiner Suchmaschine mehr ausgewertet.
   alternates: { canonical: '/' },
   robots: {
     index: true,

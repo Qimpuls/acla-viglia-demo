@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Anreise } from '@/components/Anreise'
 import { Familienleben } from '@/components/Familienleben'
+import { Faq } from '@/components/Faq'
 import { Footer } from '@/components/Footer'
 import { Gastgeber } from '@/components/Gastgeber'
 import { Header } from '@/components/Header'
@@ -16,7 +17,7 @@ import { Verfuegbarkeit } from '@/components/Verfuegbarkeit'
 import { Winterteaser } from '@/components/Winterteaser'
 import { Wohnen } from '@/components/Wohnen'
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '@/app/layout'
-import { anreise, chf, chfWoche, hero, kontakt, preisWerte } from '@/lib/content'
+import { faq, hero, kontakt, preisWerte } from '@/lib/content'
 import { getSeason } from '@/lib/season'
 
 // ISR: die Route rendert stündlich neu. Das ist die Voraussetzung dafür, dass die
@@ -32,13 +33,13 @@ export async function generateMetadata(): Promise<Metadata> {
       ? {
           url: '/images/og-image-winter.jpg',
           width: 1200,
-          height: 553,
+          height: 630,
           alt: hero.winter.alt,
         }
       : {
           url: '/images/og-image.jpg',
           width: 1200,
-          height: 553,
+          height: 630,
           alt: hero.sommer.alt,
         }
   return {
@@ -94,6 +95,10 @@ const jsonLd = {
   numberOfRooms: 3,
   numberOfBathroomsTotal: 2,
   maximumAttendeeCapacity: preisWerte.capacityMax,
+  // Wechseltag Samstag: Anreise ab 15 Uhr, Abreise bis 10 Uhr (sichtbar in der
+  // FAQ-Sektion, hier maschinenlesbar für die Suche).
+  checkinTime: '15:00',
+  checkoutTime: '10:00',
   petsAllowed: true,
   knowsLanguage: ['de-CH'],
   priceRange: `CHF ${preisWerte.min} bis ${preisWerte.max} pro Nacht`,
@@ -172,67 +177,20 @@ const jsonLd = {
   },
 }
 
+// FAQ-Markup aus derselben Quelle wie die sichtbare Sektion (Faq.tsx). Google
+// akzeptiert FAQPage nur mit sichtbarem Inhalt; aus content.faq abgeleitet
+// können Markup und Seite nicht auseinanderlaufen.
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Für wie viele Personen ist das Maiensäss Acla Viglia?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Das ganze Maiensäss bietet Platz für 2 bis 8 Personen: ein Doppelzimmer, ein Dreierzimmer und zwei Doppelmatratzen auf der Dachgalerie.',
-      },
+  mainEntity: faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.frage,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.antwort,
     },
-    {
-      '@type': 'Question',
-      name: 'Wie komme ich im Sommer nach Radons?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: anreise.sommer.text,
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Wie ist die Anreise im Winter?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: anreise.winter.text,
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Was kostet das Maiensäss?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: `Das ganze Haus kostet ab ${chf(preisWerte.min)} pro Nacht für bis zu ${preisWerte.personsBase} Personen, je nach Saison bis ${chf(preisWerte.max)}. Eine Woche von Samstag bis Samstag sind ${preisWerte.nightsPerWeek} Nächte, also ab ${chfWoche(preisWerte.min)}. Jede weitere erwachsene Person ${chf(preisWerte.extraPerson)} pro Nacht. Nicht enthalten sind Endreinigung, Wäsche und Kurtaxen.`,
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Sind Haustiere erlaubt?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Ja, Haustiere sind nach Absprache erlaubt.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Gibt es WLAN im Maiensäss?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Ja, im Maiensäss ist WLAN vorhanden.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Wie läuft die Buchung ab?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sie senden eine unverbindliche Anfrage über das Formular oder per E-Mail. Angela oder Gallus antworten persönlich.',
-      },
-    },
-  ],
+  })),
 }
 
 export default function Home() {
@@ -253,6 +211,7 @@ export default function Home() {
         <Verfuegbarkeit />
         <Anreise />
         <Winterteaser />
+        <Faq />
         <Kontakt />
       </main>
       <Footer />
