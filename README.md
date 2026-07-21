@@ -297,10 +297,10 @@ Erste Live-URL: `acla-viglia-demo.vercel.app`. Custom-Domain `aclavigliaradons.c
 Umgesetzt (Stand 2026-06-06, live):
 
 - JSON-LD `LodgingBusiness` erweitert: `makesOffer` (ab CHF 220), `slogan`, `currenciesAccepted`, `ReserveAction`, Amenities, Geo, Adresse
-- JSON-LD `FAQPage` (7 Q&A: Personenzahl, Sommer-/Winteranreise, Preis, Haustiere, WLAN, Buchung)
-- OG-Bild `public/images/og-image.jpg` (1200×553, ~278 KB) mit deklarierten Massen; `og`/`twitter` gesetzt
+- JSON-LD `FAQPage` aus `content.faq` (8 Q&A, identisch mit der sichtbaren FAQ-Sektion `Faq.tsx`)
+- OG-Bild `public/images/og-image.jpg` (1200×630, Standard-Mass) mit deklarierten Massen; `og`/`twitter` gesetzt; Winter-Variante `og-image-winter.jpg` schaltet saisonal
 - `sitemap.xml` (`sitemap.ts`), `robots.txt` (`robots.ts`, erlaubt explizit KI-Bots, sperrt `/verwaltung`), `public/llms.txt` (ausführlich)
-- Geschärfte `description` + erweiterte Keywords, `canonical`, `metadataBase`
+- Geschärfte `description`, `canonical`, `metadataBase` (meta keywords bewusst entfernt, wirkungslos)
 
 Offen:
 

@@ -66,7 +66,7 @@ Alle Winter-Bilder liegen bereits in `public/images/` und sind in `content.ts` v
 | Sektion | Sommer | Winter |
 |---------|--------|--------|
 | Hero | `hero-sommer.png` | `hero-winter.png` |
-| OG-/Twitter-Vorschaubild | `og-image.jpg` (1200x553) | `og-image-winter.jpg` (1200x553) |
+| OG-/Twitter-Vorschaubild | `og-image.jpg` (1200x630) | `og-image-winter.jpg` (1200x630) |
 | Saisonwoche-Banner | `sommer-wanderfamilie.png` | `winter-familie.png` |
 | Umgebung Leitbild (breit, nur Winter) | (keins) | `dorf-radons-winter.png` |
 | Umgebung Bild 1 | `umgebung-sommer-2.png` | `region-tiefschnee.webp` |
