@@ -25,7 +25,12 @@ export const brand = {
 // Gemeinsame Felder plus saisonale Varianten. Hero.tsx liest hero.eyebrow etc.
 // und hero[season].headline. Winter-Texte aus docs/SAISON-WECHSEL.md.
 export const hero = {
-  eyebrow: 'MAIENSÄSS IN RADONS · 1885 M',
+  // Eyebrow ist die semantische H1 (Ort + Leistung für die Suche), die grosse
+  // Headline bleibt optisch unverändert als Absatz. Entscheid Marco 23.09.2026.
+  // Höhe separat: auf dem Handy (unter 640px) ausgeblendet, sonst bricht die
+  // Eyebrow um und «1885 M» steht allein auf der zweiten Zeile.
+  eyebrow: 'MAIENSÄSS IN RADONS ÜBER SAVOGNIN',
+  eyebrowHoehe: '1885 M',
   claim: 'Ein Maiensäss. Geführt wie ein gutes Hotel.',
   primaryCta: { label: 'Verfügbarkeit prüfen', href: '#verfuegbarkeit' },
   trust: 'Persönlich geführt von Angela und Gallus · Samstag bis Samstag',
@@ -592,11 +597,13 @@ export const winterteaser = {
     eyebrow: 'WINTER IN RADONS',
     headline: 'Im Winter gehört Radons den Skiern, Schlitten und stillen Wegen.',
     text: 'Wenn die Strasse gesperrt ist, kommen Gäste mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus. Der Winter hat seinen eigenen Rhythmus. Ab Oktober steht er wieder stärker im Vordergrund.',
+    link: { label: 'Winterferien in Radons ansehen', href: '/winter' },
   },
   winter: {
     eyebrow: 'SOMMER IN RADONS',
     headline: 'Im Sommer fahren Sie bis vor das Haus.',
     text: 'Von Ende Mai bis Ende Oktober ist die Zufahrt offen. Wanderwege ab der Haustür, Bergseen und lange, helle Abende. Ab dem Frühjahr rückt der Sommer wieder in den Vordergrund.',
+    link: { label: 'Sommerferien in Radons ansehen', href: '/sommer' },
   },
 }
 
@@ -756,7 +763,7 @@ export const kontakt = {
 // Winterbilder, bleibt damit ganzjährig aktuell, ohne Saison-Logik.
 export const galerie = {
   eyebrow: 'BILDERGALERIE',
-  headline: 'Acla Viglia Radons in Bildern.',
+  headline: 'Das Maiensäss in Radons in Bildern.',
   intro:
     'Das Maiensäss im Sommer und im Winter, die Räume drinnen und die Berge ringsum. Eine Auswahl unserer Bilder aus Radons auf 1885 m im Parc Ela.',
   groups: [
@@ -934,11 +941,12 @@ export const footer = {
 }
 
 // Footer-Navigation mit absoluten Ankern (/#...), damit die Links auch von
-// Unterseiten wie /galerie zurück zur richtigen Sektion führen. Erstes Label
-// folgt der Saison. Footer.tsx ruft dies mit getSeason().
-export function getFooterNavigation(season: Season) {
+// Unterseiten wie /galerie zurück zur richtigen Sektion führen. Sommer und
+// Winter zeigen auf die ganzjährigen Saisonseiten (interne Links für die Suche).
+export function getFooterNavigation() {
   return [
-    { label: season === 'winter' ? 'Winter' : 'Sommer', href: '/#sommer' },
+    { label: 'Sommer', href: '/sommer' },
+    { label: 'Winter', href: '/winter' },
     { label: 'Haus', href: '/#haus' },
     { label: 'Gastgeber', href: '/#gastgeber' },
     { label: 'Preise', href: '/#preise' },
@@ -946,4 +954,36 @@ export function getFooterNavigation(season: Season) {
     { label: 'Kontakt', href: '/#kontakt' },
     { label: 'Galerie', href: '/galerie' },
   ]
+}
+
+// Ganzjährige Saisonseiten /sommer und /winter. Die Startseite zeigt je nach
+// Datum nur eine Edition (season.ts), diese Seiten halten beide Editionen
+// dauerhaft für die Suche sichtbar. Der Einstiegsabsatz beantwortet die
+// Suchfrage direkt (Snippet für Google und KI-Suchen). Fakten nur aus dem
+// bestehenden Kanon (Preise aus preisWerte, Anreise/Region wie oben).
+export const saisonseiten = {
+  sommer: {
+    path: '/sommer',
+    title: 'Maiensäss im Sommer mieten in Savognin',
+    description: `Ferienhaus über Savognin im Sommer: das ganze Maiensäss in Radons für ${preisWerte.capacityMin} bis ${preisWerte.capacityMax} Personen, Zufahrt bis vors Haus, Wandern ab der Haustür, ab ${chf(preisWerte.min)} pro Nacht.`,
+    eyebrow: 'FERIENHAUS SAVOGNIN IM SOMMER',
+    headline: 'Sommerferien im Maiensäss über Savognin.',
+    intro: `Acla Viglia ist ein Maiensäss zum Mieten in Radons, auf 1885 m über Savognin im Parc Ela. Vermietet wird das ganze Haus für ${preisWerte.capacityMin} bis ${preisWerte.capacityMax} Personen, jeweils von Samstag bis Samstag. Von Ende Mai bis Ende Oktober fahren Sie bis vor das Haus. Die Wege zum Lai Barnagn, auf den Piz Martegnas und zur Alp Flix beginnen an der Haustür. Im Sommer kostet das Haus ${chf(preisWerte.min)} pro Nacht, im Juli und August ${chf(preisWerte.sommerHoch)}, für bis zu ${preisWerte.personsBase} Personen. Haustiere sind nach Absprache erlaubt.`,
+    image: hero.sommer.image,
+    alt: hero.sommer.alt,
+    other: { label: 'Winterferien in Radons', href: '/winter' },
+    breadcrumb: 'Sommer',
+  },
+  winter: {
+    path: '/winter',
+    title: 'Maiensäss im Winter mieten in Savognin',
+    description: `Maiensäss im Winter mieten: ganzes Haus in Radons an der Piste von Savognin, ${preisWerte.capacityMin} bis ${preisWerte.capacityMax} Personen, Anreise mit Ski, Schlitten oder Winterbus, ab ${chf(preisWerte.winterNeben)} pro Nacht.`,
+    eyebrow: 'MAIENSÄSS MIETEN IM WINTER',
+    headline: 'Winterferien im Maiensäss an der Piste von Savognin.',
+    intro: `Acla Viglia ist ein Maiensäss zum Mieten in Radons, auf 1885 m über Savognin, direkt an der Piste der Savognin Bergbahnen. Vermietet wird das ganze Haus für ${preisWerte.capacityMin} bis ${preisWerte.capacityMax} Personen, jeweils von Samstag bis Samstag. Im Winter ist die Strasse gesperrt: Sie reisen mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus ab Savognin an. Das Skigebiet Savognin hat rund 80 km Pisten. Im Winter kostet das Haus ${chf(preisWerte.winterNeben)} pro Nacht, über Weihnachten, Neujahr und im Februar ${chf(preisWerte.max)}, für bis zu ${preisWerte.personsBase} Personen.`,
+    image: hero.winter.image,
+    alt: hero.winter.alt,
+    other: { label: 'Sommerferien in Radons', href: '/sommer' },
+    breadcrumb: 'Winter',
+  },
 }
