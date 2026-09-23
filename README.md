@@ -299,7 +299,8 @@ Umgesetzt (Stand 2026-06-06, live):
 - JSON-LD `LodgingBusiness` erweitert: `makesOffer` (ab CHF 220), `slogan`, `currenciesAccepted`, `ReserveAction`, Amenities, Geo, Adresse
 - JSON-LD `FAQPage` aus `content.faq` (8 Q&A, identisch mit der sichtbaren FAQ-Sektion `Faq.tsx`)
 - OG-Bild `public/images/og-image.jpg` (1200×630, Standard-Mass) mit deklarierten Massen; `og`/`twitter` gesetzt; Winter-Variante `og-image-winter.jpg` schaltet saisonal
-- `sitemap.xml` (`sitemap.ts`), `robots.txt` (`robots.ts`, erlaubt explizit KI-Bots, sperrt `/verwaltung`), `public/llms.txt` (ausführlich)
+- `sitemap.xml` (`sitemap.ts`, festes `LAST_CONTENT_CHANGE` statt `new Date()`), `robots.txt` (`robots.ts`, erlaubt explizit KI-Bots, sperrt `/verwaltung`), `llms.txt` als Route-Handler `src/app/llms.txt/route.ts` (aus `content.ts` generiert)
+- **SEO-Durchgang 23.09.2026:** ganzjährige Saisonseiten `/sommer` und `/winter` (`SaisonSeite.tsx`, Texte `saisonseiten` in `content.ts`), Hero-Eyebrow als semantische H1, gemeinsames Schema in `src/lib/schema.ts` (LodgingBusiness, BreadcrumbList), `SubpageHeader.tsx` für alle Unterseiten. Bericht: [docs/seo-2026-09-23.md](docs/seo-2026-09-23.md), Google-Profil: [docs/GOOGLE-BUSINESS-PROFIL.md](docs/GOOGLE-BUSINESS-PROFIL.md)
 - Geschärfte `description`, `canonical`, `metadataBase` (meta keywords bewusst entfernt, wirkungslos)
 
 Offen:
