@@ -1,8 +1,8 @@
 import { anreise } from '@/lib/content'
-import { getSeason } from '@/lib/season'
+import { getSeason, type Season } from '@/lib/season'
 
-export function Anreise() {
-  const a = anreise[getSeason()]
+export function Anreise({ season = getSeason() }: { season?: Season }) {
+  const a = anreise[season]
   // Eigenes Kapitel. Winterteaser darunter bleibt parchment (seine Karte ist
   // bg-linen und wuerde auf linen verschwinden), der Farbwechsel traegt also
   // die Trennung und der Teaser braucht kein eigenes pt.

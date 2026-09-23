@@ -28,10 +28,17 @@ export function Hero() {
       <div className="absolute inset-0 md:hidden bg-linear-to-t from-soapstone/75 via-soapstone/15 to-transparent" />
 
       <div className="relative z-10 flex flex-col justify-end min-h-[70vh] md:min-h-[85vh] max-w-6xl mx-auto px-6 md:px-12 pt-24 pb-14 md:pb-40">
-        <p className="eyebrow text-brass-light! mb-5">{hero.eyebrow}</p>
-        <h1 className="font-serif text-4xl md:text-7xl text-parchment! max-w-4xl leading-[1.05] text-balance">
-          {h.headline}
+        {/* Semantische H1 ist die Eyebrow (Ort + Leistung für die Suche). Die
+            grosse Headline ist ein Absatz mit den h1-Werten (Gewicht 500,
+            Laufweite -0.015em), optisch unverändert. leading-[1.65] hält die
+            Eyebrow auf der Zeilenhöhe des früheren <p>. */}
+        <h1 className="eyebrow text-brass-light! mb-5 leading-[1.65]">
+          {hero.eyebrow}
+          <span className="hidden sm:inline"> · {hero.eyebrowHoehe}</span>
         </h1>
+        <p className="font-serif font-medium tracking-[-0.015em] text-4xl md:text-7xl text-parchment! max-w-4xl leading-[1.05] text-balance">
+          {h.headline}
+        </p>
         <p className="mt-3 md:mt-4 font-serif text-brass-light! text-lg md:text-3xl max-w-3xl">
           {hero.claim}
         </p>

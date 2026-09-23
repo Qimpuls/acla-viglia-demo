@@ -16,6 +16,12 @@ export function Winterteaser() {
           <p className="text-ink/85 text-base md:text-lg leading-relaxed max-w-3xl">
             {t.text}
           </p>
+          <a
+            href={t.link.href}
+            className="mt-5 inline-block text-larch underline underline-offset-2 hover:text-soapstone transition-colors"
+          >
+            {t.link.label}
+          </a>
         </div>
       </div>
     </section>

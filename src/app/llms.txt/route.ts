@@ -44,6 +44,12 @@ Eine Woche ist Samstag bis Samstag, also ${preisWerte.nightsPerWeek} Nächte.
 - Die Kurtaxe enthält die Gästekarte Val Surses: Postauto im Tal ganzjährig kostenlos, Savogniner Bergbahnen im Sommer während ihrer Betriebszeiten kostenlos. Betriebszeiten und Leistungen ändern jährlich, aktuell bei valsurses.ch
 - Keine öffentlichen Rabatte oder Aktionen
 
+## Seiten
+- Startseite mit Belegungskalender und Anfrageformular: https://aclavigliaradons.ch
+- Sommerferien im Maiensäss: https://aclavigliaradons.ch/sommer
+- Winterferien im Maiensäss an der Piste: https://aclavigliaradons.ch/winter
+- Bildergalerie: https://aclavigliaradons.ch/galerie
+
 ## Buchung und Kontakt
 - Verfügbarkeit prüfen (Belegungskalender) und unverbindlich anfragen über das Formular: https://aclavigliaradons.ch
 - Anfragen werden persönlich von Angela oder Gallus beantwortet
@@ -51,6 +57,8 @@ Eine Woche ist Samstag bis Samstag, also ${preisWerte.nightsPerWeek} Nächte.
 - E-Mail: ${kontakt.email}
 - Telefon: ${kontakt.phone}
 - Gastgeber: ${kontakt.hosts} (ehemals Hotel Restaurant Rätia, Filisur)
+
+Stand: 23.09.2026
 `
   return new Response(body, {
     headers: { 'content-type': 'text/plain; charset=utf-8' },

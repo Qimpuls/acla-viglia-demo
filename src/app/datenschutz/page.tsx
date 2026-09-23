@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { Footer } from '@/components/Footer'
+import { SubpageHeader } from '@/components/SubpageHeader'
 import { datenschutz } from '@/lib/content'
+import { breadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: datenschutz.title,
@@ -10,27 +11,17 @@ export const metadata: Metadata = {
   alternates: { canonical: '/datenschutz' },
 }
 
-// Eigener schlanker Header wie auf /galerie, damit die Unterseite ohne die
-// Anker-Navigation der Startseite auskommt.
+// Schlanker Unterseiten-Header, ohne die Anker-Navigation der Startseite.
 export default function DatenschutzPage() {
   return (
     <>
-      <header className="sticky top-0 z-20 bg-parchment/90 backdrop-blur border-b border-brass/30">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 h-14 md:h-16 flex items-center justify-between gap-4">
-          <Link
-            href="/"
-            className="font-serif text-soapstone text-base md:text-lg tracking-[0.18em] whitespace-nowrap"
-          >
-            ACLA VIGLIA RADONS
-          </Link>
-          <Link
-            href="/"
-            className="text-sm text-larch hover:text-soapstone transition-colors whitespace-nowrap"
-          >
-            ← Zur Startseite
-          </Link>
-        </div>
-      </header>
+      <SubpageHeader />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbLd(datenschutz.title, '/datenschutz')),
+        }}
+      />
 
       <main className="bg-parchment">
         <section className="max-w-3xl mx-auto px-6 md:px-12 pt-12 md:pt-20 pb-14 md:pb-20 lg:pb-28">

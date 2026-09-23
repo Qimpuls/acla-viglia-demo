@@ -1,9 +1,17 @@
 import Image from 'next/image'
 import { sommerwoche } from '@/lib/content'
-import { getSeason } from '@/lib/season'
+import { getSeason, type Season } from '@/lib/season'
 
-export function Sommerwoche() {
-  const sw = sommerwoche[getSeason()]
+// ctaHref: auf Unterseiten (/sommer, /winter) fehlt die Kalender-Sektion, dort
+// zeigt der CTA absolut auf die Startseite.
+export function Sommerwoche({
+  season = getSeason(),
+  ctaHref = sommerwoche.cta.href,
+}: {
+  season?: Season
+  ctaHref?: string
+}) {
+  const sw = sommerwoche[season]
   // Kapitel "Die Woche" (Sommerwoche + Sommerumgebung), Grund linen, Anfang.
   return (
     <section
@@ -42,7 +50,7 @@ export function Sommerwoche() {
 
         <div className="mt-10 md:mt-14">
           <a
-            href={sommerwoche.cta.href}
+            href={ctaHref}
             className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors w-full sm:w-auto"
           >
             {sommerwoche.cta.label}

@@ -1,8 +1,7 @@
 import { footer, getFooterNavigation } from '@/lib/content'
-import { getSeason } from '@/lib/season'
 
 export function Footer() {
-  const nav = getFooterNavigation(getSeason())
+  const nav = getFooterNavigation()
   const year = new Date().getFullYear()
   return (
     <footer className="bg-charcoal border-t border-charcoal-soft py-16 md:py-20">

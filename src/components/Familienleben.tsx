@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import { familienleben } from '@/lib/content'
-import { getSeason } from '@/lib/season'
+import { getSeason, type Season } from '@/lib/season'
 
 // Regentage/graue Tage: ein grosses Leitbild (Rückzug am Fenster) dominiert, daneben
 // zwei kleinere Familienbilder. Verkauft Ruhe und Rückzug, nicht eine Galerie.
-export function Familienleben() {
-  const fl = familienleben[getSeason()]
+export function Familienleben({ season = getSeason() }: { season?: Season }) {
+  const fl = familienleben[season]
   const [lead, ...rest] = fl.images
   // Folge-Sektion im Kapitel "Das Haus": parchment statt linen, kein pt. Damit
   // faellt auch die tote Grenze zu Preise weg, das danach linen bleibt. Enthaelt

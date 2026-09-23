@@ -21,7 +21,8 @@ function CheckIcon() {
   )
 }
 
-export function Preise() {
+// ctaHref: auf den Saisonseiten fehlt die Kalender-Sektion, dort absolut.
+export function Preise({ ctaHref = preise.cta.href }: { ctaHref?: string }) {
   return (
     <section
       id="preise"
@@ -56,7 +57,7 @@ export function Preise() {
             <p className="mt-1 text-sm text-larch">{preise.priceBox.hint}</p>
           </div>
           <a
-            href={preise.cta.href}
+            href={ctaHref}
             className="inline-flex items-center justify-center bg-soapstone text-parchment hover:bg-larch px-8 py-4 rounded-full font-medium transition-colors whitespace-nowrap w-full md:w-auto"
           >
             {preise.cta.label}

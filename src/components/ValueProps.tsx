@@ -1,8 +1,8 @@
 import { valueProps } from '@/lib/content'
-import { getSeason } from '@/lib/season'
+import { getSeason, type Season } from '@/lib/season'
 
-export function ValueProps() {
-  const vp = valueProps[getSeason()]
+export function ValueProps({ season = getSeason() }: { season?: Season }) {
+  const vp = valueProps[season]
   // Kapitel "Warum und Wer" (ValueProps + Gastgeber), Grund parchment.
   // Kapitel-Anfang, deshalb mit pt. Die Folge-Sektion Gastgeber hat keins.
   //

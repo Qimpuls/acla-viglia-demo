@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import { sommerumgebung } from '@/lib/content'
-import { getSeason } from '@/lib/season'
+import { getSeason, type Season } from '@/lib/season'
 
 // Saisonale Bildsektion zwischen Saisonwoche und Haus. Beantwortet "Warum lohnt
 // sich eine ganze Woche hier oben?". Bewusst wenige, starke Bilder statt einer
 // Tourismusgalerie. Im Winter zusätzlich ein breites Leitbild über dem 2er-Grid.
-export function Sommerumgebung() {
-  const su = sommerumgebung[getSeason()]
+export function Sommerumgebung({ season = getSeason() }: { season?: Season }) {
+  const su = sommerumgebung[season]
   // Folge-Sektion im Kapitel "Die Woche": linen statt parchment (schliesst das
   // Kapitel mit Sommerwoche zusammen), kein pt. Enthaelt keine Karten, deshalb
   // ist der Farbwechsel gefahrlos.
