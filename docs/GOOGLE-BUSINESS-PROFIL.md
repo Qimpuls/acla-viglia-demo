@@ -12,11 +12,13 @@
 | Hauptkategorie | Ferienhaus | Maiensäss, ganzes Haus | passt |
 | Adresse | Radons 104, 7464 Surses | Radons 104, 7464 Surses | identisch |
 | Telefon | 079 349 58 89 | +41 79 349 58 89 | identisch |
-| Website | aclavigliaradons.ch | | verlinkt |
+| Website | `https://aclavigliaradons.ch/` (bis 23.09. `www.`, korrigiert, Google-Prüfung läuft) | Hauptdomain ohne www | identisch |
 | Rezensionen | keine | | offen |
 | Fotos | Google schlägt «Fotos hinzufügen» vor | | offen |
 
 ## Beschreibung (max. 750 Zeichen, keine Links erlaubt)
+
+> **Stand 23.09.2026:** Der Profil-Editor bietet für dieses Profil kein Feld «Beschreibung» an (geprüft im Editor: Name, Kategorie, Eröffnungsdatum, Kontakt, Standort, Öffnungszeiten, Mehr). Vermutlich, weil Google bei Unterkünften die Beschreibung selbst erzeugt. Der Text bleibt als Vorlage für Portale (graubuenden.ch, sentiero.ch, local.ch) und für den Fall, dass Google das Feld freischaltet.
 
 Acla Viglia ist ein persönlich geführtes Maiensäss auf 1885 m in Radons über Savognin, mitten im Parc Ela im Val Surses. Vermietet wird das ganze Haus für 2 bis 8 Personen, jeweils von Samstag bis Samstag. Im Sommer fahren Sie von Ende Mai bis Ende Oktober bis vor das Haus, die Wanderwege zum Lai Barnagn, auf den Piz Martegnas und zur Alp Flix beginnen an der Haustür. Im Winter liegt das Haus direkt an der Piste der Savognin Bergbahnen, die Anreise erfolgt mit Skiern, Schlitten, zu Fuss oder mit dem Winterbus. Zwei Specksteinöfen, ein offenes Cheminée, eine grosse Wohnküche und WLAN. Haustiere nach Absprache. Gastgeber sind Angela und Gallus Liesch-Lombris, die über 25 Jahre das Hotel Restaurant Rätia in Filisur führten.
 
